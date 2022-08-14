@@ -11,7 +11,8 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
-import StarIcon from '@mui/icons-material/Star';
+import {StarIcon} from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -21,7 +22,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import { DarkMode } from '@mui/icons-material';
-import { autocompleteClasses, CardActionArea } from '@mui/material';
+import { autocompleteClasses, CardActionArea, Tooltip } from '@mui/material';
 import { flexbox, maxWidth } from '@mui/system';
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -64,10 +65,16 @@ export default function SingleCard(props) {
                 titleTypographyProps={{ variant: 'h5' }}
                 action={
                     <>
-                        Add to WatchList <br />
-                        <IconButton aria-label="settings">
-                            <AddToQueueIcon sx={{ color: "red" }} />
+                        <Tooltip title="Add to Watchlist" arrow>
+                        <IconButton aria-label="add">
+                            <AddToQueueIcon onClick={() => alert("Add is working")} sx={{ color: "red" }} />
                         </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Add Recommender to Friend List" arrow>
+                        <IconButton aria-label="follow">
+                            <StarBorderIcon onClick={() => alert("Star is working")} sx={{ color: "red" }} />
+                        </IconButton>
+                        </Tooltip>
                     </>
                 }
                 title={card.title}

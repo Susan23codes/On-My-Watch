@@ -71,7 +71,6 @@ export default function RecCardList() {
         <>
             <div className='card'>
                 {dummyData.map((card, index) => {
-
                     return (
                         <SingleCard card={card} key={index}/>
                     )

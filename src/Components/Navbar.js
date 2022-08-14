@@ -11,15 +11,17 @@ import Typography from '@mui/material/Typography';
 
 
 
-export default function Navbar() {
+export default function Navbar(props) {
+    const { navigate, handleLogout, isLoggedIn } = props
+
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ 
+            <AppBar position="static" sx={{
                 bgcolor: "#293e8a",
                 // backgroundImage: "url('/film_image.jpg')",
                 // backgroundSize: 'cover',
                 // opacity: .6 
-                }}>
+            }}>
                 {/* <div> */}
                 <Toolbar className='toolbar' sx={{ height: 200 }}>
                     {/* <IconButton
@@ -43,14 +45,21 @@ export default function Navbar() {
 
                 <div className='navbar-buttons'>
                     <div className='home-button'>
-                        <Button onClick={() => alert("this is the home button")} color="inherit" sx={{ fontSize: 20 }}>Home</Button>
+                        <Button onClick={() => navigate('/')} color="inherit" sx={{ fontSize: 20 }}>Home</Button>
                     </div>
                     <div className='recommendation-button'>
-                    <Button onClick={() => alert("this is the recommendation button")} color="inherit" sx={{ fontSize: 20,  }}>Make a New Recommendation</Button> 
+                        <Button onClick={() => alert("this is the recommendation button")} color="inherit" sx={{ fontSize: 20, }}>Make a New Recommendation</Button>
                     </div>
                     <div>
-                    <Button onClick={() => alert("this is the login button")} color="inherit" sx={{ fontSize: 20 }}>Login </Button>
-                    <Button onClick={() => alert("this is the register button")} color="inherit" sx={{ fontSize: 20}}>Register </Button>
+                        {isLoggedIn ? (
+                            <Button onClick={() => handleLogout()} color="inherit" sx={{ fontSize: 20 }}>Logout </Button>
+
+                         ) : (
+                            <>
+                                <Button onClick={() => navigate('/login')} color="inherit" sx={{ fontSize: 20 }}>Login </Button>
+                                <Button onClick={() => alert("this is the register button")} color="inherit" sx={{ fontSize: 20 }}>Register </Button>
+                            </>
+                        )}
                     </div>
                 </div>
             </AppBar>
