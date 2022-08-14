@@ -11,7 +11,8 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
-import StarIcon from '@mui/icons-material/Star';
+import {StarIcon} from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -21,7 +22,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import { DarkMode } from '@mui/icons-material';
-import { autocompleteClasses, CardActionArea } from '@mui/material';
+import { autocompleteClasses, CardActionArea, Tooltip } from '@mui/material';
 import { flexbox, maxWidth } from '@mui/system';
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -49,74 +50,80 @@ export default function SingleCard(props) {
     }
     return (
         <Card sx={{width: 450, mr: 2, mb: 2, border: 2, pt: 2, }}>
-                            <CardHeader
-                                sx={{ 
-                                    pt: 0,
-                                    '& .MuiCardHeader-title, css-1qvr50w-MuiTypography-root': {
-                                        width: 250                 
-                                    } 
-                                }}
-                                avatar={
-                                    <Avatar  sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                        {card.recommended_by.charAt(0).toUpperCase()}
-                                    </Avatar>
-                                }
-                                titleTypographyProps={{ variant: 'h5' }}
-                                action={
-                                    <>
-                                        Add to WatchList <br />
-                                        <IconButton aria-label="settings">
-                                            <AddToQueueIcon sx={{ color: "red" }} />
-                                        </IconButton>
-                                    </>
-                                }
-                                title={card.title}
-                                subheader={<CardActionArea sx={{fontSize: 15}}>Recommended by: {card.recommended_by}</CardActionArea>}  
-                                
-                            />
-                            <div className='poster-and-text'>
-                                <div className='poster'>
-                                    <CardMedia
-                                        component="img"
-                                        height="220"
-                                        image="/dark_poster.jpeg"
-                                        alt="TV poster"
-                                    />
-                                </div>
-                                <CardContent>
-                                    <Typography paragraph>
-                                        <strong>Medium:</strong> {card.medium}
-                                    </Typography>
-                                    <Typography paragraph>
-                                        <strong>Streaming on:</strong> {card.streaming_on}
-                                    </Typography>
-                                    <Typography paragraph>
-                                        <strong>Genre:</strong> {card.genre.join(', ')}
-                                    </Typography>
-                                    <Typography paragraph>
-                                        <strong>Tags: </strong>{card.tags.join(', ')}
-                                    </Typography>
-                                </CardContent>
-                            </div>
-                            <CardActions disableSpacing>
-                                Click to see my recommendation!
-                                <ExpandMore
-                                    expand={expanded}
-                                    onClick={handleExpandClick}
-                                    aria-expanded={expanded}
-                                    aria-label="show more"
-                                >
-                                    <ExpandMoreIcon />
-                                </ExpandMore>
-                            </CardActions>
-                            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                                <CardContent>
-                                    <Typography paragraph>Why I Recommend this:</Typography>
-                                    <Typography paragraph>
-                                        {card.recommendation}
-                                    </Typography>
-                                </CardContent>
-                            </Collapse>
-                        </Card>
-                    )
-        }
+            <CardHeader
+                sx={{ 
+                    pt: 0,
+                    '& .MuiCardHeader-title, css-1qvr50w-MuiTypography-root': {
+                        width: 250                 
+                    } 
+                }}
+                avatar={
+                    <Avatar  sx={{ bgcolor: red[500] }} aria-label="recipe">
+                        {card.recommended_by.charAt(0).toUpperCase()}
+                    </Avatar>
+                }
+                titleTypographyProps={{ variant: 'h5' }}
+                action={
+                    <>
+                        <Tooltip title="Add to Watchlist" arrow>
+                        <IconButton aria-label="add">
+                            <AddToQueueIcon onClick={() => alert("Add is working")} sx={{ color: "red" }} />
+                        </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Add Recommender to Friend List" arrow>
+                        <IconButton aria-label="follow">
+                            <StarBorderIcon onClick={() => alert("Star is working")} sx={{ color: "red" }} />
+                        </IconButton>
+                        </Tooltip>
+                    </>
+                }
+                title={card.title}
+                subheader={<CardActionArea>Recommended by: {card.recommended_by}</CardActionArea>}  
+                
+            />
+            <div className='poster-and-text'>
+                <div className='poster'>
+                    <CardMedia
+                        component="img"
+                        height="220"
+                        image="/dark_poster.jpeg"
+                        alt="TV poster"
+                    />
+                </div>
+                <CardContent>
+                    <Typography paragraph>
+                        <strong>Medium:</strong> {card.medium}
+                    </Typography>
+                    <Typography paragraph>
+                        <strong>Streaming on:</strong> {card.streaming_on}
+                    </Typography>
+                    <Typography paragraph>
+                        <strong>Genre:</strong> {card.genre.join(', ')}
+                    </Typography>
+                    <Typography paragraph>
+                        <strong>Tags: </strong>{card.tags.join(', ')}
+                    </Typography>
+                </CardContent>
+            </div>
+            <CardActions disableSpacing>
+                Click to see my recommendation!
+                <ExpandMore
+                    expand={expanded}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                >
+                    <ExpandMoreIcon />
+                </ExpandMore>
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                    <Typography paragraph>Why I Recommend this:</Typography>
+                    <Typography paragraph>
+                        {card.recommendation}
+                    </Typography>
+                </CardContent>
+            </Collapse>
+        </Card>
+    )
+}

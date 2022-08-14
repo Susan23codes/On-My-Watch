@@ -1,3 +1,27 @@
+.toolbar {
+  display: flex;
+  flex-direction: column;;
+} 
+
+.on-my-watch-title {
+  padding-top: 10px;
+}
+
+.navbar-buttons {
+  display: flex;
+  justify-content:space-between;
+  padding: 30px 30px 20px 0;
+  }
+
+
+.home-button {
+  display: flex;
+  padding-left: 30px;
+}
+
+.recommendation-button {
+  padding-left: 100px;
+}
 .poster-and-text {
   display: flex;
 }

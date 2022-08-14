@@ -1,4 +1,5 @@
 import './App.css';
+import Navbar from './Components/Navbar';
 import RecCardList from './Components/RecCardList';
 import SingleCard from './Components/SingleCard';
 import Login from './Components/Login';
@@ -11,6 +12,8 @@ function App() {
   const [token, setToken] = useLocalStorageState('watchToken', null)
   const [username, setUsername] = useLocalStorageState('watchUsername', '')
 
+  const navigate = useNavigate()
+
   const setAuth = (username, token) => {
     setToken(token)
     setUsername(username)
@@ -19,7 +22,7 @@ function App() {
   const handleLogout = () => {
     axios
       .post(
-        'https://onmywatch.herokuapp.com/auth/token/logout',
+        'https://onmywatch.herokuapp.com/auth/token/logout/',
         {},
         {
           headers: {
@@ -32,11 +35,28 @@ function App() {
       )
   }
 
+  const isLoggedIn = username && token
+
 
   return (
     <>
-    <RecCardList />
-    <Login />
+    <Navbar 
+      navigate={navigate}
+      handleLogout={handleLogout}
+      isLoggedIn={isLoggedIn}
+      />
+    <Routes>
+      <Route
+        path="/"
+        element={<RecCardList />}
+      />
+      <Route
+        path="/login"
+        element={<Login 
+          setAuth={setAuth}
+          isLoggedIn={isLoggedIn}/>}
+      />
+    </Routes>
     </>
   );
 }
