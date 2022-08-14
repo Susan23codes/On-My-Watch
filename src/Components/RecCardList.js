@@ -73,7 +73,7 @@ export default function RecCardList() {
                 {dummyData.map((card, index) => {
 
                     return (
-                        <SingleCard card={card} index={index}/>
+                        <SingleCard card={card} key={index}/>
                     )
                 }
                 )}
