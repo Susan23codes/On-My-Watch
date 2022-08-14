@@ -22,3 +22,14 @@
 .recommendation-button {
   padding-left: 100px;
 }
+.poster-and-text {
+  display: flex;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 50px;
+}
+
+
