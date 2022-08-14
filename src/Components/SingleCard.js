@@ -71,7 +71,7 @@ export default function SingleCard(props) {
                                     </>
                                 }
                                 title={card.title}
-                                subheader={<CardActionArea>Recommended by: {card.recommended_by}</CardActionArea>}  
+                                subheader={<CardActionArea sx={{fontSize: 15}}>Recommended by: {card.recommended_by}</CardActionArea>}  
                                 
                             />
                             <div className='poster-and-text'>
