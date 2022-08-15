@@ -64,7 +64,7 @@ export default function SingleCard(props) {
         console.log(`added ${cardObject.id}!`)
         // setOnWatchList(true)
         setError(null)
-        axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/favorties/`,
+        axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/favorites/`,
             {},
             {
                 headers: {
@@ -86,7 +86,7 @@ export default function SingleCard(props) {
         console.log("deleted!")
         setOnWatchList(false)
         setError(null)
-        axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/favorties/`,
+        axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/favorites/`,
         {
             headers: { Authorization: `Token ${token}` },
         })
@@ -143,7 +143,7 @@ export default function SingleCard(props) {
                 title={cardObject.title}
                 subheader=
 
-                {<Tooltip title="Add to Friend List">
+                {<Tooltip title="See other recommendations by this user">
                     <CardActionArea>
                     Recommended by: {cardObject.user} on {moment(cardObject.created_at)
                     .format('MM/DD/YY')}

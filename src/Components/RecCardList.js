@@ -79,22 +79,31 @@ import axios from 'axios';
 
 
 export default function RecCardList(props) {
-    const { isLoggedIn, token } = props
+    const { isLoggedIn, token, navigate, username } = props
 
     const [recommendationList, setRecommendationList] = useState(null)
+    const [error, setError] = useState(null)
+    const [onWatchList, setOnWatchList] = useState(false)
 
 
     useEffect(() => {
         axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
         .then(res => {
                 let results = (res.data)
-                // if we have a category name, take the results and filter to keep everything that matches our category name.
-                // if (categoryName) {
-                //     results = results.filter((question) => question.category_name === categoryName) 
-                // }
                 setRecommendationList(results)
                 console.log(results)
-            })
+                results.map((cardObject, index) => {
+                    if (results.favorited_by.includes(username)){
+                        setOnWatchList(true)
+                        console.log("yes")
+                    }
+                    else {
+                        setOnWatchList(false)
+                        console.log("no")
+                }
+              
+                }
+         ) })
     }, [])
 
 
@@ -114,6 +123,8 @@ export default function RecCardList(props) {
                 }
                 )}
             </div>
+            <button onClick={() => navigate('/mywatchlist')}>See my watchlist</button>
         </>
+    
     );
 }
