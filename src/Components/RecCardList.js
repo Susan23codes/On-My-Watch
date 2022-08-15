@@ -93,6 +93,7 @@ export default function RecCardList(props) {
                 setRecommendationList(results)
                 console.log(results)
                 results.map((cardObject, index) => {
+                    
                     if (results.favorited_by.includes(username)){
                         setOnWatchList(true)
                         console.log("yes")
