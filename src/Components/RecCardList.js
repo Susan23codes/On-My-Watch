@@ -19,6 +19,7 @@ import SingleCard from './SingleCard';
 const dummyData = [
     {
         title: "Dark",
+        id: 1,
         recommended_by: "Susan",
         medium: "TV",
         streaming_on: "Netflix",
@@ -28,6 +29,7 @@ const dummyData = [
     },
     {
         title: "It's Always Sunny in Philadelphia and I love living here",
+        id: 2,
         recommended_by: "Me",
         medium: "TV2",
         streaming_on: "Netflix",
@@ -37,6 +39,7 @@ const dummyData = [
     },
     {
         title: "Dark II",
+        id: 3,
         recommended_by: "Me",
         medium: "TV2",
         streaming_on: "Netflix",
@@ -46,6 +49,7 @@ const dummyData = [
     },
     {
         title: "Dark II",
+        id: 4,
         recommended_by: "Joey",
         medium: "TV2",
         streaming_on: "Netflix",
@@ -55,6 +59,7 @@ const dummyData = [
     },
     {
         title: "Dark II",
+        id: 5,
         recommended_by: "Nancy",
         medium: "TV2",
         streaming_on: "Netflix",
@@ -65,14 +70,15 @@ const dummyData = [
 ]
 
 
-export default function RecCardList() {
+export default function RecCardList(props) {
+    const { isLoggedIn } = props
 
     return (
         <>
             <div className='card'>
                 {dummyData.map((card, index) => {
                     return (
-                        <SingleCard card={card} key={index}/>
+                        <SingleCard card={card} key={index} id={card.id} isLoggedIn={isLoggedIn}/>
                     )
                 }
                 )}

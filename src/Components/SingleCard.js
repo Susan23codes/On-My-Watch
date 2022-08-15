@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, } from 'react-router-dom'
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -11,7 +12,8 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
-import {StarIcon} from '@mui/icons-material/Star';
+import CheckIcon from '@mui/icons-material/Check';
+import { StarIcon } from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -41,45 +43,77 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 
-export default function SingleCard(props) {
-    const { card, index } = props
 
-    const [expanded, setExpanded] = React.useState(false);
+
+export default function SingleCard(props) {
+    const { card, id, isLoggedIn } = props
+
+    const [expanded, setExpanded] = useState(false);
+    const [onWatchList, setOnWatchList] = useState(false)
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     }
+
+    const params = useParams()
+    // console.log(`QL: ${params.id}`)
+
+
+    function handleAddToWatchList() {
+        console.log("added!")
+        setOnWatchList(true)
+
+    }
+
+    function handleDeleteFromWatchList () {
+        console.log("deleted!")
+        setOnWatchList(false)
+    }
+
     return (
-        <Card sx={{width: 450, mr: 2, mb: 2, border: 2, pt: 2, }}>
+        <Card sx={{ width: 450, mr: 2, mb: 2, border: 2, pt: 2, }}>
             <CardHeader
-                sx={{ 
+                sx={{
                     pt: 0,
                     '& .MuiCardHeader-title, css-1qvr50w-MuiTypography-root': {
-                        width: 250                 
-                    } 
+                        width: 250
+                    }
                 }}
                 avatar={
-                    <Avatar  sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
                         {card.recommended_by.charAt(0).toUpperCase()}
                     </Avatar>
                 }
                 titleTypographyProps={{ variant: 'h5' }}
-                action={
+                action=
+                {isLoggedIn && !onWatchList ? (
                     <>
                         <Tooltip title="Add to Watchlist" arrow>
-                        <IconButton aria-label="add">
-                            <AddToQueueIcon onClick={() => alert("Add is working")} sx={{ color: "red" }} />
-                        </IconButton>
+                            <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
+                                <AddToQueueIcon sx={{ color: "red" }} />
+                            </IconButton>
                         </Tooltip>
-                        <Tooltip title="Add Recommender to Friend List" arrow>
-                        <IconButton aria-label="follow">
-                            <StarBorderIcon onClick={() => alert("Star is working")} sx={{ color: "red" }} />
+                        {/* <Tooltip title="Add Recommender to Friend List" arrow>
+                        <IconButton onClick={() => alert("Star is working")} aria-label="follow">
+                            <StarBorderIcon  sx={{ color: "red" }} />
                         </IconButton>
+                        </Tooltip> */}
+                    </>
+                ) : (
+                    <>
+                        <Tooltip title="Added to Watchlist!" arrow>
+                            <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
+                                <CheckIcon sx={{ color: "red" }} />
+                            </IconButton>
                         </Tooltip>
                     </>
-                }
+    )}
+
                 title={card.title}
-                subheader={<CardActionArea>Recommended by: {card.recommended_by}</CardActionArea>}  
-                
+                subheader=
+
+                {<Tooltip title="Add to Friend List"><CardActionArea>Recommended by: {card.recommended_by}</CardActionArea></Tooltip>}
+
             />
             <div className='poster-and-text'>
                 <div className='poster'>

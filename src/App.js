@@ -48,7 +48,9 @@ function App() {
     <Routes>
       <Route
         path="/"
-        element={<RecCardList />}
+        element={<RecCardList 
+          isLoggedIn={isLoggedIn}
+          />}
       />
       <Route
         path="/login"
