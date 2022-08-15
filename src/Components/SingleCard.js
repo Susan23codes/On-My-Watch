@@ -46,7 +46,7 @@ const ExpandMore = styled((props) => {
 
 
 export default function SingleCard(props) {
-    const { cardObject, id, isLoggedIn, token } = props
+    const { cardObject, id, isLoggedIn, token, username } = props
 
     const [expanded, setExpanded] = useState(false);
     const [onWatchList, setOnWatchList] = useState(false)
@@ -59,12 +59,23 @@ export default function SingleCard(props) {
     const params = useParams()
     // console.log(`QL: ${params.id}`)
 
+    useEffect(() => {
+        if (cardObject.saved_by.includes(username)) {
+            setOnWatchList(true)
+            console.log("yes")
+        }
+        else {
+            setOnWatchList(false)
+            console.log("no")
+        }
+    }, [])
+
 
     function handleAddToWatchList() {
         console.log(`added ${cardObject.id}!`)
         // setOnWatchList(true)
         setError(null)
-        axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/favorites/`,
+        axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
             {},
             {
                 headers: {
@@ -86,7 +97,7 @@ export default function SingleCard(props) {
         console.log("deleted!")
         setOnWatchList(false)
         setError(null)
-        axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/favorites/`,
+        axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
         {
             headers: { Authorization: `Token ${token}` },
         })

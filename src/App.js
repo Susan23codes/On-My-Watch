@@ -70,6 +70,7 @@ function App() {
             token={token}
             navigate={navigate}
             SingleCard={SingleCard}
+            username={username}
           />}
         />
 

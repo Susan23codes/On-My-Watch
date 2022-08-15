@@ -4,18 +4,18 @@ import React, { useEffect, useState } from 'react';
 
 
 export default function MyWatchlist(props) {
-    const {navigate, token, SingleCard, isLoggedIn} = props
+    const {navigate, token, SingleCard, isLoggedIn, username} = props
     const [error, setError] = useState(null)
-    const [onWatchlist, setOnWatchlist] = useState(false)
+    const [watchlist, setWatchlist] = useState(false)
 
     useEffect(() => {
-        axios.get('https://onmywatch.herokuapp.com/api/user/favorite/recommendations/', 
+        axios.get('https://onmywatch.herokuapp.com/api/user/watchlist/recommendations/', 
         {headers: {
             Authorization: `Token ${token}`,
             }},)
         .then(res => {
             console.log(res.data)
-            setOnWatchlist(res.data)
+            setWatchlist(res.data)
             // let myWatchlist = (res.data.questions)
             // console.log(res.data)
             // setMyQuestionList(myQuestions.reverse())
@@ -44,7 +44,7 @@ export default function MyWatchlist(props) {
     return (
         <>
         <h1>My Watchlist</h1>
-        {onWatchlist && onWatchlist.map((cardObject, index) => {
+        {watchlist && watchlist.map((cardObject, index) => {
                     return (
                         <SingleCard 
                             cardObject={cardObject}
@@ -52,6 +52,7 @@ export default function MyWatchlist(props) {
                             id={cardObject.id}
                             isLoggedIn={isLoggedIn}
                             token={token}
+                            username={username}
                             />
                     )
         }
