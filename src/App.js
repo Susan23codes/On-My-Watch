@@ -50,6 +50,7 @@ function App() {
         path="/"
         element={<RecCardList 
           isLoggedIn={isLoggedIn}
+          token={token}
           />}
       />
       <Route

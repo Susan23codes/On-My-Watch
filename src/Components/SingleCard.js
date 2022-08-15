@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, } from 'react-router-dom'
+import axios from 'axios';
+import moment from 'moment'
+import { useParams, } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -27,29 +29,28 @@ import { DarkMode } from '@mui/icons-material';
 import { autocompleteClasses, CardActionArea, Tooltip } from '@mui/material';
 import { flexbox, maxWidth } from '@mui/system';
 
-interface ExpandMoreProps extends IconButtonProps {
-    expand: boolean;
-}
 
-const ExpandMore = styled((props: ExpandMoreProps) => {
+
+const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
-})(({ theme, expand }) => ({
+  })(({ theme, expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
+      duration: theme.transitions.duration.shortest,
     }),
-}));
+  }));
 
 
 
 
 export default function SingleCard(props) {
-    const { card, id, isLoggedIn } = props
+    const { cardObject, id, isLoggedIn, token } = props
 
     const [expanded, setExpanded] = useState(false);
     const [onWatchList, setOnWatchList] = useState(false)
+    const [error, setError] = useState(null)
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -60,14 +61,44 @@ export default function SingleCard(props) {
 
 
     function handleAddToWatchList() {
-        console.log("added!")
-        setOnWatchList(true)
+        console.log(`added ${cardObject.id}!`)
+        // setOnWatchList(true)
+        setError(null)
+        axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/favorties/`,
+            {},
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                },
+            })
+            .then((res) => {
+                console.log("This is a favorite!")
+                setOnWatchList(true)
 
+            })
+            .catch((error) => {
+                setError(Object.values(error.response.data))
+                console.log(error)
+            })
     }
 
     function handleDeleteFromWatchList () {
         console.log("deleted!")
         setOnWatchList(false)
+        setError(null)
+        axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/favorties/`,
+        {
+            headers: { Authorization: `Token ${token}` },
+        })
+            .then((res) => {
+                setOnWatchList(false)
+                console.log("This is no longer a favorite!")
+
+            })
+            .catch((error) => {
+                setError(Object.values(error.response.data))
+                console.log(error)
+            })
     }
 
     return (
@@ -81,7 +112,7 @@ export default function SingleCard(props) {
                 }}
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        {card.recommended_by.charAt(0).toUpperCase()}
+                        {cardObject.user.charAt(0).toUpperCase()}
                     </Avatar>
                 }
                 titleTypographyProps={{ variant: 'h5' }}
@@ -109,10 +140,15 @@ export default function SingleCard(props) {
                     </>
     )}
 
-                title={card.title}
+                title={cardObject.title}
                 subheader=
 
-                {<Tooltip title="Add to Friend List"><CardActionArea>Recommended by: {card.recommended_by}</CardActionArea></Tooltip>}
+                {<Tooltip title="Add to Friend List">
+                    <CardActionArea>
+                    Recommended by: {cardObject.user} on {moment(cardObject.created_at)
+                    .format('MM/DD/YY')}
+                    </CardActionArea>
+                </Tooltip>}
 
             />
             <div className='poster-and-text'>
@@ -120,22 +156,22 @@ export default function SingleCard(props) {
                     <CardMedia
                         component="img"
                         height="220"
-                        image="/dark_poster.jpeg"
+                        image={cardObject.poster}
                         alt="TV poster"
                     />
                 </div>
                 <CardContent>
                     <Typography paragraph>
-                        <strong>Medium:</strong> {card.medium}
+                        <strong>Medium:</strong> {cardObject.medium}
                     </Typography>
                     <Typography paragraph>
-                        <strong>Streaming on:</strong> {card.streaming_on}
+                        <strong>Streaming on:</strong> {cardObject.streaming_service}
                     </Typography>
                     <Typography paragraph>
-                        <strong>Genre:</strong> {card.genre.join(', ')}
+                        <strong>Genre:</strong> {cardObject.genre}
                     </Typography>
                     <Typography paragraph>
-                        <strong>Tags: </strong>{card.tags.join(', ')}
+                        <strong>Tags: </strong>{cardObject.tag.join(', ')}
                     </Typography>
                 </CardContent>
             </div>
@@ -154,7 +190,7 @@ export default function SingleCard(props) {
                 <CardContent>
                     <Typography paragraph>Why I Recommend this:</Typography>
                     <Typography paragraph>
-                        {card.recommendation}
+                        {cardObject.reason}
                     </Typography>
                 </CardContent>
             </Collapse>

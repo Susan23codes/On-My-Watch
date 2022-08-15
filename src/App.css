@@ -19,9 +19,10 @@
   padding-left: 30px;
 }
 
-.recommendation-button {
-  padding-left: 100px;
-}
+/* .recommendation-button {
+  padding-left: 40px;
+} */
+
 .poster-and-text {
   display: flex;
 }

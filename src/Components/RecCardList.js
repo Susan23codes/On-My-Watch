@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SingleCard from './SingleCard';
+import axios from 'axios';
 
 // interface ExpandMoreProps extends IconButtonProps {
 //     expand: boolean;
@@ -16,69 +17,99 @@ import SingleCard from './SingleCard';
 //     }),
 // }));
 
-const dummyData = [
-    {
-        title: "Dark",
-        id: 1,
-        recommended_by: "Susan",
-        medium: "TV",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The series is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    },
-    {
-        title: "It's Always Sunny in Philadelphia and I love living here",
-        id: 2,
-        recommended_by: "Me",
-        medium: "TV2",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    },
-    {
-        title: "Dark II",
-        id: 3,
-        recommended_by: "Me",
-        medium: "TV2",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    },
-    {
-        title: "Dark II",
-        id: 4,
-        recommended_by: "Joey",
-        medium: "TV2",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    },
-    {
-        title: "Dark II",
-        id: 5,
-        recommended_by: "Nancy",
-        medium: "TV2",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    }
-]
+// const dummyData = [
+//     {
+//         title: "Dark",
+//         id: 1,
+//         image: "/dark_poster.jpeg",
+//         recommended_by: "Susan",
+//         medium: "TV",
+//         streaming_on: "Netflix",
+//         genre: ["crime", "drama", "mystery"],
+//         tags: ["suspense", "foreign", "subtitled"],
+//         recommendation: "The series is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
+//     },
+//     {
+//         title: "It's Always Sunny in Philadelphia and I love living here",
+//         id: 2,
+//         image: "/dark_poster.jpeg",
+//         recommended_by: "Me",
+//         medium: "TV2",
+//         streaming_on: "Netflix",
+//         genre: ["crime", "drama", "mystery"],
+//         tags: ["suspense", "foreign", "subtitled"],
+//         recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
+//     },
+//     {
+//         title: "Dark II",
+//         id: 3,
+//         image: "/dark_poster.jpeg",
+//         recommended_by: "Me",
+//         medium: "TV2",
+//         streaming_on: "Netflix",
+//         genre: ["crime", "drama", "mystery"],
+//         tags: ["suspense", "foreign", "subtitled"],
+//         recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
+//     },
+//     {
+//         title: "Dark II",
+//         id: 4,
+//         image: "/dark_poster.jpeg",
+//         recommended_by: "Joey",
+//         medium: "TV2",
+//         streaming_on: "Netflix",
+//         genre: ["crime", "drama", "mystery"],
+//         tags: ["suspense", "foreign", "subtitled"],
+//         recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
+//     },
+//     {
+//         title: "Dark II",
+//         id: 5,
+//         image: "/dark_poster.jpeg",
+//         recommended_by: "Nancy",
+//         medium: "TV2",
+//         streaming_on: "Netflix",
+//         genre: ["crime", "drama", "mystery"],
+//         tags: ["suspense", "foreign", "subtitled"],
+//         recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
+//     }
+// ]
+
+
 
 
 export default function RecCardList(props) {
-    const { isLoggedIn } = props
+    const { isLoggedIn, token } = props
+
+    const [recommendationList, setRecommendationList] = useState(null)
+
+
+    useEffect(() => {
+        axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
+        .then(res => {
+                let results = (res.data)
+                // if we have a category name, take the results and filter to keep everything that matches our category name.
+                // if (categoryName) {
+                //     results = results.filter((question) => question.category_name === categoryName) 
+                // }
+                setRecommendationList(results)
+                console.log(results)
+            })
+    }, [])
+
 
     return (
         <>
             <div className='card'>
-                {dummyData.map((card, index) => {
+                {recommendationList && recommendationList.map((cardObject, index) => {
                     return (
-                        <SingleCard card={card} key={index} id={card.id} isLoggedIn={isLoggedIn}/>
+                        <SingleCard 
+                            cardObject={cardObject}
+                            key={index}
+                            id={cardObject.id}
+                            isLoggedIn={isLoggedIn}
+                            token={token}
+                            />
                     )
                 }
                 )}
