@@ -78,5 +78,19 @@
    align-items: center;
  }
 
+ .detail-page {
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: space-around;
+ }
+
+ .detail-page-text {
+   /* border: 2px solid; */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   margin-right: 40px;
+ }
  
 

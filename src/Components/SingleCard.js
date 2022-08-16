@@ -206,7 +206,7 @@ export default function SingleCard(props) {
                 </CardContent>
             </Collapse> */}
             <CardActions>
-        <Button onClick={() => navigate(`/detail/${cardObject.id}`)} size="small">Learn More</Button>
+        <Button onClick={() => navigate(`/detail/${cardObject.id}`)} size="small">Click to See More!</Button>
       </CardActions>
         </Card>
     )
