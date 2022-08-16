@@ -44,11 +44,45 @@
   background-size: cover; */
 }
 
-#login-form, .login-form, #registration-form{
+#login-form, .login-form{
   text-align: center;
+  margin-top: 70px;
 }
  #username-field, #password, #confirm-password {
    margin: 10px;
+ }
+
+ #registration-form {
+   width: 350px;
+   text-align: center;
+   margin: auto;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   margin-top: 35px;
+ }
+
+ #email-field {
+   margin: 10px 10px 10px 10px;
+ }
+
+ .registration-text {
+   padding-top: 40px;
+ }
+
+
+ .form-controls {
+   display:flex;
+   justify-content: space-between;
+   width: 300px;
+   text-align: center;
+   margin: auto;
+   margin-top: 10px;
+   align-items: center;
+ }
+
+ .form-submit {
+   margin: auto;
  }
 
  .homepage-sidebar-and-cards {
@@ -95,5 +129,6 @@
    justify-content: center;
    margin-right: 40px;
  }
+
  
 

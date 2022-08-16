@@ -28,6 +28,8 @@ export default function RecCardList(props) {
         <>
             <div className='homepage-sidebar-and-cards'>
                 {isLoggedIn &&
+                <>
+                
                 <div className='homepage-sidebar'>
                     <ul className='my-stuff'>My Stuff</ul>
                     <li><GiFilmProjector/><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
@@ -35,6 +37,7 @@ export default function RecCardList(props) {
                     <li><GiFilmProjector/> Search</li><br />
                     <li><GiFilmProjector/> Make a New Recommendation</li>
                 </div>
+                </>
                 }
                 {!isLoggedIn &&
                 <div className='homepage-sidebar'>
