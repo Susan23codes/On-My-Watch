@@ -50,10 +50,14 @@ export default function Registration(props) {
     return (
         <>
         {error && <div>{error}</div>}
+        <h2 style={{textAlign:'center'}}>Sign up and starting watching great TV!</h2>
+        <div className="registration-text">
+        <h4 style={{textAlign:'center'}}>Please enter an email if you'd like to get notified when someone on your following list makes a new recommendation!</h4>
+        </div>
     <form id="registration-form" onSubmit={handleRegistrationSubmit}>
             <div className="form-controls">
                 <label htmlFor="email-field">Email </label>
-                <input id="email-field" type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
+                <input id="email-field" type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className="form-controls">
                 <label htmlFor="username-field">Username </label>

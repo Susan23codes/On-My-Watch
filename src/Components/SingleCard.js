@@ -156,8 +156,7 @@ export default function SingleCard(props) {
 
                 {<Tooltip title="See other recommendations by this user">
                     <CardActionArea>
-                    Recommended by: {cardObject.user} on {moment(cardObject.created_at)
-                    .format('MM/DD/YY')}
+                    Recommended by: {cardObject.user} on {moment(cardObject.created_at).format('MM/DD/YY')}
                     </CardActionArea>
                 </Tooltip>}
 
