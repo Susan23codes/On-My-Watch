@@ -2,9 +2,10 @@ import './App.css';
 import Navbar from './Components/Navbar';
 import RecCardList from './Components/RecCardList';
 import SingleCard from './Components/SingleCard';
+import RecForm from './Components/RecForm';
 import Login from './Components/Login';
 import axios from 'axios'
-import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router} from 'react-router-dom'
+import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
 import useLocalStorageState from 'use-local-storage-state'
 
 
@@ -40,23 +41,27 @@ function App() {
 
   return (
     <>
-    <Navbar 
-      navigate={navigate}
-      handleLogout={handleLogout}
-      isLoggedIn={isLoggedIn}
+      <Navbar
+        navigate={navigate}
+        handleLogout={handleLogout}
+        isLoggedIn={isLoggedIn}
       />
-    <Routes>
-      <Route
-        path="/"
-        element={<RecCardList />}
-      />
-      <Route
-        path="/login"
-        element={<Login 
-          setAuth={setAuth}
-          isLoggedIn={isLoggedIn}/>}
-      />
-    </Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={<RecCardList />}
+        />
+        <Route
+          path="/login"
+          element={<Login
+            setAuth={setAuth}
+            isLoggedIn={isLoggedIn} />}
+        />
+        <Route
+          path="/new"
+          element={<RecForm />}
+        />
+      </Routes>
     </>
   );
 }
