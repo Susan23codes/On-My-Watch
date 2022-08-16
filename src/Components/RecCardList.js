@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SingleCard from './SingleCard';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import { GiFilmProjector } from 'react-icons/gi';
 
 
 
@@ -28,10 +29,11 @@ export default function RecCardList(props) {
             <div className='homepage-sidebar-and-cards'>
                 {isLoggedIn &&
                 <div className='homepage-sidebar'>
-                    <ul className='my-stuff'>My Stuff:</ul>
-                    <li><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}>My Watchlist</Link></li><br />
-                    <li>Following</li><br />
-                    <li>Make a New Recommendation</li>
+                    <ul className='my-stuff'>My Stuff</ul>
+                    <li><GiFilmProjector/><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
+                    <li><GiFilmProjector/> Following</li><br />
+                    <li><GiFilmProjector/> Search</li><br />
+                    <li><GiFilmProjector/> Make a New Recommendation</li>
                 </div>
                 }
                 <div className='card'>

@@ -57,15 +57,18 @@
    width: 500px;
    margin: 20px 0 0 20px;
    font-size: 30px;
-   padding: 30px 20px 0 20px;
+   padding: 0px 20px 0 20px;
    background-color: #293e8a;
    color: white;
    border-radius: 10px;
+   height: 600px;
+   list-style-type: none;
  }
 
  .my-stuff {
    font-size: 50px;
    padding-left: 15px;
+   text-decoration: underline;
  }
 
  .watchlist-cards {
@@ -74,4 +77,6 @@
    padding-left: 20px;
    align-items: center;
  }
+
+ 
 
