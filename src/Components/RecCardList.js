@@ -1,82 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SingleCard from './SingleCard';
-
-// interface ExpandMoreProps extends IconButtonProps {
-//     expand: boolean;
-// }
-
-// const ExpandMore = styled((props: ExpandMoreProps) => {
-//     const { expand, ...other } = props;
-//     return <IconButton {...other} />;
-// })(({ theme, expand }) => ({
-//     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-//     marginLeft: 'auto',
-//     transition: theme.transitions.create('transform', {
-//         duration: theme.transitions.duration.shortest,
-//     }),
-// }));
-
-const dummyData = [
-    {
-        title: "Dark",
-        recommended_by: "Susan",
-        medium: "TV",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The series is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    },
-    {
-        title: "It's Always Sunny in Philadelphia and I love living here",
-        recommended_by: "Me",
-        medium: "TV2",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    },
-    {
-        title: "Dark II",
-        recommended_by: "Me",
-        medium: "TV2",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    },
-    {
-        title: "Dark II",
-        recommended_by: "Joey",
-        medium: "TV2",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    },
-    {
-        title: "Dark II",
-        recommended_by: "Nancy",
-        medium: "TV2",
-        streaming_on: "Netflix",
-        genre: ["crime", "drama", "mystery"],
-        tags: ["suspense", "foreign", "subtitled"],
-        recommendation: "The TV show is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-    }
-]
+import axios from 'axios';
+import { Link } from 'react-router-dom'
+import { GiFilmProjector } from 'react-icons/gi';
 
 
-export default function RecCardList() {
+
+export default function RecCardList(props) {
+    const { isLoggedIn, token, navigate, username } = props
+
+    const [recommendationList, setRecommendationList] = useState(null)
+
+
+
+    useEffect(() => {
+        axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
+            .then(res => {
+                let results = (res.data)
+                setRecommendationList(results)
+                console.log(results)
+
+            })
+    }, [])
+
 
     return (
         <>
-            <div className='card'>
-                {dummyData.map((card, index) => {
-                    return (
-                        <SingleCard card={card} key={index}/>
-                    )
+            <div className='homepage-sidebar-and-cards'>
+                {isLoggedIn &&
+                <>
+                
+                <div className='homepage-sidebar'>
+                    <ul className='my-stuff'>My Stuff</ul>
+                    <li><GiFilmProjector/><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
+                    <li><GiFilmProjector/> Following</li><br />
+                    <li><GiFilmProjector/> Search</li><br />
+                    <li><GiFilmProjector/> Make a New Recommendation</li>
+                </div>
+                </>
                 }
-                )}
+                {!isLoggedIn &&
+                <div className='homepage-sidebar'>
+                    <ul className='my-stuff'></ul>
+                    <li style={{fontSize: 20}}><GiFilmProjector style={{marginRight:10}}/> Need inspiration for a new show?  You've come to the right place!</li><br />
+                    <li style={{fontSize: 20}}><GiFilmProjector style={{marginRight:10}}/> Browse the latest recommendations for new ideas!</li><br />
+                    <li style={{fontSize: 20}}><GiFilmProjector style={{marginRight:10}}/> Sign in or Register to follow people and see their recommendations!</li><br />
+                    <li style={{fontSize: 20}}><GiFilmProjector style={{marginRight:10}}/> Search for your next favorite show!</li>
+                </div>
+                }
+                <div className='card'>
+                    {recommendationList && recommendationList.map((cardObject, index) => {
+                        return (
+                            <SingleCard
+                                cardObject={cardObject}
+                                key={index}
+                                id={cardObject.id}
+                                isLoggedIn={isLoggedIn}
+                                token={token}
+                                username={username}
+                                navigate={navigate}
+                            />
+                        )
+                    }
+                    )}
+                </div>
             </div>
         </>
+
     );
 }

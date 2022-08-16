@@ -2,8 +2,10 @@ import './App.css';
 import Navbar from './Components/Navbar';
 import RecCardList from './Components/RecCardList';
 import SingleCard from './Components/SingleCard';
-import RecForm from './Components/RecForm';
+import MyWatchlist from './Components/MyWatchlist';
+import DetailView from './Components/DetailView';
 import Login from './Components/Login';
+import Registration from './Components/Registration';
 import axios from 'axios'
 import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
 import useLocalStorageState from 'use-local-storage-state'
@@ -32,7 +34,8 @@ function App() {
         }
       )
       .then(() =>
-        setAuth('', null)
+        setAuth('', null),
+        navigate('/')
       )
   }
 
@@ -48,19 +51,51 @@ function App() {
       />
       <Routes>
         <Route
-          path="/"
-          element={<RecCardList />}
-        />
-        <Route
+
           path="/login"
           element={<Login
             setAuth={setAuth}
-            isLoggedIn={isLoggedIn} />}
+            isLoggedIn={isLoggedIn}
+          />}
         />
         <Route
-          path="/new"
-          element={<RecForm />}
+          path="/register"
+          element={<Registration
+            navigate={navigate}
+            setAuth={setAuth}
+          />}
         />
+        <Route
+          path="/"
+          element={<RecCardList
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            username={username}
+          />}
+        />
+        <Route
+          path="/mywatchlist"
+          element={<MyWatchlist
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            SingleCard={SingleCard}
+            username={username}
+          />}
+        />
+        <Route
+          path="/detail/:recommendationId"
+          element={<DetailView
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            SingleCard={SingleCard}
+            username={username}
+          />}
+        />
+
+
       </Routes>
     </>
   );
