@@ -46,6 +46,7 @@ export default function RecCardList(props) {
                                 isLoggedIn={isLoggedIn}
                                 token={token}
                                 username={username}
+                                navigate={navigate}
                             />
                         )
                     }
