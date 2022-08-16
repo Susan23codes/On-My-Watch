@@ -43,7 +43,8 @@ export default function MyWatchlist(props) {
     // }
     return (
         <>
-        <h1>My Watchlist</h1>
+        <h1 style={{ textAlign: "center", fontSize: 50}}>My Watchlist</h1>
+        <div className='watchlist-cards'>
         {watchlist && watchlist.map((cardObject, index) => {
                     return (
                         <SingleCard 
@@ -57,6 +58,7 @@ export default function MyWatchlist(props) {
                     )
         }
         )}
+        </div>
         </>
     )
 
