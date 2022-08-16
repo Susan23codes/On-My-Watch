@@ -44,11 +44,34 @@
   background-size: cover; */
 }
 
-#login-form, .login-form, #registration-form{
+#login-form, .login-form{
   text-align: center;
+  margin-top: 70px;
 }
  #username-field, #password, #confirm-password {
    margin: 10px;
+ }
+
+ #registration-form {
+   width: 350px;
+   text-align: center;
+   margin: auto;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   margin-top: 70px;
+ }
+
+ .form-controls {
+   display:flex;
+   justify-content: space-between;
+   width: 300px;
+   text-align: center;
+   margin: auto;
+ }
+
+ .form-submit {
+   margin: auto;
  }
 
  .homepage-sidebar-and-cards {
@@ -95,5 +118,6 @@
    justify-content: center;
    margin-right: 40px;
  }
+
  
 

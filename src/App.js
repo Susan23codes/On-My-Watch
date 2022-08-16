@@ -5,6 +5,7 @@ import SingleCard from './Components/SingleCard';
 import MyWatchlist from './Components/MyWatchlist';
 import DetailView from './Components/DetailView';
 import Login from './Components/Login';
+import Registration from './Components/Registration';
 import axios from 'axios'
 import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
 import useLocalStorageState from 'use-local-storage-state'
@@ -56,6 +57,13 @@ function App() {
             isLoggedIn={isLoggedIn} 
           />}
         />
+        <Route
+            path="/register"
+            element={<Registration
+              navigate={navigate}
+              setAuth={setAuth}
+              />}
+            />
         <Route
           path="/"
           element={<RecCardList

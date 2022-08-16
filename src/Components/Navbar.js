@@ -44,7 +44,7 @@ export default function Navbar(props) {
                         ) : (
                             <>
                                 <Button onClick={() => navigate('/login')} color="inherit" sx={{ fontSize: 20 }}>Login </Button>
-                                <Button onClick={() => alert("this is the register button")} color="inherit" sx={{ fontSize: 20 }}>Register </Button>
+                                <Button onClick ={() => navigate('/register')} color="inherit" sx={{ fontSize: 20 }}>Register </Button>
                             </>
                         )}
                     </div>
