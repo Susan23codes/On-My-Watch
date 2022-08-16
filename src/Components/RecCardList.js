@@ -36,6 +36,15 @@ export default function RecCardList(props) {
                     <li><GiFilmProjector/> Make a New Recommendation</li>
                 </div>
                 }
+                {!isLoggedIn &&
+                <div className='homepage-sidebar'>
+                    <ul className='my-stuff'></ul>
+                    <li style={{fontSize: 20}}><GiFilmProjector style={{marginRight:10}}/> Need inspiration for a new show?  You've come to the right place!</li><br />
+                    <li style={{fontSize: 20}}><GiFilmProjector style={{marginRight:10}}/> Browse the latest recommendations for new ideas!</li><br />
+                    <li style={{fontSize: 20}}><GiFilmProjector style={{marginRight:10}}/> Sign in or Register to follow people and see their recommendations!</li><br />
+                    <li style={{fontSize: 20}}><GiFilmProjector style={{marginRight:10}}/> Search for your next favorite show!</li>
+                </div>
+                }
                 <div className='card'>
                     {recommendationList && recommendationList.map((cardObject, index) => {
                         return (

@@ -12,6 +12,7 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import { GiFilmProjector } from 'react-icons/gi';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
@@ -138,9 +139,9 @@ export default function DetailView(props) {
         <h1 style={{textAlign:'center'}}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
             <div className="detail-page">
                 <div className="detail-page-text">
-                <h2>Click here to see {cardDetail.user}'s other recommendations!</h2>
-                <h2>Click here to see who else has recommended {cardDetail.title}!</h2>
-                <h2>Click here to follow {cardDetail.user}!</h2>
+                <h2><GiFilmProjector/> Click here to see {cardDetail.user}'s other recommendations!</h2>
+                <h2><GiFilmProjector/> Click here to see who else has recommended {cardDetail.title}!</h2>
+                <h2><GiFilmProjector/> Click here to follow {cardDetail.user}!</h2>
                 </div>
             <Card sx={{ width: 450, mr: 2, ml: 4, mt: 5, mb: 2, border: 2, pt: 2, }}>
             <CardHeader

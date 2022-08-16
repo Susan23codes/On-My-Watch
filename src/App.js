@@ -33,7 +33,8 @@ function App() {
         }
       )
       .then(() =>
-        setAuth('', null)
+        setAuth('', null),
+        navigate('/')
       )
   }
 
