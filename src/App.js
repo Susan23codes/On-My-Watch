@@ -3,6 +3,7 @@ import Navbar from './Components/Navbar';
 import RecCardList from './Components/RecCardList';
 import SingleCard from './Components/SingleCard';
 import MyWatchlist from './Components/MyWatchlist';
+import DetailView from './Components/DetailView';
 import Login from './Components/Login';
 import axios from 'axios'
 import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
@@ -32,7 +33,8 @@ function App() {
         }
       )
       .then(() =>
-        setAuth('', null)
+        setAuth('', null),
+        navigate('/')
       )
   }
 
@@ -66,6 +68,16 @@ function App() {
         <Route
           path="/mywatchlist"
           element={<MyWatchlist
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            SingleCard={SingleCard}
+            username={username}
+          />}
+        />
+        <Route
+          path="/detail/:recommendationId"
+          element={<DetailView
             isLoggedIn={isLoggedIn}
             token={token}
             navigate={navigate}

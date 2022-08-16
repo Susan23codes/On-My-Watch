@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment'
-import { useParams, } from 'react-router-dom';
+import { Navigate, useParams, } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -46,7 +46,7 @@ const ExpandMore = styled((props) => {
 
 
 export default function SingleCard(props) {
-    const { cardObject, id, isLoggedIn, token, username } = props
+    const { cardObject, id, isLoggedIn, token, username, navigate } = props
 
     const [expanded, setExpanded] = useState(false);
     const [onWatchList, setOnWatchList] = useState(false)
@@ -186,7 +186,7 @@ export default function SingleCard(props) {
                     </Typography>
                 </CardContent>
             </div>
-            <CardActions disableSpacing>
+            {/* <CardActions disableSpacing>
                 Click to see my recommendation!
                 <ExpandMore
                     expand={expanded}
@@ -204,7 +204,10 @@ export default function SingleCard(props) {
                         {cardObject.reason}
                     </Typography>
                 </CardContent>
-            </Collapse>
+            </Collapse> */}
+            <CardActions>
+        <Button onClick={() => navigate(`/detail/${cardObject.id}`)} size="small">Click to See More!</Button>
+      </CardActions>
         </Card>
     )
 }

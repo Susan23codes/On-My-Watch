@@ -54,6 +54,7 @@ export default function MyWatchlist(props) {
                             isLoggedIn={isLoggedIn}
                             token={token}
                             username={username}
+                            navigate={navigate}
                             />
                     )
         }
