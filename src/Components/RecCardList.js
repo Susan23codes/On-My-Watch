@@ -37,7 +37,7 @@ export default function RecCardList(props) {
                         <div className='homepage-sidebar'>
                             <ul className='my-stuff'>My Stuff</ul>
                             <li><GiFilmProjector /><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
-                            <li><GiFilmProjector /> Following</li><br />
+                            <li><GiFilmProjector /><Link to={"/following"} style={{ textDecoration: 'none', color: 'white' }}> Following</Link></li><br />
                             <li><GiFilmProjector /> Search</li><br />
                             <li><GiFilmProjector /><Link to={"/watched"} style={{ textDecoration: 'none', color: 'white' }}> What I've Watched</Link></li><br />
                             <li><GiFilmProjector /> Make a New Recommendation</li>
