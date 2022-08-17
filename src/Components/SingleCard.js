@@ -11,6 +11,8 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
@@ -34,13 +36,13 @@ import { flexbox, maxWidth } from '@mui/system';
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
-  })(({ theme, expand }) => ({
+})(({ theme, expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
+        duration: theme.transitions.duration.shortest,
     }),
-  }));
+}));
 
 
 
@@ -93,14 +95,14 @@ export default function SingleCard(props) {
             })
     }
 
-    function handleDeleteFromWatchList () {
+    function handleDeleteFromWatchList() {
         console.log("deleted!")
         setOnWatchList(false)
         setError(null)
         axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
-        {
-            headers: { Authorization: `Token ${token}` },
-        })
+            {
+                headers: { Authorization: `Token ${token}` },
+            })
             .then((res) => {
                 setOnWatchList(false)
                 console.log("This is no longer a favorite!")
@@ -112,8 +114,12 @@ export default function SingleCard(props) {
             })
     }
 
+    function handleMovetoWatchedList() {
+
+    }
+
     return (
-        <Card sx={{ width: 450, mr: 2, mb: 2, border: 2, pt: 2, }}>
+        <Card sx={{  mr: 2, mb: 2, border: 2, pt: 2, }}>
             <CardHeader
                 sx={{
                     pt: 0,
@@ -145,18 +151,23 @@ export default function SingleCard(props) {
                     <>
                         <Tooltip title="Added to Watchlist!" arrow>
                             <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
-                                <CheckIcon sx={{ color: "red" }} />
+                                <BookmarkAddedIcon sx={{ color: "red" }} />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Mark as Watched" arrow>
+                            <IconButton onClick={() => handleMovetoWatchedList()} aria-label="mark as watched">
+                                <CheckCircleOutlineIcon sx={{ color: "red" }} />
                             </IconButton>
                         </Tooltip>
                     </>
-    )}
+                )}
 
                 title={cardObject.title}
                 subheader=
 
                 {<Tooltip title="See other recommendations by this user">
                     <CardActionArea>
-                    Recommended by: {cardObject.user} on {moment(cardObject.created_at).format('MM/DD/YY')}
+                        Recommended by: {cardObject.user} on {moment(cardObject.created_at).format('MM/DD/YY')}
                     </CardActionArea>
                 </Tooltip>}
 
@@ -185,28 +196,11 @@ export default function SingleCard(props) {
                     </Typography>
                 </CardContent>
             </div>
-            {/* <CardActions disableSpacing>
-                Click to see my recommendation!
-                <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                >
-                    <ExpandMoreIcon />
-                </ExpandMore>
-            </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                    <Typography paragraph>Why I Recommend this:</Typography>
-                    <Typography paragraph>
-                        {cardObject.reason}
-                    </Typography>
-                </CardContent>
-            </Collapse> */}
-            <CardActions>
-        <Button onClick={() => navigate(`/detail/${cardObject.id}`)} size="small">Click to See More!</Button>
-      </CardActions>
+            {isLoggedIn &&
+                <CardActions>
+                    <Button onClick={() => navigate(`/detail/${cardObject.id}`)} size="small">Click to See More!</Button>
+                </CardActions>
+            }
         </Card>
     )
 }

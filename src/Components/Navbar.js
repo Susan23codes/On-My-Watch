@@ -19,7 +19,7 @@ export default function Navbar(props) {
             <AppBar position="static" sx={{
                 bgcolor: "#293e8a",
             }}>
-                <Toolbar className='toolbar' sx={{ height: 200 }}>
+                <Toolbar className='toolbar' sx={{ height: 175 }}>
 
                     <Typography className='on-my-watch-title' component="div" sx={{ flexGrow: 1, fontSize: 80 }}>
                         📺n My Watch

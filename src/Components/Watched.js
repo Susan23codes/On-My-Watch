@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react';
 
 
 
-export default function MyWatchlist(props) {
+export default function Watched(props) {
     const {navigate, token, SingleCard, isLoggedIn, username} = props
     const [error, setError] = useState(null)
-    const [watchlist, setWatchlist] = useState(false)
+    const [alreadyWatched, setAlreadyWatched] = useState(false)
 
     useEffect(() => {
-        axios.get('https://onmywatch.herokuapp.com/api/user/watchlist/recommendations/', 
+        axios.get('https://onmywatch.herokuapp.com/???', 
         {headers: {
             Authorization: `Token ${token}`,
             }},)
         .then(res => {
             console.log(res.data)
-            setWatchlist(res.data)
+            setAlreadyWatched(res.data)
             // setWatchList(Watchlist.reverse())
            
     
@@ -25,9 +25,9 @@ export default function MyWatchlist(props) {
    
     return (
         <>
-        <h1 style={{ textAlign: "center", fontSize: 50}}>My Watchlist</h1>
+        <h1 style={{ textAlign: "center", fontSize: 50}}>I've already watched these fantastic shows:</h1>
         <div className='watchlist-cards'>
-        {watchlist && watchlist.map((cardObject, index) => {
+        {alreadyWatched && alreadyWatched.map((cardObject, index) => {
                     return (
                         <SingleCard 
                             cardObject={cardObject}

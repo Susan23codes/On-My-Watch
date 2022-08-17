@@ -28,11 +28,13 @@
 }
 
 .card {
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* flex-wrap: wrap; */ 
   padding-top: 50px;
-  margin-left: 100px;
+  margin-left: 250px;
+  margin-right: 200px;
 }
+
 
 .entire-login-form{
   /* border: 2px solid; */
@@ -48,42 +50,48 @@
   text-align: center;
   margin-top: 70px;
 }
- #username-field, #password, #confirm-password {
-   margin: 10px;
- }
+#username-field, #password, #confirm-password {
+  margin: 10px;
+}
 
- #registration-form {
-   width: 350px;
-   text-align: center;
-   margin: auto;
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   margin-top: 35px;
- }
+#registration-form {
+  width: 350px;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 35px;
+}
 
- #email-field {
-   margin: 10px 10px 10px 10px;
- }
+#email-field {
+  margin: 10px 10px 10px 10px;
+}
 
- .registration-text {
-   padding-top: 40px;
- }
+.registration-text {
+  padding-top: 40px;
+}
 
 
- .form-controls {
-   display:flex;
-   justify-content: space-between;
-   width: 300px;
-   text-align: center;
-   margin: auto;
-   margin-top: 10px;
-   align-items: center;
- }
+.form-controls {
+  display:flex;
+  justify-content: space-between;
+  width: 300px;
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+  align-items: center;
+}
 
- .form-submit {
-   margin: auto;
- }
+.form-submit {
+  margin: auto;
+}
+
+.homepage-cards-and-welcome {
+  display: flex;
+  flex-direction: column;
+  width: 75vw;
+}
 
  .homepage-sidebar-and-cards {
    display: flex;
@@ -91,9 +99,9 @@
 
  .homepage-sidebar {
    border: 4px solid black;
-   width: 1000px;
+   width: 270px;
    margin: 20px 0 0 20px;
-   font-size: 30px;
+   font-size: 25px;
    padding: 0px 20px 0 20px;
    background-color: #293e8a;
    color: white;

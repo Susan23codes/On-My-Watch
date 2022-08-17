@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from 'react'
 
 
+
 export default function Registration(props) {
 
     const { navigate, setAuth } = props
