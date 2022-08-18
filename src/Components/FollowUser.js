@@ -9,7 +9,7 @@ export default function FollowUser(props) {
     const [followinglist, setFollowinglist] = useState(false)
 
     useEffect(() => {
-        axios.post('https://onmywatch.herokuapp.com/api/following/', 
+        axios.get('https://onmywatch.herokuapp.com/api/following/', 
         {headers: {
             Authorization: `Token ${token}`,
             }},)
@@ -23,7 +23,7 @@ export default function FollowUser(props) {
     return (
 
     // <>
-    <h1>Here are the people I'm following!</h1>
+    <h1>Here are the fabulous people I'm following!</h1>
     // {followinglist.map((person, index) => (
     //         <p key={index}>{person}</p>
     //     ))

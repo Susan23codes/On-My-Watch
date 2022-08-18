@@ -33,7 +33,15 @@
   padding-top: 50px;
   margin-left: 250px;
   margin-right: 200px;
+
+  /* transition: all 0.2s ease-out; */
 }
+
+/* .card:hover {
+  /* box-shadow: 0 0 4em 0px rgba(0, 0, 0, 0.4); */
+  /* transform: scale(1.005);
+  transition: 500ms linear */
+/* }  */
 
 
 .entire-login-form{

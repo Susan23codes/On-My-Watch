@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { GiFilmProjector } from 'react-icons/gi';
 import Carousel from 'react-material-ui-carousel';
+import { red } from '@mui/material/colors';
 // import Carousel from 'react-elastic-carousel'
 
 
@@ -67,6 +68,7 @@ export default function RecCardList(props) {
                         <Carousel 
                             CycleNavigation
                             interval={3000}
+                            // sx={{'&:hover':{transform:'scale(1.1)'}}}
                             // indicators={false}
                             >
                         {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username)
