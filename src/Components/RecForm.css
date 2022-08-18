@@ -77,5 +77,11 @@ input[type=button]:hover {
 
 .checkGif {
     float: right;
-    padding: 2px 20px;
+    padding: 2px 2px;
+}
+
+.submissionMessage {
+    float: right;
+    padding-top: 50px;
+    padding-right: 10px;
 }

@@ -6,6 +6,7 @@ import MyWatchlist from './Components/MyWatchlist';
 import DetailView from './Components/DetailView';
 import Login from './Components/Login';
 import Registration from './Components/Registration';
+import RecForm from './Components/RecForm';
 import axios from 'axios'
 import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
 import useLocalStorageState from 'use-local-storage-state'
@@ -65,6 +66,17 @@ function App() {
             setAuth={setAuth}
           />}
         />
+        <Route
+          path="/new"
+          element={<RecForm
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            username={username}
+          />
+
+          } />
+
         <Route
           path="/"
           element={<RecCardList

@@ -21,15 +21,14 @@ const MenuProps = {
 };
 
 const names = [
-    'Scary',
-    'Funny',
-    'Kid-friendly',
-    'Foreign/Subtitled',
-    'British',
-    'Multi-season',
-    'Heartwarming',
-    'Sad',
-    'Thought Provoking',
+    'Netflix',
+    'Hulu',
+    'Hbo',
+    'Acorn',
+    'Amazon Prime',
+    'Disney Plus',
+    'Apple Tv',
+    'Other',
 
 ];
 
@@ -42,14 +41,15 @@ function getStyles(name, personName, theme) {
     };
 }
 
-export default function MultipleSelectChip(props) {
-    const theme = useTheme();
-    const [personName, setPersonName] = React.useState([]);
 
+export default function StreamingTagSelector(props) {
     useEffect(() => {
+
         console.log(personName)
 
     });
+    const theme = useTheme();
+    const [personName, setPersonName] = React.useState([]);
 
     const handleChange = (event) => {
         const {
@@ -59,14 +59,14 @@ export default function MultipleSelectChip(props) {
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
-        props.updateTags(personName)
+        props.updateStreaming(personName)
 
     };
 
     return (
         <div>
             <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-chip-label">Tags</InputLabel>
+                <InputLabel id="demo-multiple-chip-label">Streamed on..</InputLabel>
                 <Select
                     labelId="demo-multiple-chip-label"
                     id="demo-multiple-chip"

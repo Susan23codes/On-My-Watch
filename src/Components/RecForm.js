@@ -3,8 +3,9 @@ import { useState } from "react";
 import axios from "axios";
 import MultipleSelectChip from "./ChipTagSelector";
 import './RecForm.css';
+import StreamingTagSelector from "./StreamingTagSelector";
 
-export default function RecForm({ token }) {
+export default function RecForm(props) {
 
     const [mediaObj, setMediaObj] = useState([{
         "id": "",
@@ -25,52 +26,25 @@ export default function RecForm({ token }) {
     const [tags, setTags] = useState([])
     const [recommendation, setRecommendation] = useState([])
     const [mediaImage, setMediaImage] = useState('')
+    const [error, setError] = useState('')
 
-    /* const [card, setCard] = useState({
-         title: "Dark",
-         recommended_by: "Susan",
-         medium: "TV",
-         streaming_on: "Netflix",
-         genre: ["crime", "drama", "mystery"],
-         tags: ["suspense", "foreign", "subtitled"],
-         recommendation: "The series is centered on four main families in a small German town, and when people start to go missing, it seems like this is a crime drama. Instead, most of the missing are wandering into a nearby cave, which has doors open to the past, and occasionally the future. While this starts as a “find the missing kid lost in time” story, it evolves to become much, much more than that."
-     })*/
-
-    /*
-        useEffect(() => {
-            const proxyCard = card
-            proxyCard.title = title
-            proxyCard.genre = genre
-            proxyCard.medium = medium
-            proxyCard.streaming_on = streaming_on
-            proxyCard.tags = tags
-            proxyCard.recommendation = recommendation
-            setCard(proxyCard)
-    
-        }, [card, genre, title, medium, streaming_on, recommendation, tags]);
-    
-    */
 
 
     function logData() {
         console.log(mediaObj)
         console.log(IMDBid)
-        console.log(genre)
-        console.log(title)
-        console.log(movieTitle)
+        console.log(mediaObj.genres)
+        console.log(mediaObj.title)
         console.log(tags)
         console.log(streaming_on)
         console.log(recommendation)
-        console.log(mediaImage)
-        console.log(medium)
+        console.log(mediaObj.image)
+        console.log(mediaObj.type)
+        console.log(props.token)
+        console.log(props.username)
 
     }
-    function setData() {
-        setGenre(mediaObj.genreList)
-        setMediaImage(mediaObj.image)
-        setMovieTitle(mediaObj.title)
-        setMedium(mediaObj.type)
-    }
+
     function movieSearch() {
         setMediaObj(
             [{
@@ -121,22 +95,49 @@ export default function RecForm({ token }) {
     function handleSubmit() {
         setSubmitComplete(true)
         logData()
+        axios
+            .post(
+                "https://onmywatch.herokuapp.com/api/recommendation/",
+                {
+                    description: mediaObj.plot,
+                    saved_by: [],
+                    genre: mediaObj.genres,
+                    imdbid: mediaObj.id,
+                    medium: mediaObj.type,
+                    poster: mediaObj.image,
+                    reason: recommendation,
+                    streaming_service: streaming_on,
+                    tag: tags,
+                    title: mediaObj.title,
+                    user: props.username,
+                    related_shows: mediaObj.similars,
+                    keywords: mediaObj.keywordList,
+                    actors: mediaObj.actorList,
+
+                },
+                {
+                    headers: {
+                        Authorization: `Token ${props.token}`,
+                    },
+                }
+            )
+            .then(console.log)
+            .catch((error) => {
+                setError(error.message);
+            });
     }
     const handleChoseMedia = (event) => {
         setmediaChosen(true)
         const tempID = String(event.target.getAttribute('data-id'))
         SpecificMovieSearch(tempID)
         setIMDBid(tempID);
-        setData()
+
         //   setGenre(mediaObj.genreList)
         //  setMediaImage(mediaObj.image)
         //   setTitle(mediaObj.title)
 
     }
-    const handleChangeTitle = (event) => {
-        console.log(event.target.value);
-        setTitle(event.target.value)
-    };
+
 
     const handleChangeRecommendation = (event) => {
         console.log(event.target.value);
@@ -148,10 +149,6 @@ export default function RecForm({ token }) {
         setSearchParams(event.target.value)
     };
 
-    const handleChangeStreaming_on = (event) => {
-        console.log(event.target.value);
-        setStreaming_on(event.target.value)
-    };
 
 
 
@@ -219,21 +216,15 @@ export default function RecForm({ token }) {
                     {!mediaChosen ? <div></div> :
                         <form action="/action_page.php">
                             <div class="row">
-                                <div class="col-25">
-                                    <label >Title</label>
-                                </div>
-                                <div class="col-75">
-                                    <input type="text" id="fname" name="firstname" placeholder="Recommendation Title.." onChange={handleChangeTitle}
-                                        value={title}></input>
-                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-25">
                                     <label >Streaming Platform</label>
                                 </div>
                                 <div class="col-75">
-                                    <input type="text" id="lname" name="lastname" placeholder="What Streaming Service.." onChange={handleChangeStreaming_on}
-                                        value={streaming_on}></input>
+                                    <StreamingTagSelector updateStreaming={setStreaming_on}></StreamingTagSelector>
+
                                 </div>
                             </div>
                             <div class="row">
@@ -256,7 +247,7 @@ export default function RecForm({ token }) {
                             </div>
                             <br></br>
                             <div class="row">
-                                <div>{submitComplete ? <img src="/singleloopcheck.gif" className="checkGif" alt="gifImage" height="120"  ></img> : <input type="button" value="Submit" onClick={handleSubmit}></input>
+                                <div >{submitComplete ? <div><div class="submissionMessage">Submission Complete!</div><img src="/singleloopcheck.gif" className="checkGif" alt="gifImage" height="120"  ></img></div> : <input type="button" value="Submit" onClick={handleSubmit}></input>
                                 }</div>
 
                             </div>
