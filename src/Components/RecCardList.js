@@ -41,7 +41,7 @@ export default function RecCardList(props) {
                             <li><GiFilmProjector /><Link to={"/following"} style={{ textDecoration: 'none', color: 'white' }}> Following</Link></li><br />
                             <li><GiFilmProjector /> Search</li><br />
                             <li><GiFilmProjector /><Link to={"/watched"} style={{ textDecoration: 'none', color: 'white' }}> What I've Watched</Link></li><br />
-                            <li><GiFilmProjector /> Make a New Recommendation</li>
+                            <li><GiFilmProjector /><Link to={"/new"} style={{ textDecoration: 'none', color: 'white' }}>Make a New Recommendation</Link></li>
                         </div>
                     </>
                 }

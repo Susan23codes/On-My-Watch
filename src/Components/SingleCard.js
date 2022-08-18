@@ -119,7 +119,10 @@ export default function SingleCard(props) {
     }
 
     return (
-        <Card sx={{  mr: 2, mb: 2, border: 2, pt: 2, }}>
+        <Card sx={{  mr: 2, mb: 2, border: 2, pt: 2, bgcolor:'#f5f1e6',  boxShadow: 3,
+        "&:hover": {
+          boxShadow: 9,
+        },}}>
             <CardHeader
                 sx={{
                     pt: 0,
