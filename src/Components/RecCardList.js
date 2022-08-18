@@ -69,8 +69,8 @@ export default function RecCardList(props) {
                             interval={3000}
                             // indicators={false}
                             >
-                        {recommendationList && recommendationList.map((cardObject, index) => {
-                            if (username !== cardObject.user) 
+                        {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username)
+                            .map((cardObject, index) => {
                             return (
                                 <SingleCard
                                     cardObject={cardObject}
