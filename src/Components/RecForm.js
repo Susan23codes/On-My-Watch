@@ -18,15 +18,11 @@ export default function RecForm(props) {
     const [mediaChosen, setmediaChosen] = useState(false)
     const [IMDBid, setIMDBid] = useState('')
     const [searchParams, setSearchParams] = useState('')
-    const [title, setTitle] = useState("");
-    const [movieTitle, setMovieTitle] = useState('')
-    const [genre, setGenre] = useState([])
-    const [medium, setMedium] = useState("")
     const [streaming_on, setStreaming_on] = useState("")
     const [tags, setTags] = useState([])
     const [recommendation, setRecommendation] = useState([])
-    const [mediaImage, setMediaImage] = useState('')
     const [error, setError] = useState('')
+    console.log(error)
 
 
 
