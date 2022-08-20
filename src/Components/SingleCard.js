@@ -114,9 +114,7 @@ export default function SingleCard(props) {
             })
     }
 
-    function handleMovetoWatchedList() {
-
-    }
+    
 
     return (
         <Card sx={{  mr: 2, mb: 2, border: 2, pt: 2, bgcolor:'#f5f1e6',  boxShadow: 3,
@@ -144,6 +142,7 @@ export default function SingleCard(props) {
                                 <AddToQueueIcon sx={{ color: "red" }} />
                             </IconButton>
                         </Tooltip>
+                        
                         {/* <Tooltip title="Add Recommender to Friend List" arrow>
                         <IconButton onClick={() => alert("Star is working")} aria-label="follow">
                             <StarBorderIcon  sx={{ color: "red" }} />
@@ -157,11 +156,12 @@ export default function SingleCard(props) {
                                 <BookmarkAddedIcon sx={{ color: "red" }} />
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title="Mark as Watched" arrow>
+                        {/* <Tooltip title="Mark as Watched" arrow>
                             <IconButton onClick={() => handleMovetoWatchedList()} aria-label="mark as watched">
                                 <CheckCircleOutlineIcon sx={{ color: "red" }} />
                             </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
+                        
                     </>
                 )}
 
@@ -180,6 +180,7 @@ export default function SingleCard(props) {
                     <CardMedia
                         component="img"
                         height="220"
+                        // image="dark_poster.jpeg"
                         image={cardObject.poster}
                         alt="TV poster"
                     />

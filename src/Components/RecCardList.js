@@ -41,7 +41,7 @@ export default function RecCardList(props) {
                             <li><GiFilmProjector /><Link to={"/following"} style={{ textDecoration: 'none', color: 'white' }}> Following</Link></li><br />
                             <li><GiFilmProjector /> Search</li><br />
                             <li><GiFilmProjector /><Link to={"/watched"} style={{ textDecoration: 'none', color: 'white' }}> What I've Watched</Link></li><br />
-                            <li><GiFilmProjector /><Link to={"/new"} style={{ textDecoration: 'none', color: 'white' }}>Make a New Recommendation</Link></li>
+                            <li><GiFilmProjector /><Link to={"/new"} style={{ textDecoration: 'none', color: 'white' }}> Make a New Recommendation</Link></li>
                         </div>
                     </>
                 }
@@ -68,6 +68,7 @@ export default function RecCardList(props) {
                         <Carousel 
                             CycleNavigation
                             interval={3000}
+                            fullHeightHover={false}
                             // sx={{'&:hover':{transform:'scale(1.1)'}}}
                             // indicators={false}
                             >
