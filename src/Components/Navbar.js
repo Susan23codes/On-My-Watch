@@ -19,7 +19,7 @@ export default function Navbar(props) {
             <AppBar position="static" sx={{
                 bgcolor: "#293e8a",
             }}>
-                <Toolbar className='toolbar' sx={{ height: 200 }}>
+                <Toolbar className='toolbar' sx={{ height: 175 }}>
 
                     <Typography className='on-my-watch-title' component="div" sx={{ flexGrow: 1, fontSize: 80 }}>
                         📺n My Watch
@@ -35,11 +35,9 @@ export default function Navbar(props) {
                         <Button onClick={() => navigate('/')} color="inherit" sx={{ fontSize: 20 }}>Home</Button>
                     </div>
                     {isLoggedIn &&
-                        <div className='recommendation-button'>
-
-                            <Button onClick={() => navigate('/new')} color="inherit" sx={{ fontSize: 20, }}>Make a New Recommendation</Button>
-                        </div>}
-
+                    <div className='recommendation-button'>
+                        <Button onClick={() => alert("this is the recommendation button")} color="inherit" sx={{ fontSize: 20, }}>Make a New Recommendation</Button>
+                    </div>}
                     <div>
                         {isLoggedIn ? (
                             <Button onClick={() => handleLogout()} color="inherit" sx={{ fontSize: 20 }}>Logout </Button>
@@ -47,7 +45,7 @@ export default function Navbar(props) {
                         ) : (
                             <>
                                 <Button onClick={() => navigate('/login')} color="inherit" sx={{ fontSize: 20 }}>Login </Button>
-                                <Button onClick={() => navigate('/register')} color="inherit" sx={{ fontSize: 20 }}>Register </Button>
+                                <Button onClick ={() => navigate('/register')} color="inherit" sx={{ fontSize: 20 }}>Register </Button>
                             </>
                         )}
                     </div>

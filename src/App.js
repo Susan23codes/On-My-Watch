@@ -5,7 +5,10 @@ import SingleCard from './Components/SingleCard';
 import MyWatchlist from './Components/MyWatchlist';
 import DetailView from './Components/DetailView';
 import Login from './Components/Login';
+// import Watched from './Components/Watched';
+import FollowUser from './Components/FollowUser';
 import Registration from './Components/Registration';
+import Comments from './Components/Comments';
 import RecForm from './Components/RecForm';
 import axios from 'axios'
 import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
@@ -78,6 +81,16 @@ function App() {
           } />
 
         <Route
+          path="/comments/:recommendationId"
+          element={<Comments
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            username={username}
+            SingleCard={SingleCard}
+          />}
+        />
+         <Route
           path="/"
           element={<RecCardList
             isLoggedIn={isLoggedIn}
@@ -89,6 +102,26 @@ function App() {
         <Route
           path="/mywatchlist"
           element={<MyWatchlist
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            SingleCard={SingleCard}
+            username={username}
+          />}
+        />
+        {/* <Route
+          path="/watched"
+          element={<Watched
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            SingleCard={SingleCard}
+            username={username}
+          />}
+        /> */}
+         <Route
+          path="/following"
+          element={<FollowUser
             isLoggedIn={isLoggedIn}
             token={token}
             navigate={navigate}
