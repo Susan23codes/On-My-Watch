@@ -5,7 +5,7 @@ import SingleCard from './Components/SingleCard';
 import MyWatchlist from './Components/MyWatchlist';
 import DetailView from './Components/DetailView';
 import Login from './Components/Login';
-import Watched from './Components/Watched';
+// import Watched from './Components/Watched';
 import FollowUser from './Components/FollowUser';
 import Registration from './Components/Registration';
 import Comments from './Components/Comments';
@@ -109,7 +109,7 @@ function App() {
             username={username}
           />}
         />
-        <Route
+        {/* <Route
           path="/watched"
           element={<Watched
             isLoggedIn={isLoggedIn}
@@ -118,7 +118,7 @@ function App() {
             SingleCard={SingleCard}
             username={username}
           />}
-        />
+        /> */}
          <Route
           path="/following"
           element={<FollowUser
