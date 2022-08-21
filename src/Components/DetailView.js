@@ -57,6 +57,7 @@ export default function DetailView(props) {
     const [isOnWatchList, setIsOnWatchList] = useState(false)
     const [error, setError] = useState(null)
     const [isFollowing, setIsFollowing] = useState(false)
+    const [followPk, setFollowPk] = useState(null)
     const navigate = useNavigate()
     
     const handleExpandClick = () => {
@@ -84,9 +85,7 @@ export default function DetailView(props) {
                     setIsOnWatchList(false)
                     // console.log("no")
                 }
-
-
-            
+       
 
             axios.get('https://onmywatch.herokuapp.com/api/following/',
             {
@@ -98,12 +97,17 @@ export default function DetailView(props) {
                 let results = (res.data)
                 console.log(res.data)
 
-                // let filteredList = results.filter(result => result.followee_id === firstRequestResults.user_id)
+                let filteredList = results.filter(result => result.followee_id === firstRequestResults.user_info.id)
+                if (filteredList.length === 1) {
+                    setFollowPk(filteredList[0].id)
+                }
+
+
                 let mappedList = results.map(result => result.followee_id)
-                console.log("***")
+                // console.log("***")
                 // console.log(filteredList)
                 console.log(mappedList)
-                console.log("***")
+                // console.log("***")
 
                 if (mappedList.includes(firstRequestResults.user_info.id)) {
                     console.log("yes")
@@ -201,7 +205,23 @@ export default function DetailView(props) {
     
 
     function handleUnfollowUser() {
-        return alert("You are not following them anymore!")
+        setError(null)
+        // console.log(`https://onmywatch.herokuapp.com/api/follows/${followPk}/delete/`)
+        axios.delete(`https://onmywatch.herokuapp.com/api/follows/${followPk}/delete/`,
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                },
+            })
+            .then((res) => {
+                console.log(`added ${cardDetail.user_info.id}!`)
+                setIsFollowing(false)
+
+            })
+            .catch((error) => {
+                setError(Object.values(error.response.data))
+                console.log(error)
+            })
 
     }
 
