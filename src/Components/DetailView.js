@@ -68,11 +68,14 @@ export default function DetailView(props) {
     console.log(params)
 
     useEffect(() => {
+        let firstRequestResults = null
         axios.get(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}`)
             .then(res => {
                 let results = (res.data)
-                console.log(results)
+                console.log('first axios')
                 setCardDetail(results)
+                firstRequestResults = results
+                console.log(results)
                 if (results.saved_by.includes(username)) {
                     setIsOnWatchList(true)
                     // console.log("yes")
@@ -81,7 +84,9 @@ export default function DetailView(props) {
                     setIsOnWatchList(false)
                     // console.log("no")
                 }
-            })
+
+
+            
 
             axios.get('https://onmywatch.herokuapp.com/api/following/',
             {
@@ -92,7 +97,15 @@ export default function DetailView(props) {
             .then(res => {
                 let results = (res.data)
                 console.log(res.data)
-                if (results.followee.includes(username)) {
+
+                // let filteredList = results.filter(result => result.followee_id === firstRequestResults.user_id)
+                let mappedList = results.map(result => result.followee_id)
+                console.log("***")
+                // console.log(filteredList)
+                console.log(mappedList)
+                console.log("***")
+
+                if (mappedList.includes(firstRequestResults.user_info.id)) {
                     console.log("yes")
                     setIsFollowing(true)
                 }
@@ -101,6 +114,7 @@ export default function DetailView(props) {
                     console.log("no")
                 }
             })
+        })
     }, 
     [])
 
@@ -166,17 +180,16 @@ export default function DetailView(props) {
     }
 
     function handleFollowUser() {
-        console.log(`added ${cardDetail.id}!`)
         setError(null)
         axios.post('https://onmywatch.herokuapp.com/api/follows/',
-            {followee: cardDetail.id},
+            {followee: cardDetail.user_info.id},
             {
                 headers: {
                     Authorization: `Token ${token}`
                 },
             })
             .then((res) => {
-                console.log(`added ${cardDetail.user_id}!`)
+                console.log(`added ${cardDetail.user_info.id}!`)
                 setIsFollowing(true)
 
             })
@@ -196,9 +209,6 @@ export default function DetailView(props) {
 
     }
 
-    function handleSeeComments() {
-
-    }
 
 
     return (
@@ -238,7 +248,7 @@ export default function DetailView(props) {
                             }
 
                         </div>
-                        <Card className="card-detail" sx={{ width: 450, mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
+                        <Card className="card-detail" sx={{ bgcolor:'#e9eef0', width: 550, mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
                             <CardHeader
                                 sx={{
                                     pt: 0,

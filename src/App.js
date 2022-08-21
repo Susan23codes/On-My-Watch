@@ -10,6 +10,7 @@ import FollowUser from './Components/FollowUser';
 import Registration from './Components/Registration';
 import Comments from './Components/Comments';
 import RecForm from './Components/RecForm';
+import FollowingCard from './Components/FollowingCard';
 import axios from 'axios'
 import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
 import useLocalStorageState from 'use-local-storage-state'
