@@ -114,6 +114,7 @@ export default function SingleCard(props) {
             })
     }
 
+<<<<<<< HEAD
     // function getWatchListIcon() {
     //     if (isLoggedIn && !onWatchList) {
     //         return (
@@ -137,8 +138,34 @@ export default function SingleCard(props) {
     //     }
     //     return <></>
     // }
+=======
 
-    
+    function getWatchListIcon() {
+        if (isLoggedIn && !onWatchList) {
+            return (
+                <>
+                    <Tooltip title="Add to Watchlist" arrow>
+                        <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
+                            <AddToQueueIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip></>
+            )
+        } else if (isLoggedIn && onWatchList) {
+            return (
+                <>
+                    <Tooltip title="Added to Watchlist!" arrow>
+                        <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
+                            <BookmarkAddedIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                </>
+            )
+        }
+        return <></>
+    }
+>>>>>>> main
+
+
 
     return (
         <Card sx={{
@@ -161,11 +188,12 @@ export default function SingleCard(props) {
                 }
                 titleTypographyProps={{ variant: 'h5' }}
                 // action={getWatchListIcon()}
+
                 title={cardObject.title}
                 subheader=
 
                 {<Tooltip title="See other recommendations by this user">
-                    <CardActionArea>
+                    <CardActionArea onClick={() => navigate(`/more/${cardObject.user_info.id}`)}>
                         Recommended by: {cardObject.user} on {moment(cardObject.created_at).format('MM/DD/YY')}
                     </CardActionArea>
                 </Tooltip>}
@@ -188,9 +216,15 @@ export default function SingleCard(props) {
                     <Typography paragraph>
                         <strong>Streaming on:</strong> {cardObject.streaming_service}
                     </Typography>
+<<<<<<< HEAD
                     {/* <Typography paragraph>
                         <strong>Genre:</strong> {cardObject.genre}
                     </Typography> */}
+=======
+                    <Typography paragraph>
+
+                    </Typography>
+>>>>>>> main
                     <Typography paragraph>
                         <strong>Tags: </strong>{cardObject.tag.join(', ')}
                     </Typography>

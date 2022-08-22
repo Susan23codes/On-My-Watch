@@ -46,10 +46,14 @@ export default function StreamingTagSelector(props) {
     useEffect(() => {
 
         console.log(personName)
-
+        handleUpdate()
     });
     const theme = useTheme();
     const [personName, setPersonName] = React.useState([]);
+
+    function handleUpdate() {
+        props.updateStreaming(personName)
+    }
 
     const handleChange = (event) => {
         const {
