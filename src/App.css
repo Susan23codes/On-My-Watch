@@ -10,7 +10,7 @@
 .navbar-buttons {
   display: flex;
   justify-content:space-between;
-  padding: 30px 30px 20px 0;
+  padding: 40px 30px 20px 0;
   }
 
 
@@ -19,9 +19,12 @@
   padding-left: 30px;
 }
 
-/* .recommendation-button {
-  padding-left: 40px;
-} */
+.recommendation-button {
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+ 
+}
 
 .poster-and-text {
   display: flex;
@@ -128,9 +131,9 @@
 
  .watchlist-cards {
    display: flex;
-   flex-direction: column;
    padding-left: 20px;
    align-items: center;
+   justify-content: center;
  }
 
  .detail-page {
@@ -169,6 +172,34 @@
   border-radius: 4px;
   cursor: pointer;
   float: right;
+}
+
+.following-list {
+  display: flex;
+}
+
+.following-list-item {
+  width: 360px;
+}
+
+.following-list-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.following-smaller-card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #293e8a;
+  border-radius: 5px;
+  width: 20vw;
+  padding: 0 0 10px 5px;
+  margin-bottom: 10px;
+  background-color: #e9eef0;
+}
+
+.following-list-name-and-avatar {
+  display: flex;
 }
 
 

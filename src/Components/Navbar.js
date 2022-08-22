@@ -19,7 +19,7 @@ export default function Navbar(props) {
             <AppBar position="static" sx={{
                 bgcolor: "#293e8a",
             }}>
-                <Toolbar className='toolbar' sx={{ height: 175 }}>
+                <Toolbar className='toolbar' sx={{ height: 150 }}>
 
                     <Typography className='on-my-watch-title' component="div" sx={{ flexGrow: 1, fontSize: 80 }}>
                         📺n My Watch
@@ -35,8 +35,11 @@ export default function Navbar(props) {
                         <Button onClick={() => navigate('/')} color="inherit" sx={{ fontSize: 20 }}>Home</Button>
                     </div>
                     {isLoggedIn &&
+
                         <div className='recommendation-button'>
                             <Button onClick={() => navigate("/new")} color="inherit" sx={{ fontSize: 20, }}>Make a New Recommendation</Button>
+
+                            <Button color="inherit" sx={{ fontSize: 20, }}> Search </Button>
                         </div>}
                     <div>
                         {isLoggedIn ? (

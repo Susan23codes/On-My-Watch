@@ -52,7 +52,10 @@ export default function RecCardList(props) {
                         <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Browse the latest recommendations for new ideas!</li><br />
                         <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Sign in or Register to follow people and see their recommendations!</li><br />
                         <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Search for your next favorite show!</li><br />
-                        <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Add recommendations to your Watchlist!</li>
+
+                        <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Make your own recommendations!</li><br />
+                        <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Add recommendations to your Watchlist! </li>
+
 
                     </div>
                 }

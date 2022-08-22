@@ -177,7 +177,7 @@ export default function RecForm(props) {
                     :
                     <div>                <div className="input-field">
 
-                        <label>First Choose What You Watched</label>
+                        <label>First Tell Us What You Watched and then Choose the Appropriate Poster:</label>
                         <br></br>
                         <input
                             className="input"
@@ -248,7 +248,7 @@ export default function RecForm(props) {
                             </div>
                             <div class="row">
                                 <div class="col-25">
-                                    <label >Recommendation</label>
+                                    <label >Your Recommendation</label>
                                 </div>
                                 <div class="col-75">
                                     <textarea id="subject" name="subject" placeholder="Write something.." onChange={handleChangeRecommendation}

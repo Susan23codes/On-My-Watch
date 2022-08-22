@@ -14,6 +14,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import { GiFilmProjector } from 'react-icons/gi';
 import Typography from '@mui/material/Typography';
@@ -55,8 +56,10 @@ export default function DetailView(props) {
     const [cardDetail, setCardDetail] = useState(null)
     const [expanded, setExpanded] = useState(false);
     const [isOnWatchList, setIsOnWatchList] = useState(false)
+    const [isOnWatchedList, setIsOnWatchedList] = useState(false)
     const [error, setError] = useState(null)
     const [isFollowing, setIsFollowing] = useState(false)
+    const [followPk, setFollowPk] = useState(null)
     const navigate = useNavigate()
 
     const handleExpandClick = () => {
@@ -68,11 +71,14 @@ export default function DetailView(props) {
     console.log(params)
 
     useEffect(() => {
+        let firstRequestResults = null
         axios.get(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}`)
             .then(res => {
                 let results = (res.data)
-                console.log(results)
+                console.log('first axios')
                 setCardDetail(results)
+                firstRequestResults = results
+                console.log(results)
                 if (results.saved_by.includes(username)) {
                     setIsOnWatchList(true)
                     // console.log("yes")
@@ -81,25 +87,64 @@ export default function DetailView(props) {
                     setIsOnWatchList(false)
                     // console.log("no")
                 }
-            })
 
-        axios.get('https://onmywatch.herokuapp.com/api/following/',
-            {
-                headers: {
-                    Authorization: `Token ${token}`,
-                }
-            })
-            .then(res => {
-                let results = (res.data)
-                console.log(res.data)
-                if (results.followee.includes(username)) {
-                    console.log("yes")
-                    setIsFollowing(true)
-                }
-                else {
-                    setIsFollowing(false)
-                    console.log("no")
-                }
+
+
+                axios.get('https://onmywatch.herokuapp.com/api/following/',
+                    {
+                        headers: {
+                            Authorization: `Token ${token}`,
+                        }
+                    })
+                    .then(res => {
+                        let results = (res.data)
+                        console.log(res.data)
+
+                        let filteredList = results.filter(result => result.followee_id === firstRequestResults.user_info.id)
+                        if (filteredList.length === 1) {
+                            setFollowPk(filteredList[0].id)
+                        }
+
+
+                        let mappedList = results.map(result => result.followee_id)
+                        // console.log("***")
+                        // console.log(filteredList)
+                        console.log(mappedList)
+                        // console.log("***")
+
+                        if (mappedList.includes(firstRequestResults.user_info.id)) {
+                            console.log("yes")
+                            setIsFollowing(true)
+                        }
+                        else {
+                            setIsFollowing(false)
+                            console.log("no")
+                        }
+                    })
+
+                console.log(`Starting watchedList request.  Results of frr: ${firstRequestResults}`)
+                axios.get('https://onmywatch.herokuapp.com/api/watchedlist/',
+                    {
+                        headers: {
+                            Authorization: `Token ${token}`,
+                        }
+                    })
+                    .then(res => {
+                        let results = (res.data)
+                        // firstRequestResults = results
+                        console.log(results)
+                        let mappedList = results.map(result => result.imdbid)
+
+                        if (mappedList.includes(firstRequestResults.imdbid)) {
+                            console.log("yes")
+                            setIsOnWatchedList(true)
+                        }
+                        else {
+                            setIsOnWatchedList(false)
+                            console.log("no")
+                        }
+
+                    })
             })
     },
         [])
@@ -166,17 +211,18 @@ export default function DetailView(props) {
     }
 
     function handleFollowUser() {
-        console.log(`added ${cardDetail.id}!`)
         setError(null)
         axios.post('https://onmywatch.herokuapp.com/api/follows/',
-            { followee: cardDetail.id },
+
+            { followee: cardDetail.user_info.id },
+
             {
                 headers: {
                     Authorization: `Token ${token}`
                 },
             })
             .then((res) => {
-                console.log(`added ${cardDetail.user_id}!`)
+                console.log(`added ${cardDetail.user_info.id}!`)
                 setIsFollowing(true)
 
             })
@@ -188,19 +234,125 @@ export default function DetailView(props) {
 
 
     function handleUnfollowUser() {
-        return alert("You are not following them anymore!")
+        setError(null)
+        // console.log(`https://onmywatch.herokuapp.com/api/follows/${followPk}/delete/`)
+        axios.delete(`https://onmywatch.herokuapp.com/api/follows/${followPk}/delete/`,
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                },
+            })
+            .then((res) => {
+                console.log(`added ${cardDetail.user_info.id}!`)
+                setIsFollowing(false)
+
+            })
+            .catch((error) => {
+                setError(Object.values(error.response.data))
+                console.log(error)
+            })
 
     }
 
     function handleMovetoWatchedList() {
+        setError(null)
+        axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardDetail.id}/watchedlist`,
+            {},
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                },
+            })
+            .then((res) => {
+                console.log("You've watched this now!")
+                setIsOnWatchedList(true)
 
+            })
+            .catch((error) => {
+                setError(Object.values(error.response.data))
+                console.log(error)
+            })
     }
 
-    function handleSeeComments() {
+    function handleDeleteFromWatchedList() {
+        setError(null)
+        axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardDetail.id}/watchedlist`,
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                },
+            })
+            .then((res) => {
+                console.log("You've watched this now!")
+                setIsOnWatchedList(false)
 
+            })
+            .catch((error) => {
+                setError(Object.values(error.response.data))
+                console.log(error)
+            })
     }
 
-    //onClick={() => navigate(`/more/${cardObject.user_info.id}`)}
+    function getAddedToWatchedListIcon() {
+
+        if (isLoggedIn && !isOnWatchList) {
+            return (
+                <>
+                    <Tooltip title="Add to Watchlist" arrow>
+                        <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
+                            <AddToQueueIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="See/Add Comments" arrow>
+                        <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
+                            <CommentIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+
+                </>
+            )
+        }
+        else if (isLoggedIn && isOnWatchList && !isOnWatchedList) {
+            return (
+                <>
+                    <Tooltip title="Added to Watchlist!" arrow>
+                        <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
+                            <BookmarkAddedIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="See/Add Comments" arrow>
+                        <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
+                            <CommentIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Mark as Watched" arrow>
+                        <IconButton onClick={() => handleMovetoWatchedList()} aria-label="mark as watched">
+                            <CheckCircleOutlineIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                </>
+            )
+        }
+        else if (isLoggedIn && isOnWatchList && isOnWatchedList) {
+            return (
+                <>
+                    <Tooltip title="See/Add Comments" arrow>
+                        <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
+                            <CommentIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="You've Watched This" arrow>
+                        <IconButton onClick={() => handleDeleteFromWatchedList()} aria-label="delete from watched">
+                            <CheckCircleIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                </>
+            )
+        }
+    }
+
+
+
 
     return (
         <>
@@ -242,7 +394,7 @@ export default function DetailView(props) {
                             }
 
                         </div>
-                        <Card className="card-detail" sx={{ width: 450, mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
+                        <Card className="card-detail" sx={{ bgcolor: '#e9eef0', width: 550, mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
                             <CardHeader
                                 sx={{
                                     pt: 0,
@@ -256,44 +408,7 @@ export default function DetailView(props) {
                                     </Avatar>
                                 }
                                 titleTypographyProps={{ variant: 'h5' }}
-                                action=
-                                {isLoggedIn && !isOnWatchList ? (
-                                    <>
-                                        <Tooltip title="Add to Watchlist" arrow>
-                                            <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-                                                <AddToQueueIcon sx={{ color: "red" }} />
-                                            </IconButton>
-                                        </Tooltip>
-                                        <Tooltip title="See/Add Comments" arrow>
-                                            <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
-                                                <CommentIcon sx={{ color: "red" }} />
-                                            </IconButton>
-                                        </Tooltip>
-                                        {/* <Tooltip title="Add Recommender to Friend List" arrow>
-                        <IconButton onClick={() => alert("Star is working")} aria-label="follow">
-                            <StarBorderIcon  sx={{ color: "red" }} />
-                        </IconButton>
-                        </Tooltip> */}
-                                    </>
-                                ) : (
-                                    <>
-                                        <Tooltip title="Added to Watchlist!" arrow>
-                                            <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
-                                                <BookmarkAddedIcon sx={{ color: "red" }} />
-                                            </IconButton>
-                                        </Tooltip>
-                                        <Tooltip title="See/Add Comments" arrow>
-                                            <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
-                                                <CommentIcon sx={{ color: "red" }} />
-                                            </IconButton>
-                                        </Tooltip>
-                                        <Tooltip title="Mark as Watched" arrow>
-                                            <IconButton onClick={() => handleMovetoWatchedList()} aria-label="mark as watched">
-                                                <CheckCircleOutlineIcon sx={{ color: "red" }} />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </>
-                                )}
+                                action={getAddedToWatchedListIcon()}
 
                                 title={cardDetail.title}
                                 subheader=

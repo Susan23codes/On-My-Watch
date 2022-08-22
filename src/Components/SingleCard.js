@@ -115,10 +115,35 @@ export default function SingleCard(props) {
     }
 
 
+    function getWatchListIcon() {
+        if (isLoggedIn && !onWatchList) {
+            return (
+                <>
+                    <Tooltip title="Add to Watchlist" arrow>
+                        <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
+                            <AddToQueueIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip></>
+            )
+        } else if (isLoggedIn && onWatchList) {
+            return (
+                <>
+                    <Tooltip title="Added to Watchlist!" arrow>
+                        <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
+                            <BookmarkAddedIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                </>
+            )
+        }
+        return <></>
+    }
+
+
 
     return (
         <Card sx={{
-            mr: 2, mb: 2, border: 2, pt: 2, bgcolor: '#f5f1e6', boxShadow: 3,
+            width: 550, mr: 2, mb: 2, border: 2, pt: 2, bgcolor: '#e9eef0', boxShadow: 3,
             "&:hover": {
                 boxShadow: 9,
             },
@@ -136,36 +161,8 @@ export default function SingleCard(props) {
                     </Avatar>
                 }
                 titleTypographyProps={{ variant: 'h5' }}
-                action=
-                {isLoggedIn && !onWatchList ? (
-                    <>
-                        <Tooltip title="Add to Watchlist" arrow>
-                            <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-                                <AddToQueueIcon sx={{ color: "red" }} />
-                            </IconButton>
-                        </Tooltip>
 
-                        {/* <Tooltip title="Add Recommender to Friend List" arrow>
-                        <IconButton onClick={() => alert("Star is working")} aria-label="follow">
-                            <StarBorderIcon  sx={{ color: "red" }} />
-                        </IconButton>
-                        </Tooltip> */}
-                    </>
-                ) : (
-                    <>
-                        <Tooltip title="Added to Watchlist!" arrow>
-                            <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
-                                <BookmarkAddedIcon sx={{ color: "red" }} />
-                            </IconButton>
-                        </Tooltip>
-                        {/* <Tooltip title="Mark as Watched" arrow>
-                            <IconButton onClick={() => handleMovetoWatchedList()} aria-label="mark as watched">
-                                <CheckCircleOutlineIcon sx={{ color: "red" }} />
-                            </IconButton>
-                        </Tooltip> */}
-
-                    </>
-                )}
+                action={getWatchListIcon()}
 
                 title={cardObject.title}
                 subheader=
