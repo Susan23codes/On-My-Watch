@@ -114,7 +114,6 @@ export default function SingleCard(props) {
             })
     }
 
-<<<<<<< HEAD
     // function getWatchListIcon() {
     //     if (isLoggedIn && !onWatchList) {
     //         return (
@@ -138,32 +137,6 @@ export default function SingleCard(props) {
     //     }
     //     return <></>
     // }
-=======
-
-    function getWatchListIcon() {
-        if (isLoggedIn && !onWatchList) {
-            return (
-                <>
-                    <Tooltip title="Add to Watchlist" arrow>
-                        <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-                            <AddToQueueIcon sx={{ color: "red" }} />
-                        </IconButton>
-                    </Tooltip></>
-            )
-        } else if (isLoggedIn && onWatchList) {
-            return (
-                <>
-                    <Tooltip title="Added to Watchlist!" arrow>
-                        <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
-                            <BookmarkAddedIcon sx={{ color: "red" }} />
-                        </IconButton>
-                    </Tooltip>
-                </>
-            )
-        }
-        return <></>
-    }
->>>>>>> main
 
 
 
