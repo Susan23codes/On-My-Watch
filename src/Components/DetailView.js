@@ -60,6 +60,7 @@ export default function DetailView(props) {
     const [error, setError] = useState(null)
     const [isFollowing, setIsFollowing] = useState(false)
     const [followPk, setFollowPk] = useState(null)
+    const [otherUserSameRecommendation, setOtherUserSameRecommendation] = useState(null)
     const navigate = useNavigate()
 
     const handleExpandClick = () => {
@@ -112,12 +113,12 @@ export default function DetailView(props) {
                         // console.log("***")
 
                         if (mappedList.includes(firstRequestResults.user_info.id)) {
-                            console.log("yes")
+                            // console.log("yes")
                             setIsFollowing(true)
                         }
                         else {
                             setIsFollowing(false)
-                            console.log("no")
+                            // console.log("no")
                         }
                     })
 
@@ -135,15 +136,30 @@ export default function DetailView(props) {
                         let mappedList = results.map(result => result.imdbid)
 
                         if (mappedList.includes(firstRequestResults.imdbid)) {
-                            console.log("yes")
+                            // console.log("yes")
                             setIsOnWatchedList(true)
                         }
                         else {
                             setIsOnWatchedList(false)
-                            console.log("no")
+                            // console.log("no")
                         }
 
                     })
+
+                    // axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
+                    // .then(res => {
+                    //     let results = (res.data)
+                    // let filteredList = results.filter(result => {
+                    //     return result.imdbid === firstRequestResults.imdbid && result.user !== firstRequestResult.user})
+                    //     console.log("***")
+                    //     console.log(filteredList)
+                    //     console.log("***")
+
+                    //     setOtherUserSameRecommendation(filteredList)
+                    // }
+        
+                    // })
+
             })
     },
         [])
@@ -417,7 +433,8 @@ export default function DetailView(props) {
                                 <div className='poster'>
                                     <CardMedia
                                         component="img"
-                                        height="220"
+                                        height="230"
+                                        sx={{width:200, pl: 5}}
                                         image={cardDetail.poster}
                                         alt="TV poster"
                                     />
@@ -429,9 +446,9 @@ export default function DetailView(props) {
                                     <Typography paragraph>
                                         <strong>Streaming on:</strong> {cardDetail.streaming_service}
                                     </Typography>
-                                    <Typography paragraph>
+                                    {/* <Typography paragraph>
                                         <strong>Genre:</strong> {cardDetail.genre}
-                                    </Typography>
+                                    </Typography> */}
                                     <Typography paragraph>
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
                                     </Typography>

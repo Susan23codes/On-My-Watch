@@ -175,7 +175,8 @@ export default function SingleCard(props) {
                 <div className='poster'>
                     <CardMedia
                         component="img"
-                        height="220"
+                        height="230"
+                        sx={{width:200, pl: 5}}
                         image={cardObject.poster}
                         alt="Poster"
                     />
@@ -187,9 +188,9 @@ export default function SingleCard(props) {
                     <Typography paragraph>
                         <strong>Streaming on:</strong> {cardObject.streaming_service}
                     </Typography>
-                    <Typography paragraph>
+                    {/* <Typography paragraph>
                         <strong>Genre:</strong> {cardObject.genre}
-                    </Typography>
+                    </Typography> */}
                     <Typography paragraph>
                         <strong>Tags: </strong>{cardObject.tag.join(', ')}
                     </Typography>

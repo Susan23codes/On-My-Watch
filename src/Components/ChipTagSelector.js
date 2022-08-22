@@ -30,6 +30,14 @@ const names = [
     'Heartwarming',
     'Sad',
     'Thought Provoking',
+    'Witty',
+    'Grim',
+    'Charming',
+    'Quirky',
+    'Silly',
+    'Smart',
+    'Bucolic',
+    'Crude',
 
 ];
 
