@@ -48,9 +48,12 @@ export default function MultipleSelectChip(props) {
 
     useEffect(() => {
         console.log(personName)
-
+        handleUpdate()
     });
 
+    function handleUpdate() {
+        props.updateTags(personName)
+    }
     const handleChange = (event) => {
         const {
             target: { value },

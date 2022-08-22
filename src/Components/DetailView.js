@@ -89,6 +89,7 @@ export default function DetailView(props) {
                 }
 
 
+
                 axios.get('https://onmywatch.herokuapp.com/api/following/',
                     {
                         headers: {
@@ -212,7 +213,9 @@ export default function DetailView(props) {
     function handleFollowUser() {
         setError(null)
         axios.post('https://onmywatch.herokuapp.com/api/follows/',
+
             { followee: cardDetail.user_info.id },
+
             {
                 headers: {
                     Authorization: `Token ${token}`
@@ -350,6 +353,7 @@ export default function DetailView(props) {
 
 
 
+
     return (
         <>
             {cardDetail &&
@@ -357,8 +361,11 @@ export default function DetailView(props) {
                     <h1 style={{ textAlign: 'center' }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
                     <div className="detail-page">
                         <div className="detail-page-text">
-                            <h2><GiFilmProjector /> Click here to see {cardDetail.user}'s other recommendations!</h2>
+                            <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)} sx={{ fontSize: 16 }}>
+                                <h2 ><GiFilmProjector /> Click here to see {cardDetail.user}'s other recommendations!</h2>
+                            </CardActionArea>
                             <h2><GiFilmProjector /> Click here to see who else has recommended {cardDetail.title}!</h2>
+
 
                             {!isFollowing ? (
                                 <>
@@ -402,6 +409,7 @@ export default function DetailView(props) {
                                 }
                                 titleTypographyProps={{ variant: 'h5' }}
                                 action={getAddedToWatchedListIcon()}
+
                                 title={cardDetail.title}
                                 subheader=
 
@@ -430,7 +438,7 @@ export default function DetailView(props) {
                                         <strong>Streaming on:</strong> {cardDetail.streaming_service}
                                     </Typography>
                                     <Typography paragraph>
-                                        <strong>Genre:</strong> {cardDetail.genre}
+
                                     </Typography>
                                     <Typography paragraph>
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}

@@ -114,6 +114,7 @@ export default function SingleCard(props) {
             })
     }
 
+
     function getWatchListIcon() {
         if (isLoggedIn && !onWatchList) {
             return (
@@ -138,7 +139,7 @@ export default function SingleCard(props) {
         return <></>
     }
 
-    
+
 
     return (
         <Card sx={{
@@ -160,12 +161,14 @@ export default function SingleCard(props) {
                     </Avatar>
                 }
                 titleTypographyProps={{ variant: 'h5' }}
+
                 action={getWatchListIcon()}
+
                 title={cardObject.title}
                 subheader=
 
                 {<Tooltip title="See other recommendations by this user">
-                    <CardActionArea>
+                    <CardActionArea onClick={() => navigate(`/more/${cardObject.user_info.id}`)}>
                         Recommended by: {cardObject.user} on {moment(cardObject.created_at).format('MM/DD/YY')}
                     </CardActionArea>
                 </Tooltip>}
@@ -189,7 +192,7 @@ export default function SingleCard(props) {
                         <strong>Streaming on:</strong> {cardObject.streaming_service}
                     </Typography>
                     <Typography paragraph>
-                        <strong>Genre:</strong> {cardObject.genre}
+
                     </Typography>
                     <Typography paragraph>
                         <strong>Tags: </strong>{cardObject.tag.join(', ')}
