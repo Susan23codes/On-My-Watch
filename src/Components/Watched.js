@@ -9,7 +9,7 @@ export default function Watched(props) {
     const [alreadyWatched, setAlreadyWatched] = useState(false)
 
     useEffect(() => {
-        axios.get('https://onmywatch.herokuapp.com/???', 
+        axios.get('https://onmywatch.herokuapp.com/api/watchedlist/', 
         {headers: {
             Authorization: `Token ${token}`,
             }},)
