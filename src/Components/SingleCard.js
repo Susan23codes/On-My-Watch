@@ -138,6 +138,8 @@ export default function SingleCard(props) {
         return <></>
     }
 
+    
+
     return (
         <Card sx={{
             width: 550, mr: 2, mb: 2, border: 2, pt: 2, bgcolor: '#e9eef0', boxShadow: 3,
