@@ -27,17 +27,31 @@ export default function RecForm(props) {
 
 
     function logData() {
-        console.log(mediaObj)
-        console.log(IMDBid)
+        /* console.log(mediaObj)
+         console.log(IMDBid)
+         console.log(mediaObj.genres)
+         console.log(mediaObj.title)
+         console.log(tags)
+         console.log(streaming_on)
+         console.log(recommendation)
+         console.log(mediaObj.image)
+         console.log(mediaObj.type)
+         console.log(props.token)
+         console.log(props.username)
+         console.log(mediaObj.plot)*/
+
         console.log(mediaObj.genres)
-        console.log(mediaObj.title)
-        console.log(tags)
-        console.log(streaming_on)
-        console.log(recommendation)
-        console.log(mediaObj.image)
+        console.log(mediaObj.id)
         console.log(mediaObj.type)
-        console.log(props.token)
+        console.log(mediaObj.image)
+        console.log(recommendation)
+        console.log(streaming_on)
+        console.log(tags)
+        console.log(mediaObj.title)
         console.log(props.username)
+        console.log(mediaObj.similars)
+        console.log(mediaObj.keywordList)
+        console.log(mediaObj.actorList)
 
     }
 
@@ -97,7 +111,7 @@ export default function RecForm(props) {
                 {
                     description: mediaObj.plot,
                     saved_by: [],
-                    genre: mediaObj.genres,
+                    genre: mediaObj.genreList,
                     imdbid: mediaObj.id,
                     medium: mediaObj.type,
                     poster: mediaObj.image,

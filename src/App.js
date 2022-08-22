@@ -13,6 +13,8 @@ import RecForm from './Components/RecForm';
 import axios from 'axios'
 import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
 import useLocalStorageState from 'use-local-storage-state'
+import UserRecs from './Components/UserRecs';
+import Search from './Components/Search';
 
 
 function App() {
@@ -90,7 +92,7 @@ function App() {
             SingleCard={SingleCard}
           />}
         />
-         <Route
+        <Route
           path="/"
           element={<RecCardList
             isLoggedIn={isLoggedIn}
@@ -119,7 +121,7 @@ function App() {
             username={username}
           />}
         /> */}
-         <Route
+        <Route
           path="/following"
           element={<FollowUser
             isLoggedIn={isLoggedIn}
@@ -132,6 +134,28 @@ function App() {
         <Route
           path="/detail/:recommendationId"
           element={<DetailView
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            SingleCard={SingleCard}
+            username={username}
+          />}
+        />
+
+        <Route
+          path="more/:userId"
+          element={<UserRecs
+            isLoggedIn={isLoggedIn}
+            token={token}
+            navigate={navigate}
+            SingleCard={SingleCard}
+            username={username}
+          />}
+        />
+
+        <Route
+          path="/search"
+          element={<Search
             isLoggedIn={isLoggedIn}
             token={token}
             navigate={navigate}

@@ -114,13 +114,15 @@ export default function SingleCard(props) {
             })
     }
 
-    
+
 
     return (
-        <Card sx={{  mr: 2, mb: 2, border: 2, pt: 2, bgcolor:'#f5f1e6',  boxShadow: 3,
-        "&:hover": {
-          boxShadow: 9,
-        },}}>
+        <Card sx={{
+            mr: 2, mb: 2, border: 2, pt: 2, bgcolor: '#f5f1e6', boxShadow: 3,
+            "&:hover": {
+                boxShadow: 9,
+            },
+        }}>
             <CardHeader
                 sx={{
                     pt: 0,
@@ -142,7 +144,7 @@ export default function SingleCard(props) {
                                 <AddToQueueIcon sx={{ color: "red" }} />
                             </IconButton>
                         </Tooltip>
-                        
+
                         {/* <Tooltip title="Add Recommender to Friend List" arrow>
                         <IconButton onClick={() => alert("Star is working")} aria-label="follow">
                             <StarBorderIcon  sx={{ color: "red" }} />
@@ -161,7 +163,7 @@ export default function SingleCard(props) {
                                 <CheckCircleOutlineIcon sx={{ color: "red" }} />
                             </IconButton>
                         </Tooltip> */}
-                        
+
                     </>
                 )}
 
@@ -169,7 +171,7 @@ export default function SingleCard(props) {
                 subheader=
 
                 {<Tooltip title="See other recommendations by this user">
-                    <CardActionArea>
+                    <CardActionArea onClick={() => navigate(`/more/${cardObject.user_info.id}`)}>
                         Recommended by: {cardObject.user} on {moment(cardObject.created_at).format('MM/DD/YY')}
                     </CardActionArea>
                 </Tooltip>}
@@ -193,7 +195,7 @@ export default function SingleCard(props) {
                         <strong>Streaming on:</strong> {cardObject.streaming_service}
                     </Typography>
                     <Typography paragraph>
-                        <strong>Genre:</strong> {cardObject.genre}
+
                     </Typography>
                     <Typography paragraph>
                         <strong>Tags: </strong>{cardObject.tag.join(', ')}

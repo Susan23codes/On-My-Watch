@@ -51,14 +51,14 @@ const ExpandMore = styled((props) => {
 
 export default function DetailView(props) {
     const { isLoggedIn, token, SingleCard, cardObject, key, id, username } = props
-    
+
     const [cardDetail, setCardDetail] = useState(null)
     const [expanded, setExpanded] = useState(false);
     const [isOnWatchList, setIsOnWatchList] = useState(false)
     const [error, setError] = useState(null)
     const [isFollowing, setIsFollowing] = useState(false)
     const navigate = useNavigate()
-    
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     }
@@ -83,7 +83,7 @@ export default function DetailView(props) {
                 }
             })
 
-            axios.get('https://onmywatch.herokuapp.com/api/following/',
+        axios.get('https://onmywatch.herokuapp.com/api/following/',
             {
                 headers: {
                     Authorization: `Token ${token}`,
@@ -101,8 +101,8 @@ export default function DetailView(props) {
                     console.log("no")
                 }
             })
-    }, 
-    [])
+    },
+        [])
 
 
 
@@ -169,7 +169,7 @@ export default function DetailView(props) {
         console.log(`added ${cardDetail.id}!`)
         setError(null)
         axios.post('https://onmywatch.herokuapp.com/api/follows/',
-            {followee: cardDetail.id},
+            { followee: cardDetail.id },
             {
                 headers: {
                     Authorization: `Token ${token}`
@@ -185,7 +185,7 @@ export default function DetailView(props) {
                 console.log(error)
             })
     }
-    
+
 
     function handleUnfollowUser() {
         return alert("You are not following them anymore!")
@@ -200,6 +200,7 @@ export default function DetailView(props) {
 
     }
 
+    //onClick={() => navigate(`/more/${cardObject.user_info.id}`)}
 
     return (
         <>
@@ -208,8 +209,11 @@ export default function DetailView(props) {
                     <h1 style={{ textAlign: 'center' }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
                     <div className="detail-page">
                         <div className="detail-page-text">
-                            <h2><GiFilmProjector /> Click here to see {cardDetail.user}'s other recommendations!</h2>
+                            <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)} sx={{ fontSize: 16 }}>
+                                <h2 ><GiFilmProjector /> Click here to see {cardDetail.user}'s other recommendations!</h2>
+                            </CardActionArea>
                             <h2><GiFilmProjector /> Click here to see who else has recommended {cardDetail.title}!</h2>
+
 
                             {!isFollowing ? (
                                 <>
@@ -261,7 +265,7 @@ export default function DetailView(props) {
                                             </IconButton>
                                         </Tooltip>
                                         <Tooltip title="See/Add Comments" arrow>
-                                            <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, {state: {title: cardDetail.title}})} aria-label="add">
+                                            <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
                                                 <CommentIcon sx={{ color: "red" }} />
                                             </IconButton>
                                         </Tooltip>
@@ -279,7 +283,7 @@ export default function DetailView(props) {
                                             </IconButton>
                                         </Tooltip>
                                         <Tooltip title="See/Add Comments" arrow>
-                                            <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, {state: {title: cardDetail.title}})} aria-label="add">
+                                            <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
                                                 <CommentIcon sx={{ color: "red" }} />
                                             </IconButton>
                                         </Tooltip>
@@ -319,7 +323,7 @@ export default function DetailView(props) {
                                         <strong>Streaming on:</strong> {cardDetail.streaming_service}
                                     </Typography>
                                     <Typography paragraph>
-                                        <strong>Genre:</strong> {cardDetail.genre}
+
                                     </Typography>
                                     <Typography paragraph>
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
