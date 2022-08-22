@@ -36,17 +36,9 @@
   padding-top: 50px;
   margin-left: 250px;
   margin-right: 200px;
-
-
-
-  /* transition: all 0.2s ease-out; */
 }
 
-/* .card:hover {
-  /* box-shadow: 0 0 4em 0px rgba(0, 0, 0, 0.4); */
-  /* transform: scale(1.005);
-  transition: 500ms linear */
-/* }  */
+
 
 
 .entire-login-form{
@@ -55,14 +47,14 @@
   height: 400px;
   text-align: center;
   margin: auto;
-  /* background-image: url('/public/old_tv.jpeg');
-  background-size: cover; */
+
 }
 
 #login-form, .login-form{
   text-align: center;
   margin-top: 70px;
 }
+
 #username-field, #password, #confirm-password {
   margin: 10px;
 }

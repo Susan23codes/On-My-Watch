@@ -64,7 +64,7 @@ export default function RecCardList(props) {
                         <h1 style={{paddingLeft: 30}}>Welcome, {username}!  Check out these latest recommendations!</h1>
                     }
                     {!isLoggedIn && 
-                        <h1 style={{paddingLeft: 30}}>Log in or sign up to access other great features!</h1>
+                        <h1 style={{paddingLeft: 30}}>See the latest recommendations below!  Log in or sign up to access other great features!</h1>
                         }
                     <div className='card'>
                     {!recommendationList &&
