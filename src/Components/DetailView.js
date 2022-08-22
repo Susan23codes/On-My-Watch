@@ -121,7 +121,7 @@ export default function DetailView(props) {
                         }
                     })
 
-                console.log(`Starting watchedList request.  Results of frr: ${firstRequestResults}`)
+                
                 axios.get('https://onmywatch.herokuapp.com/api/watchedlist/',
                     {
                         headers: {
@@ -450,7 +450,6 @@ export default function DetailView(props) {
                             </CardActions>
                             <Collapse in={expanded} timeout="auto" unmountOnExit>
                                 <CardContent>
-                                    {/* <Typography paragraph>Why I Recommend this:</Typography> */}
                                     <Typography paragraph>
                                         {cardDetail.reason}
                                     </Typography>

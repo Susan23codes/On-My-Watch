@@ -114,29 +114,29 @@ export default function SingleCard(props) {
             })
     }
 
-    function getWatchListIcon() {
-        if (isLoggedIn && !onWatchList) {
-            return (
-                <>
-                    <Tooltip title="Add to Watchlist" arrow>
-                        <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-                            <AddToQueueIcon sx={{ color: "red" }} />
-                        </IconButton>
-                    </Tooltip></>
-            )
-        } else if (isLoggedIn && onWatchList) {
-            return (
-                <>
-                    <Tooltip title="Added to Watchlist!" arrow>
-                        <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
-                            <BookmarkAddedIcon sx={{ color: "red" }} />
-                        </IconButton>
-                    </Tooltip>
-                </>
-            )
-        }
-        return <></>
-    }
+    // function getWatchListIcon() {
+    //     if (isLoggedIn && !onWatchList) {
+    //         return (
+    //             <>
+    //                 <Tooltip title="Add to Watchlist" arrow>
+    //                     <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
+    //                         <AddToQueueIcon sx={{ color: "red" }} />
+    //                     </IconButton>
+    //                 </Tooltip></>
+    //         )
+    //     } else if (isLoggedIn && onWatchList) {
+    //         return (
+    //             <>
+    //                 <Tooltip title="Added to Watchlist!" arrow>
+    //                     <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
+    //                         <BookmarkAddedIcon sx={{ color: "red" }} />
+    //                     </IconButton>
+    //                 </Tooltip>
+    //             </>
+    //         )
+    //     }
+    //     return <></>
+    // }
 
     
 
@@ -160,7 +160,7 @@ export default function SingleCard(props) {
                     </Avatar>
                 }
                 titleTypographyProps={{ variant: 'h5' }}
-                action={getWatchListIcon()}
+                // action={getWatchListIcon()}
                 title={cardObject.title}
                 subheader=
 
@@ -176,9 +176,8 @@ export default function SingleCard(props) {
                     <CardMedia
                         component="img"
                         height="220"
-                        // image="dark_poster.jpeg"
                         image={cardObject.poster}
-                        alt="TV poster"
+                        alt="Poster"
                     />
                 </div>
                 <CardContent>

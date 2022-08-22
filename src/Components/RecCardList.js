@@ -67,6 +67,13 @@ export default function RecCardList(props) {
                         <h1 style={{paddingLeft: 30}}>Log in or sign up to access other great features!</h1>
                         }
                     <div className='card'>
+                    {!recommendationList &&
+                    <img src="/loadingAnimation.gif" 
+                        className="checkGif"
+                        alt="gifImage"
+                        height="200"
+                        style={{paddingRight:200, marginTop:100}}>
+                            </img>}
                         <Carousel 
                             CycleNavigation
                             interval={3000}
