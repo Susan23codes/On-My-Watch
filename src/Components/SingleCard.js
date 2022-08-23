@@ -73,46 +73,46 @@ export default function SingleCard(props) {
     }, [])
 
 
-    function handleAddToWatchList() {
-        console.log(`added ${cardObject.id}!`)
-        // setOnWatchList(true)
-        setError(null)
-        axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
-            {},
-            {
-                headers: {
-                    Authorization: `Token ${token}`
-                },
-            })
-            .then((res) => {
-                console.log("This is a favorite!")
-                setOnWatchList(true)
+    // function handleAddToWatchList() {
+    //     console.log(`added ${cardObject.id}!`)
+    //     // setOnWatchList(true)
+    //     setError(null)
+    //     axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
+    //         {},
+    //         {
+    //             headers: {
+    //                 Authorization: `Token ${token}`
+    //             },
+    //         })
+    //         .then((res) => {
+    //             console.log("This is a favorite!")
+    //             setOnWatchList(true)
 
-            })
-            .catch((error) => {
-                setError(Object.values(error.response.data))
-                console.log(error)
-            })
-    }
+    //         })
+    //         .catch((error) => {
+    //             setError(Object.values(error.response.data))
+    //             console.log(error)
+    //         })
+    // }
 
-    function handleDeleteFromWatchList() {
-        console.log("deleted!")
-        setOnWatchList(false)
-        setError(null)
-        axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
-            {
-                headers: { Authorization: `Token ${token}` },
-            })
-            .then((res) => {
-                setOnWatchList(false)
-                console.log("This is no longer a favorite!")
+    // function handleDeleteFromWatchList() {
+    //     console.log("deleted!")
+    //     setOnWatchList(false)
+    //     setError(null)
+    //     axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
+    //         {
+    //             headers: { Authorization: `Token ${token}` },
+    //         })
+    //         .then((res) => {
+    //             setOnWatchList(false)
+    //             console.log("This is no longer a favorite!")
 
-            })
-            .catch((error) => {
-                setError(Object.values(error.response.data))
-                console.log(error)
-            })
-    }
+    //         })
+    //         .catch((error) => {
+    //             setError(Object.values(error.response.data))
+    //             console.log(error)
+    //         })
+    // }
 
     // function getWatchListIcon() {
     //     if (isLoggedIn && !onWatchList) {
@@ -142,7 +142,7 @@ export default function SingleCard(props) {
 
     return (
         <Card sx={{
-            width: 550, mr: 2, mb: 2, border: 2, pt: 2, bgcolor: '#e9eef0', boxShadow: 3,
+            width: 550, height: 400, mr: 2, mb: 2, border: 2, pt: 2, bgcolor: '#e9eef0', boxShadow: 3,
             "&:hover": {
                 boxShadow: 9,
             },
@@ -151,7 +151,7 @@ export default function SingleCard(props) {
                 sx={{
                     pt: 0,
                     '& .MuiCardHeader-title, css-1qvr50w-MuiTypography-root': {
-                        width: 250
+                        width: 300
                     }
                 }}
                 avatar={
@@ -189,15 +189,9 @@ export default function SingleCard(props) {
                     <Typography paragraph>
                         <strong>Streaming on:</strong> {cardObject.streaming_service}
                     </Typography>
-<<<<<<< HEAD
                     {/* <Typography paragraph>
                         <strong>Genre:</strong> {cardObject.genre}
                     </Typography> */}
-=======
-                    <Typography paragraph>
-
-                    </Typography>
->>>>>>> main
                     <Typography paragraph>
                         <strong>Tags: </strong>{cardObject.tag.join(', ')}
                     </Typography>

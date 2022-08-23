@@ -49,7 +49,7 @@ export default function FollowingCard(props) {
                                             <>
                                                 <p><strong>Title: </strong>{cardObject.title}</p>
                                                 <p><strong>Medium: </strong>{cardObject.medium}</p>
-                                                <p><strong>Genre: </strong>{cardObject.genre}</p>
+                                                {/* <p><strong>Genre: </strong>{cardObject.genre}</p> */}
                                                 <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
                                             </>
                                         </div>
