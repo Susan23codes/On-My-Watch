@@ -19,16 +19,24 @@ export default function Navbar(props) {
             <AppBar position="static" sx={{
                 bgcolor: "#293e8a",
             }}>
-                <Toolbar className='toolbar' sx={{ height: 150 }}>
 
-                    <Typography className='on-my-watch-title' component="div" sx={{ flexGrow: 1, fontSize: 80 }}>
-                        📺n My Watch
-                    </Typography>
-                    <Typography component="div" paragraph sx={{ fontSize: 30 }}>
-                        Come find your next favorite show!
-                    </Typography>
+                {!isLoggedIn ? (
+                    <Toolbar className='toolbar' sx={{ height: 150 }}>
+                        <Typography className='on-my-watch-title' component="div" sx={{ flexGrow: 1, fontSize: 80 }}>
+                            📺n My Watch
+                        </Typography>
+                        <Typography component="div" paragraph sx={{ fontSize: 30 }}>
+                            Come find your next favorite show!
+                        </Typography>
+                    </Toolbar>
+                ) : (
+                    <Toolbar className='toolbar' sx={{ height: 120 }}>
+                        <Typography className='on-my-watch-title' component="div" sx={{ flexGrow: 1, fontSize: 80 }}>
+                            📺n My Watch
+                        </Typography>
+                    </Toolbar>
+                )}
 
-                </Toolbar>
 
                 <div className='navbar-buttons'>
                     <div className='home-button'>
@@ -39,7 +47,7 @@ export default function Navbar(props) {
                         <div className='recommendation-button'>
                             <Button onClick={() => navigate("/new")} color="inherit" sx={{ fontSize: 20, }}>Make a New Recommendation</Button>
 
-                            <Button color="inherit" sx={{ fontSize: 20, }}> Search </Button>
+                            <Button onClick={() => navigate("/search")} color="inherit" sx={{ fontSize: 20, }}> Search </Button>
                         </div>}
                     <div>
                         {isLoggedIn ? (

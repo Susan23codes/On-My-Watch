@@ -32,7 +32,7 @@ export default function Search(props) {
                     console.log(res.data);
                     setData(res.data);
                 });
-        } else if (medium === "TV") {
+        } else if (medium === "TVSeries") {
             console.log("getting TV")
             axios
                 .get(
