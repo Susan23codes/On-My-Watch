@@ -136,7 +136,10 @@ export default function DetailView(props) {
                     .then(res => {
                         let results = (res.data)
                         // firstRequestResults = results
+                        console.log("**+**")
                         console.log(results)
+                        console.log("**+**")
+
                         let mappedList = results.map(result => result.imdbid)
 
                         if (mappedList.includes(firstRequestResults.imdbid)) {
@@ -285,6 +288,7 @@ export default function DetailView(props) {
             .then((res) => {
                 console.log("You've watched this now!")
                 setIsOnWatchedList(true)
+                
 
             })
             .catch((error) => {
@@ -302,7 +306,7 @@ export default function DetailView(props) {
                 },
             })
             .then((res) => {
-                console.log("You've watched this now!")
+                console.log("You've deleted this from WATCHED!")
                 setIsOnWatchedList(false)
 
             })
@@ -319,7 +323,7 @@ export default function DetailView(props) {
                 <>
                     <Tooltip title="Add to Watchlist" arrow>
                         <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-                            <AddToQueueIcon sx={{ color: "red" }} />
+                            <AddToQueueIcon sx={{ color: "red"}} className="addtoqueue"/>
                         </IconButton>
                     </Tooltip>
                     {!showAddComment ? (
@@ -425,7 +429,7 @@ export default function DetailView(props) {
         <>
             {cardDetail &&
                 <>
-                    <h1 style={{ textAlign: 'center' }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
+                    <h1 style={{ textAlign: 'center', marginBottom:0 }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
                     <div className="detail-page">
                         <div className="detail-page-text">
                             {/* <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)} sx={{ fontSize: 16 }}>
@@ -459,9 +463,24 @@ export default function DetailView(props) {
                                 ('')
                             )
                             } */}
+                            {username === cardDetail.user ? (
+                                <>
+                                <div className="delete-recommendation">
+                                    <h2><GiFilmProjector /> Delete your recommendation?</h2>
+                                    <Button onClick={() => handleDeleteRecommendationCard()}
+                                        variant="contained" startIcon={<DeleteIcon />}>
+                                        Delete
+                                    </Button>
+                                    </div>
+                                </>
+                            ) : (
+                                ('')
+                            )
+                            } 
 
                         </div>
-                        <Card className="card-detail" sx={{ bgcolor: '#e9eef0', width: '80vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
+                        <Card className="card-detail" sx={{ bgcolor: '#e9eef0', width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
+                            
                             <CardHeader
                                 sx={{
                                     pt: 0,
@@ -469,22 +488,23 @@ export default function DetailView(props) {
                                     //     width: 250,
                                     // }, 
                                     '& .MuiCardHeader-root': {
-                                        paddingLeft: '200px',
+                                        paddingLeft: 200,
                                     }
                                 }}
                                 avatar={
-                                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                    <Avatar sx={{ bgcolor: red[500], width: 56, height: 56
+                                }} aria-label="recipe">
                                         {cardDetail.user.charAt(0).toUpperCase()}
                                     </Avatar>
                                 }
-                                titleTypographyProps={{ variant: 'h5' }}
+                                titleTypographyProps={{ variant: 'h3' }}
                                 action={getAddedToWatchedListIcon()}
-
                                 title={cardDetail.title}
                                 subheader=
 
                                 {<Tooltip title="See other recommendations by this user">
-                                    <CardActionArea>
+                                    <CardActionArea
+                                    sx={{ fontSize: 20}}>
                                         Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
                                             .format('MM/DD/YY')}
                                     </CardActionArea>
@@ -503,48 +523,51 @@ export default function DetailView(props) {
                                 </div>
                                 <CardContent className="card-content">
                                     {/* sx={{ width: 1000 }}> */}
-                                    {/* <Typography paragraph>
+                                    <Typography paragraph>
                                         <strong>Medium:</strong> {cardDetail.medium}
                                     </Typography>
                                     <Typography paragraph>
-                                        <strong>Streaming on:</strong> {cardDetail.streaming_service}
+                                        <strong>Watched on:</strong> {cardDetail.streaming_service}
                                     </Typography>
-                                    <Typography paragraph>
+                                    {/* <Typography paragraph>
                                         <strong>Genre:</strong> {cardDetail.genre}
-                                    </Typography>
+                                    </Typography> */}
                                     <Typography paragraph>
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
-                                    </Typography> */}
+                                    </Typography>
                                     <Typography
+                                    className="recommendation"
                                         sx={{ width: 600 }}>
                                         <strong>My Recommendation: </strong> {cardDetail.reason}
                                     </Typography>
+                                    </CardContent>
                                     {isFollowing ? (
                                         <CardActionArea
                                             onClick={() => handleUnfollowUser()}
-                                            sx={{ width: 150 }}>
+                                            sx={{ width: 150, height: 30 }}>
                                             <Tooltip title={`Unfollow ${cardDetail.user}`} placement="top-start">
                                                 <img className="follow-image"
                                                     src="/following.png"
-                                                    height='120' 
+                                                    height='100' 
                                                     alt="Unfollow"
+                                                                                
                                                     />
                                             </Tooltip>
                                         </CardActionArea>
                                     ) : (
                                         <CardActionArea
                                             onClick={() => handleFollowUser()}
-                                            sx={{ width: 150 }}>
+                                            sx={{ width: 150, height: 30 }}>
                                             <Tooltip title={`Follow ${cardDetail.user}`} placement="top-start">
                                                 <img className="follow-image"
                                                     src="/follow.png"
-                                                    height='120'
+                                                    height='90'
                                                     alt="Follow"
                                                     />
                                             </Tooltip>
                                         </CardActionArea>
                                     )}
-                                </CardContent>
+                                
                             </div>
                             
                             <CardActions disableSpacing>

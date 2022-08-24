@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { GiFilmProjector } from 'react-icons/gi';
 import Carousel from 'react-material-ui-carousel';
 import { red } from '@mui/material/colors';
-// import Carousel from 'react-elastic-carousel'
+import { isVisible } from '@testing-library/user-event/dist/utils';
 
 
 
@@ -20,7 +20,7 @@ export default function RecCardList(props) {
     useEffect(() => {
         axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
             .then(res => {
-                let results = (res.data)
+                let results = (res.data.reverse())
                 setRecommendationList(results)
                 console.log(results)
 
@@ -39,7 +39,7 @@ export default function RecCardList(props) {
                             <ul className='my-stuff'>My Stuff</ul>
                             <li><GiFilmProjector /><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
                             <li><GiFilmProjector /><Link to={"/following"} style={{ textDecoration: 'none', color: 'white' }}> Following</Link></li><br />
-                            <li onClick={() => (navigate('/search'))}><GiFilmProjector /> Search</li><br />
+                            <li><GiFilmProjector /><Link to={"/search"} style={{ textDecoration: 'none', color: 'white' }}> Search</Link></li><br />
                             <li><GiFilmProjector /><Link to={"/watched"} style={{ textDecoration: 'none', color: 'white' }}> What I've Watched</Link></li><br />
                             <li><GiFilmProjector /><Link to={"/new"} style={{ textDecoration: 'none', color: 'white' }}> Make a New Recommendation</Link></li>
                         </div>
@@ -65,25 +65,23 @@ export default function RecCardList(props) {
                         <h1 style={{ paddingLeft: 30 }}>Welcome, {username}!  Check out these latest recommendations!</h1>
                     }
                     {!isLoggedIn &&
-                        <h1 style={{ paddingLeft: 30 }}>Log in or sign up to access other great features!</h1>
+                        <h2 style={{ paddingLeft: 30 }}>See the latest recommendations below!  Log in or sign up to access other great features!</h2>
                     }
-                    {!isLoggedIn && 
-                        <h1 style={{paddingLeft: 30}}>See the latest recommendations below!  Log in or sign up to access other great features!</h1>
-                        }
                     <div className='card'>
-                    {!recommendationList &&
-                    <img src="/loadingAnimation.gif" 
-                        className="checkGif"
-                        alt="gifImage"
-                        height="200"
-                        style={{paddingRight:200, marginTop:100}}>
+                        {!recommendationList &&
+                            <img src="/loadingAnimation.gif"
+                                className="checkGif"
+                                alt="gifImage"
+                                height="200"
+                                style={{ paddingRight: 200, marginTop: 100 }}>
                             </img>}
-                        <Carousel 
+                        <Carousel
+                            className='carousel'
                             CycleNavigation
                             interval={3000}
                             fullHeightHover={false}
-                        // sx={{'&:hover':{transform:'scale(1.1)'}}}
-                        // indicators={false}
+                            // IndicatorIcon={false}
+                            navButtonsAlwaysVisible={true}
                         >
                             {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username)
                                 .map((cardObject, index) => {

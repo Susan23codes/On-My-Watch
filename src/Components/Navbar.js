@@ -47,7 +47,7 @@ export default function Navbar(props) {
                         <div className='recommendation-button'>
                             <Button onClick={() => navigate("/new")} color="inherit" sx={{ fontSize: 20, }}>Make a New Recommendation</Button>
 
-                            <Button color="inherit" sx={{ fontSize: 20, }}> Search </Button>
+                            <Button onClick={() => navigate("/search")} color="inherit" sx={{ fontSize: 20, }}> Search </Button>
                         </div>}
                     <div>
                         {isLoggedIn ? (
