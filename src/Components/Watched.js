@@ -17,10 +17,7 @@ export default function Watched(props) {
             })
             .then(res => {
                 console.log(res.data)
-                setAlreadyWatched(res.data)
-                // setWatchList(Watchlist.reverse())
-
-
+                setAlreadyWatched(res.data.reverse())
             })
     }, [])
 

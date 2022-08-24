@@ -55,7 +55,7 @@
   /* padding-left: 200px; */
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  /* align-items: flex-start; */
 }
 
 .follow-image {
@@ -283,13 +283,15 @@
   justify-content:center
 }
 
-/* .watched-background { */
-  /* background: url('/public/Old_television.png') ;  */
-  /* -webkit-background-size: cover; */
-  /* -moz-background-size: cover; */
-  /* -o-background-size: cover; */
-  /* background-size: cover; */
-/* } */
+/* .watched-background {
+  background: url('/public/Old_television.png') ;  
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  
+} */
+
 
 
 

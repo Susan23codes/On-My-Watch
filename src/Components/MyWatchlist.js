@@ -15,7 +15,7 @@ export default function MyWatchlist(props) {
             }},)
         .then(res => {
             console.log(res.data)
-            setWatchlist(res.data)
+            setWatchlist(res.data.reverse())
 
     
         })

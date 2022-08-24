@@ -288,7 +288,7 @@ export default function DetailView(props) {
             .then((res) => {
                 console.log("You've watched this now!")
                 setIsOnWatchedList(true)
-                
+
 
             })
             .catch((error) => {
@@ -323,7 +323,7 @@ export default function DetailView(props) {
                 <>
                     <Tooltip title="Add to Watchlist" arrow>
                         <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-                            <AddToQueueIcon sx={{ color: "red"}} className="addtoqueue"/>
+                            <AddToQueueIcon sx={{ color: "red" }} className="addtoqueue" />
                         </IconButton>
                     </Tooltip>
                     {!showAddComment ? (
@@ -429,29 +429,10 @@ export default function DetailView(props) {
         <>
             {cardDetail &&
                 <>
-                    <h1 style={{ textAlign: 'center', marginBottom:0 }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
+                    <h1 style={{ textAlign: 'center', marginBottom: 0 }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
                     <div className="detail-page">
                         <div className="detail-page-text">
-                            {/* <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)} sx={{ fontSize: 16 }}>
-                                <h2 ><GiFilmProjector /> Click here to see {cardDetail.user}'s other recommendations!</h2>
-                            </CardActionArea>
-                            <h2><GiFilmProjector /> Click here to see who else has recommended {cardDetail.title}!</h2> */}
-
-                            {/* 
-                            {!isFollowing ? (
-                                <>
-                                    <CardActionArea sx={{ fontSize: 16 }}>
-                                        <h2 onClick={() => handleFollowUser()}><GiFilmProjector /> Click here to follow {cardDetail.user}!</h2>
-                                    </CardActionArea>
-                                </>
-                            ) : (
-                                <CardActionArea sx={{ fontSize: 16 }}>
-                                    <h2 onClick={() => handleUnfollowUser()}><GiFilmProjector /> You are now following {cardDetail.user}!  Click to unfollow.</h2>
-                                </CardActionArea>
-                            )
-                            }
-
-                            {username === cardDetail.user ? (
+                            {/* {username === cardDetail.user ? (
                                 <>
                                     <h2><GiFilmProjector /> Would you like to delete your recommendation?</h2>
                                     <Button onClick={() => handleDeleteRecommendationCard()}
@@ -462,55 +443,50 @@ export default function DetailView(props) {
                             ) : (
                                 ('')
                             )
-                            } */}
+                            }  */}
                             {username === cardDetail.user ? (
                                 <>
-                                <div className="delete-recommendation">
-                                    <h2><GiFilmProjector /> Delete your recommendation?</h2>
-                                    <Button onClick={() => handleDeleteRecommendationCard()}
-                                        variant="contained" startIcon={<DeleteIcon />}>
-                                        Delete
-                                    </Button>
+                                    <div className="delete-recommendation">
+                                        <h2><GiFilmProjector /> Delete your recommendation?</h2>
+                                        <Button onClick={() => handleDeleteRecommendationCard()}
+                                            variant="contained" startIcon={<DeleteIcon />}>
+                                            Delete
+                                        </Button>
                                     </div>
                                 </>
                             ) : (
                                 ('')
                             )
-                            } 
+                            }
 
                         </div>
                         <Card className="card-detail" sx={{ bgcolor: '#e9eef0', width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
                             
-                            <CardHeader
-                                sx={{
-                                    pt: 0,
-                                    // '& .MuiCardHeader-title, css-1qvr50w-MuiTypography-root': {
-                                    //     width: 250,
-                                    // }, 
-                                    '& .MuiCardHeader-root': {
-                                        paddingLeft: 200,
+                                <CardHeader
+                                    sx={{
+                                        pt: 0,
+                                    }}
+                                    avatar={
+                                        <Avatar sx={{
+                                            bgcolor: red[500], width: 56, height: 56
+                                        }} aria-label="recipe">
+                                            {cardDetail.user.charAt(0).toUpperCase()}
+                                        </Avatar>
                                     }
-                                }}
-                                avatar={
-                                    <Avatar sx={{ bgcolor: red[500], width: 56, height: 56
-                                }} aria-label="recipe">
-                                        {cardDetail.user.charAt(0).toUpperCase()}
-                                    </Avatar>
-                                }
-                                titleTypographyProps={{ variant: 'h3' }}
-                                action={getAddedToWatchedListIcon()}
-                                title={cardDetail.title}
-                                subheader=
+                                    titleTypographyProps={{ variant: 'h3' }}
+                                    action={getAddedToWatchedListIcon()}
+                                    title={cardDetail.title}
+                                    subheader=
 
-                                {<Tooltip title="See other recommendations by this user">
-                                    <CardActionArea
-                                    sx={{ fontSize: 20}}>
-                                        Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
-                                            .format('MM/DD/YY')}
-                                    </CardActionArea>
-                                </Tooltip>}
-
-                            />
+                                    {<Tooltip title="See other recommendations by this user">
+                                        <CardActionArea
+                                            sx={{ fontSize: 20 }}>
+                                            Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
+                                                .format('MM/DD/YY')}
+                                        </CardActionArea>
+                                    </Tooltip>}
+                                />
+                            
                             <div className='poster-and-text'>
                                 <div className='poster'>
                                     <CardMedia
@@ -536,40 +512,40 @@ export default function DetailView(props) {
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
                                     </Typography>
                                     <Typography
-                                    className="recommendation"
+                                        className="recommendation"
                                         sx={{ width: 600 }}>
                                         <strong>My Recommendation: </strong> {cardDetail.reason}
                                     </Typography>
-                                    </CardContent>
-                                    {isFollowing ? (
-                                        <CardActionArea
-                                            onClick={() => handleUnfollowUser()}
-                                            sx={{ width: 150, height: 30 }}>
-                                            <Tooltip title={`Unfollow ${cardDetail.user}`} placement="top-start">
-                                                <img className="follow-image"
-                                                    src="/following.png"
-                                                    height='100' 
-                                                    alt="Unfollow"
-                                                                                
-                                                    />
-                                            </Tooltip>
-                                        </CardActionArea>
-                                    ) : (
-                                        <CardActionArea
-                                            onClick={() => handleFollowUser()}
-                                            sx={{ width: 150, height: 30 }}>
-                                            <Tooltip title={`Follow ${cardDetail.user}`} placement="top-start">
-                                                <img className="follow-image"
-                                                    src="/follow.png"
-                                                    height='90'
-                                                    alt="Follow"
-                                                    />
-                                            </Tooltip>
-                                        </CardActionArea>
-                                    )}
-                                
+                                </CardContent>
+                                {isFollowing ? (
+                                    <CardActionArea
+                                        onClick={() => handleUnfollowUser()}
+                                        sx={{ width: 150, height: 30 }}>
+                                        <Tooltip title={`Unfollow ${cardDetail.user}`} placement="top-start">
+                                            <img className="follow-image"
+                                                src="/following.png"
+                                                height='100'
+                                                alt="Unfollow"
+
+                                            />
+                                        </Tooltip>
+                                    </CardActionArea>
+                                ) : (
+                                    <CardActionArea
+                                        onClick={() => handleFollowUser()}
+                                        sx={{ width: 150, height: 30 }}>
+                                        <Tooltip title={`Follow ${cardDetail.user}`} placement="top-start">
+                                            <img className="follow-image"
+                                                src="/follow.png"
+                                                height='90'
+                                                alt="Follow"
+                                            />
+                                        </Tooltip>
+                                    </CardActionArea>
+                                )}
+
                             </div>
-                            
+
                             <CardActions disableSpacing>
                                 Click to see comments!
                                 <ExpandMore
@@ -586,11 +562,11 @@ export default function DetailView(props) {
                                     <Typography paragraph>
                                         <Comments
                                             token={token}
-                                             />
+                                        />
                                     </Typography>
                                 </CardContent>
                             </Collapse>
-                           
+
                         </Card>
                     </div>
                     {showAddComment && (
