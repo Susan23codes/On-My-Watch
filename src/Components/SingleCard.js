@@ -208,12 +208,12 @@ export default function SingleCard(props) {
                             <>
                                 <div>
                                     <div className='movieBox'>
-                                        <strong>Genre:</strong>
+                                        <strong>Genre: </strong>
 
                                         {cardObject.genre.map(genre => {
                                             return (
                                                 <div>
-                                                    {genre.key}&ensp;
+                                                    &ensp;{genre.key}&ensp;
                                                 </div>
                                             )
                                         })}

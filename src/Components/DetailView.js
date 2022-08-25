@@ -514,12 +514,12 @@ export default function DetailView(props) {
                                             <>
                                                 <div>
                                                     <div className='movieBox'>
-                                                        <strong>Genre:</strong>
+                                                        <strong>Genre: </strong>
 
                                                         {cardDetail.genre.map(genre => {
                                                             return (
                                                                 <div>
-                                                                    {genre.key}&ensp;
+                                                                    &ensp;{genre.key}&ensp;
                                                                 </div>
                                                             )
                                                         })}
@@ -615,7 +615,8 @@ export default function DetailView(props) {
                         </>
                     )}
 
-                </>
+                </> 
+                
             }<strong>More Movies Like This:</strong><br></br>
             {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
         </>
