@@ -36,6 +36,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { DarkMode } from '@mui/icons-material';
 import { CardActionArea, Tooltip } from '@mui/material';
 import { flexbox, maxWidth } from '@mui/system';
+import MoreMovies from "./MoreMovies";
 
 
 const ExpandMore = styled((props) => {
@@ -495,8 +496,7 @@ export default function DetailView(props) {
                                 subheader=
 
                                 {<Tooltip title="See other recommendations by this user">
-                                    <CardActionArea
-                                        sx={{ fontSize: 20 }}>
+                                    <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)}>
                                         Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
                                             .format('MM/DD/YY')}
                                     </CardActionArea>
@@ -525,6 +525,11 @@ export default function DetailView(props) {
                                         <Typography paragraph>
                                             <strong>Watched on:</strong> {cardDetail.streaming_service}
                                         </Typography>
+                                        <Typography paragraph>
+
+                                     
+
+                                    </Typography>
                                         </div>
                                         <div className="avatars-who-else">
                                             {otherUserSameRecommendation && otherUserSameRecommendation.slice(0, 4).map((user, index) => {
@@ -548,9 +553,31 @@ export default function DetailView(props) {
                                             }
                                         </div>
                                     </div>
-                                    {/* <Typography paragraph>
-                                        <strong>Genre:</strong> {cardDetail.genre}
-                                    </Typography> */}
+
+                                    {cardDetail.genre !== null &&
+                                            <>
+                                                <div>
+                                                    <div className='movieBox'>
+                                                        <strong>Genre:</strong>
+
+                                                        {cardDetail.genre.map(genre => {
+                                                            return (
+                                                                <div>
+                                                                    {genre.key}&ensp;
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            </>
+                                        }
+                                    
+                                    <Typography paragraph>
+
+                                        
+
+                                    </Typography>
+
                                     <Typography paragraph>
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
                                     </Typography>
@@ -612,7 +639,9 @@ export default function DetailView(props) {
                             </Collapse>
 
                         </Card>
+
                     </div>
+
                     {showAddComment && (
                         <>
                             <h2 className='comment-form'>Want to join in the conversation?  Add a comment below!</h2>
@@ -634,8 +663,10 @@ export default function DetailView(props) {
                             </div>
                         </>
                     )}
+
                 </>
-            }
+            }<strong>More Movies Like This:</strong><br></br>
+            {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
         </>
     )
 

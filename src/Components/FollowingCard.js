@@ -46,8 +46,6 @@ export default function FollowingCard(props) {
 
     return (
         <>
-
-
             <div className='following-list-names' >
                 <div className='following-list-name-and-avatar' style={{ fontSize: 40, paddingLeft: 40, listStyleType: "none", }}>
                     <Avatar sx={{ bgcolor: red[500], mr: 2 }} aria-label="recipe">
@@ -72,6 +70,7 @@ export default function FollowingCard(props) {
                     >
                         Unfollow {followingObject.followee}</button>
                 </div>
+
             </div>
             {isExpanded ? (
                 <>
@@ -84,7 +83,7 @@ export default function FollowingCard(props) {
                                         <>
                                             <div className='following-info'>
                                                 <div>
-                                                    <img src={cardObject.poster} width='70' />
+                                                    <img src={cardObject.poster} width='70' alt='poster' />
                                                 </div>
                                                 <div className='following-text'>
                                                     <p><strong>Title: </strong>{cardObject.title}</p>

@@ -62,7 +62,7 @@ input[type=button]:hover {
 }
 
 .mediaTitle {
-    width: 200px;
+    width: 325px;
     margin: auto;
     padding: 5px;
 }
@@ -84,4 +84,14 @@ input[type=button]:hover {
     float: right;
     padding-top: 50px;
     padding-right: 10px;
+}
+
+.mediaBox3 {
+    display: flex;
+    align-items: center;
+    height: 80%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
 }
