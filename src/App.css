@@ -230,6 +230,12 @@
   float: right;
 }
 
+.unfollow-and-modal-question-mark {
+  display: flex;
+  justify-content: space-between;
+  width: 400px
+}
+
 .following-list {
   display: flex;
   flex-wrap: wrap;
@@ -255,11 +261,12 @@
 }
 
 .following-list-cards {
-  height: 400px;
+  height: 600px;
   overflow-y: scroll;
   overflow-x: visible;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .following-smaller-card {
@@ -268,6 +275,7 @@
   border: 2px solid #293e8a;
   border-radius: 5px;
   width: 20vw;
+  height: 200px;
   padding: 0 0 10px 5px;
   margin-bottom: 10px;
   background-color: #e9eef0;
