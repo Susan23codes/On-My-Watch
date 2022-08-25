@@ -85,76 +85,77 @@ export default function SingleCard(props) {
     }, [])
 
 
-    // function handleAddToWatchList() {
-    //     console.log(`added ${cardObject.id}!`)
-    //     // setOnWatchList(true)
-    //     setError(null)
-    //     axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
-    //         {},
-    //         {
-    //             headers: {
-    //                 Authorization: `Token ${token}`
-    //             },
-    //         })
-    //         .then((res) => {
-    //             console.log("This is a favorite!")
-    //             setOnWatchList(true)
+    function handleAddToWatchList() {
+        console.log(`added ${cardObject.id}!`)
+        // setOnWatchList(true)
+        setError(null)
+        axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
+            {},
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                },
+            })
+            .then((res) => {
+                console.log("This is a favorite!")
+                setOnWatchList(true)
 
-    //         })
-    //         .catch((error) => {
-    //             setError(Object.values(error.response.data))
-    //             console.log(error)
-    //         })
-    // }
+            })
+            .catch((error) => {
+                setError(Object.values(error.response.data))
+                console.log(error)
+            })
+    }
 
-    // function handleDeleteFromWatchList() {
-    //     console.log("deleted!")
-    //     setOnWatchList(false)
-    //     setError(null)
-    //     axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
-    //         {
-    //             headers: { Authorization: `Token ${token}` },
-    //         })
-    //         .then((res) => {
-    //             setOnWatchList(false)
-    //             console.log("This is no longer a favorite!")
+    function handleDeleteFromWatchList() {
+        console.log("deleted!")
+        setOnWatchList(false)
+        setError(null)
+        axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchlist/`,
+            {
+                headers: { Authorization: `Token ${token}` },
+            })
+            .then((res) => {
+                setOnWatchList(false)
+                console.log("This is no longer a favorite!")
 
-    //         })
-    //         .catch((error) => {
-    //             setError(Object.values(error.response.data))
-    //             console.log(error)
-    //         })
-    // }
+            })
+            .catch((error) => {
+                setError(Object.values(error.response.data))
+                console.log(error)
+            })
+    }
 
-    // function getWatchListIcon() {
-    //     if (isLoggedIn && !onWatchList) {
-    //         return (
-    //             <>
-    //                 <Tooltip title="Add to Watchlist" arrow>
-    //                     <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-    //                         <AddToQueueIcon sx={{ color: "red" }} />
-    //                     </IconButton>
-    //                 </Tooltip></>
-    //         )
-    //     } else if (isLoggedIn && onWatchList) {
-    //         return (
-    //             <>
-    //                 <Tooltip title="Added to Watchlist!" arrow>
-    //                     <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
-    //                         <BookmarkAddedIcon sx={{ color: "red" }} />
-    //                     </IconButton>
-    //                 </Tooltip>
-    //             </>
-    //         )
-    //     }
-    //     return <></>
-    // }
+
+    function getWatchListIcon() {
+        if (isLoggedIn && !onWatchList) {
+            return (
+                <>
+                    <Tooltip title="Add to Watchlist" arrow>
+                        <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
+                            <AddToQueueIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip></>
+            )
+        } else if (isLoggedIn && onWatchList) {
+            return (
+                <>
+                    <Tooltip title="Added to Watchlist!" arrow>
+                        <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
+                            <BookmarkAddedIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                </>
+            )
+        }
+        return <></>
+    }
 
 
 
     return (
         <Card sx={{
-            width: 550, height: 400, mr: 2, mb: 2, border: 2, pt: 2, bgcolor: '#e9eef0', boxShadow: 3,
+            width: 550, mr: 2, mb: 2, border: 2, pt: 2, bgcolor: '#e9eef0', boxShadow: 3,
             "&:hover": {
                 boxShadow: 9,
             },
@@ -163,7 +164,7 @@ export default function SingleCard(props) {
                 sx={{
                     pt: 0,
                     '& .MuiCardHeader-title, css-1qvr50w-MuiTypography-root': {
-                        width: 300
+                        width: 250
                     }
                 }}
                 avatar={
@@ -172,7 +173,8 @@ export default function SingleCard(props) {
                     </Avatar>
                 }
                 titleTypographyProps={{ variant: 'h5' }}
-                // action={getWatchListIcon()}
+
+                action={getWatchListIcon()}
 
                 title={cardObject.title}
                 subheader=
@@ -191,7 +193,7 @@ export default function SingleCard(props) {
                         height="230"
                         sx={{ width: 200, pl: 5 }}
                         image={cardObject.poster}
-                        alt="Poster"
+                        alt="TV poster"
                     />
                 </div>
                 <CardContent>
