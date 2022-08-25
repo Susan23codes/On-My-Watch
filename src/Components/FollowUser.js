@@ -7,7 +7,6 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import IconButton from '@mui/material/IconButton';
 import { Tooltip } from '@mui/material';
 import FollowingCard from './FollowingCard';
-import { ModalHover } from 'react-modal-hover'
 
 
 
@@ -73,13 +72,6 @@ export default function FollowUser(props) {
                                         token={token}
                                     />
 
-                                <ModalHover onHover={<h3>Hello World</h3>}>
-                                    <FollowingCard
-                                        followingObject={followingObject}
-                                        recommendationList={recommendationList}
-                                        token={token}
-                                    />
-                                </ModalHover>
                                 </>
                             </div>
 
