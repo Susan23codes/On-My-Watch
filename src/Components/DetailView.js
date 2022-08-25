@@ -75,8 +75,8 @@ export default function DetailView(props) {
     const params = useParams()
     console.log(params)
 
+    let firstRequestResults = null
     useEffect(() => {
-        let firstRequestResults = null
         axios.get(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}`)
             .then(res => {
                 let results = (res.data)
@@ -137,9 +137,7 @@ export default function DetailView(props) {
                     .then(res => {
                         let results = (res.data)
                         // firstRequestResults = results
-                        console.log("**+**")
                         console.log(results)
-                        console.log("**+**")
 
                         let mappedList = results.map(result => result.imdbid)
 
@@ -154,25 +152,42 @@ export default function DetailView(props) {
 
                     })
 
-                // axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
-                // .then(res => {
-                //     let results = (res.data)
-                // let filteredList = results.filter(result => {
-                //     return result.imdbid === firstRequestResults.imdbid && result.user !== firstRequestResult.user})
-                //     console.log("***")
-                //     console.log(filteredList)
-                //     console.log("***")
+                axios.get(`https://onmywatch.herokuapp.com/api/search/recommendations/?search=${firstRequestResults.imdbid}`)
+                    .then(res => {
+                        let results = (res.data)
+                        console.log("***")
+                        console.log(results)
+                        console.log("***")
+                        let filteredList = results.filter(result => {
+                            return result.imdbid === firstRequestResults.imdbid && result.user !== firstRequestResults.user
+                        })
+                        // console.log("***")
+                        console.log(filteredList)
+                        // console.log("***")
+                        // console.log(filteredList.map(listObject => listObject.user.charAt(0).toUpperCase()))
+                        let avatarForWhoElseRecommended = filteredList.map(listObject => listObject.user)
+                        console.log(avatarForWhoElseRecommended)
 
-                //     setOtherUserSameRecommendation(filteredList)
-                // }
-
-                // })
+                        setOtherUserSameRecommendation(avatarForWhoElseRecommended)
+                    })
 
             })
     },
         [])
 
+    function seeWhoElseRecommended() {
+        // axios.get(`https://onmywatch.herokuapp.com/api/search/recommendations/?search=${firstRequestResults.imdbid}&${otherUserSameRecommendation}`)
+        //             .then(res => {
+        //                 let results = (res.data)
+        //                 console.log("***")
+        //                 console.log(results)
+        //                 console.log("***")
+        //             })
 
+        // let userFilteredList = otherUserSameRecommendation.filter((one, index) => one === user)
+        console.log(otherUserSameRecommendation)
+
+    }
 
 
 
@@ -426,6 +441,7 @@ export default function DetailView(props) {
 
 
 
+
     return (
         <>
             {cardDetail &&
@@ -470,14 +486,12 @@ export default function DetailView(props) {
                                 avatar={
                                     <Avatar sx={{
                                         bgcolor: red[500], width: 56, height: 56
-                                    }} aria-label="recipe">
+                                    }} aria-label="avatar">
                                         {cardDetail.user.charAt(0).toUpperCase()}
                                     </Avatar>
                                 }
                                 titleTypographyProps={{ variant: 'h3' }}
                                 action={getAddedToWatchedListIcon()}
-
-
                                 title={cardDetail.title}
                                 subheader=
 
@@ -487,7 +501,6 @@ export default function DetailView(props) {
                                             .format('MM/DD/YY')}
                                     </CardActionArea>
                                 </Tooltip>}
-
                             />
 
                             <div className='poster-and-text'>
@@ -502,15 +515,46 @@ export default function DetailView(props) {
                                 </div>
                                 <CardContent className="card-content">
                                     {/* sx={{ width: 1000 }}> */}
-                                    <Typography paragraph>
-                                        <strong>Medium:</strong> {cardDetail.medium}
-                                    </Typography>
-                                    <Typography paragraph>
-                                        <strong>Watched on:</strong> {cardDetail.streaming_service}
-                                    </Typography>
-                                    <Typography paragraph>
 
-                                        {cardDetail.genre !== null &&
+                                    <div className="avatars-and-medium">
+                                        <div className="medium-and-watched-on">
+                                        <Typography paragraph>
+                                            <strong>Medium:</strong> {cardDetail.medium}
+                                        </Typography>
+
+                                        <Typography paragraph>
+                                            <strong>Watched on:</strong> {cardDetail.streaming_service}
+                                        </Typography>
+                                        <Typography paragraph>
+
+                                     
+
+                                    </Typography>
+                                        </div>
+                                        <div className="avatars-who-else">
+                                            {otherUserSameRecommendation && otherUserSameRecommendation.slice(0, 4).map((user, index) => {
+                                                return (
+                                                    <Tooltip title={`${user} has also recommended this!`} placement="top-start">
+                                                        <Avatar key={index} onClick={seeWhoElseRecommended} sx={{
+                                                            bgcolor: red[500], width: 56, height: 56
+                                                        }} aria-label="avatar">
+                                                            {user.charAt(0).toUpperCase()}
+                                                        </Avatar>
+                                                    </Tooltip>
+                                                )
+                                            })
+                                            }
+                                            {otherUserSameRecommendation && (otherUserSameRecommendation.length > 4) &&
+                                                <>
+                                                    <Avatar sx={{ fontSize: 14, textAlign: "center", bgcolor: "black", color: "white", width: 45, height: 45 }}>
+                                                        {`+ ${otherUserSameRecommendation.length - 1} more!`}
+                                                    </Avatar>
+                                                </>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    {cardDetail.genre !== null &&
                                             <>
                                                 <div>
                                                     <div className='movieBox'>
@@ -527,6 +571,10 @@ export default function DetailView(props) {
                                                 </div>
                                             </>
                                         }
+                                    
+                                    <Typography paragraph>
+
+                                        
 
                                     </Typography>
 
@@ -538,34 +586,35 @@ export default function DetailView(props) {
                                         sx={{ width: 600 }}>
                                         <strong>My Recommendation: </strong> {cardDetail.reason}
                                     </Typography>
-                                </CardContent>
-                                {isFollowing ? (
-                                    <CardActionArea
-                                        onClick={() => handleUnfollowUser()}
-                                        sx={{ width: 150, height: 30 }}>
-                                        <Tooltip title={`Unfollow ${cardDetail.user}`} placement="top-start">
-                                            <img className="follow-image"
-                                                src="/following.png"
-                                                height='100'
-                                                alt="Unfollow"
+                                </CardContent>                             
 
-                                            />
-                                        </Tooltip>
-                                    </CardActionArea>
-                                ) : (
-                                    <CardActionArea
-                                        onClick={() => handleFollowUser()}
-                                        sx={{ width: 150, height: 30 }}>
-                                        <Tooltip title={`Follow ${cardDetail.user}`} placement="top-start">
-                                            <img className="follow-image"
-                                                src="/follow.png"
-                                                height='90'
-                                                alt="Follow"
-                                            />
-                                        </Tooltip>
-                                    </CardActionArea>
-                                )}
+                                    {isFollowing ? (
+                                        <CardActionArea
+                                            onClick={() => handleUnfollowUser()}
+                                            sx={{ width: 150, height: 30 }}>
+                                            <Tooltip title={`Unfollow ${cardDetail.user}`} placement="top-start">
+                                                <img className="follow-image"
+                                                    src="/following.png"
+                                                    height='100'
+                                                    alt="Unfollow"
 
+                                                />
+                                            </Tooltip>
+                                        </CardActionArea>
+                                    ) : (
+                                        <CardActionArea
+                                            onClick={() => handleFollowUser()}
+                                            sx={{ width: 150, height: 30 }}>
+                                            <Tooltip title={`Follow ${cardDetail.user}`} placement="top-start">
+                                                <img className="follow-image"
+                                                    src="/follow.png"
+                                                    height='90'
+                                                    alt="Follow"
+                                                />
+                                            </Tooltip>
+                                        </CardActionArea>
+                                    )}
+                                
                             </div>
 
                             <CardActions disableSpacing>

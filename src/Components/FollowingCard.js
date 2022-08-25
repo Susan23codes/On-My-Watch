@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 
 
 
+
 export default function FollowingCard(props) {
     const { followingObject, recommendationList, token, followPk } = props
     const [isExpanded, setIsExpanded] = useState(false)
@@ -101,7 +102,7 @@ export default function FollowingCard(props) {
                 ('')
             )
             }
-
+            
         </>
     )
 }
