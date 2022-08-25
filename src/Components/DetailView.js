@@ -596,20 +596,21 @@ export default function DetailView(props) {
                                     </div>
 
                                     {cardDetail.genre !== null &&
-                                        <>
-                                            <div>
-                                                <div className='movieBox'>
-                                                    <strong>Genre:</strong>
+                                            <>
+                                                <div>
+                                                    <div className='movieBox'>
+                                                        <strong>Genre: </strong>
 
-                                                    {cardDetail.genre.map(genre => {
-                                                        return (
-                                                            <div>
-                                                                {genre.key}&ensp;
-                                                            </div>
-                                                        )
-                                                    })}
+                                                        {cardDetail.genre.map(genre => {
+                                                            return (
+                                                                <div>
+                                                                    &ensp;{genre.key}&ensp;
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
                                                 </div>
-                                            </div>
+                                           
                                         </>
                                     }
 

@@ -8,7 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import { Tooltip, CardActionArea } from '@mui/material';
 import { red } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
 
 
@@ -18,6 +20,23 @@ export default function FollowingCard(props) {
     const [isExpanded, setIsExpanded] = useState(false)
     const [error, setError] = useState(null)
     const [isFollowing, setIsFollowing] = useState(true)
+    const [open, setOpen] = useState(false)
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 700,
+        // bgcolor: 'background.paper',
+        bgcolor:'#c1c5c9',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+      };
 
     function handleUnfollowUser() {
         setError(null)
@@ -51,7 +70,8 @@ export default function FollowingCard(props) {
                         {followingObject.followee.charAt(0).toUpperCase()}
                     </Avatar>
                     {followingObject.followee}
-                    {isExpanded ? (
+                    
+                    {/* {isExpanded ? (
                         <Tooltip title="See Less" arrow>
                             <IconButton onClick={() => setIsExpanded(false)} aria-label="mark as watched">
                                 <ExpandLessIcon />
@@ -63,46 +83,58 @@ export default function FollowingCard(props) {
                                 <ExpandMoreIcon />
                             </IconButton>
                         </Tooltip>
-                    )}
-                    <button onClick={() => { handleUnfollowUser(); refreshPage() }}
-                        style={{ backgroundColor: '#293e8a', color: 'white', borderRadius: 15 }}
-                    >
-                        Unfollow {followingObject.followee}</button>
+                    )} */}
+                    <div className='unfollow-and-modal-question-mark'>
+                        <button onClick={() => { handleUnfollowUser(); refreshPage() }}
+                            style={{ backgroundColor: '#293e8a', color: 'white', borderRadius: 15 }}
+                        >
+                            Unfollow {followingObject.followee}</button>
+                            <Tooltip title="Click to see Recommendations">
+                        <QuestionMarkIcon  onClick={handleOpen}></QuestionMarkIcon>
+                        </Tooltip>
+                    </div>
                 </div>
 
             </div>
-            {isExpanded ? (
+            {/* {isExpanded ? ( */}
                 <>
-
-                    <div className='following-list-cards' style={{ paddingLeft: 70 }}>
-                        {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
-                            .map((cardObject, index) => {
-                                return (
-                                    <div className='following-smaller-card'>
-                                        <>
-                                            <div className='following-info'>
-                                                <div>
-                                                    <img src={cardObject.poster} width='70' alt='poster' />
+                    <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    >
+                        <Box className='following-list-cards' sx={style} >
+                            
+                            {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
+                                .map((cardObject, index) => {
+                                    return (
+                                        <div className='following-smaller-card'>
+                                            <>
+                                                <div className='following-info'>
+                                                    <div>
+                                                        <img src={cardObject.poster} width='70' alt='poster' />
+                                                    </div>
+                                                    <div className='following-text'>
+                                                        <p><strong>Title: </strong>{cardObject.title}</p>
+                                                        <p><strong>Medium: </strong>{cardObject.medium}</p>
+                                                        {/* <p><strong>Genre: </strong>{cardObject.genre}</p> */}
+                                                        <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
+                                                    </div>
                                                 </div>
-                                                <div className='following-text'>
-                                                    <p><strong>Title: </strong>{cardObject.title}</p>
-                                                    <p><strong>Medium: </strong>{cardObject.medium}</p>
-                                                    {/* <p><strong>Genre: </strong>{cardObject.genre}</p> */}
-                                                    <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
-                                                </div>
-                                            </div>
-                                        </>
-                                    </div>
-                                )
-                            }
-                            )}
-                    </div>
+                                            </>
+                                        </div>
+                                    )
+                                }
+                                )}
+                        </Box>
+                    </Modal>
                 </>
-            ) : (
+            {/* ) : (
                 ('')
             )
-            }
-            
+            } */}
+
         </>
     )
 }
