@@ -35,6 +35,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { DarkMode } from '@mui/icons-material';
 import { autocompleteClasses, CardActionArea, Tooltip } from '@mui/material';
 import { flexbox, maxWidth } from '@mui/system';
+import MoreMovies from "./MoreMovies";
 
 
 const ExpandMore = styled((props) => {
@@ -414,7 +415,7 @@ export default function DetailView(props) {
                                 subheader=
 
                                 {<Tooltip title="See other recommendations by this user">
-                                    <CardActionArea>
+                                    <CardActionArea onClick={() => navigate(`/more/${cardObject.user_info.id}`)}>
                                         Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
                                             .format('MM/DD/YY')}
                                     </CardActionArea>
@@ -465,9 +466,12 @@ export default function DetailView(props) {
                                 </CardContent>
                             </Collapse>
                         </Card>
+
                     </div>
+
                 </>
-            }
+            }<strong>More Movies Like This:</strong><br></br>
+            {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
         </>
     )
 

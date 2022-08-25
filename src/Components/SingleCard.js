@@ -53,6 +53,11 @@ export default function SingleCard(props) {
     const [expanded, setExpanded] = useState(false);
     const [onWatchList, setOnWatchList] = useState(false)
     const [error, setError] = useState(null)
+    const [genreArray, setGenreArray] = useState([])
+
+    /* for (let i = 0; i < cardObject.genre.length; i++) {
+         console.log(cardObject.genre[i].key)
+     }*/
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -62,6 +67,13 @@ export default function SingleCard(props) {
     // console.log(`QL: ${params.id}`)
 
     useEffect(() => {
+        /* if (cardObject.genre !== null)
+             for (let i = 0; i < cardObject.genre.length; i++) {
+                 console.log(cardObject.genre[i].key
+                 )
+                 setGenreArray(genreArray.push(cardObject.genre[i].key))
+             }
+         console.log(genreArray)*/
         if (cardObject.saved_by.includes(username)) {
             setOnWatchList(true)
             console.log("yes")
@@ -192,6 +204,26 @@ export default function SingleCard(props) {
                         <strong>Streaming on:</strong> {cardObject.streaming_service}
                     </Typography>
                     <Typography paragraph>
+
+                        {cardObject.genre !== null &&
+                            <>
+                                <strong>genre:</strong> <div>
+                                    <ul>
+                                        <ul>
+                                            {cardObject.genre.map(genre => {
+                                                return (
+                                                    <li >
+                                                        {genre.key}
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </ul>
+                                </div>
+                            </>
+                        }
+
+
 
                     </Typography>
                     <Typography paragraph>

@@ -1,7 +1,8 @@
 .toolbar {
   display: flex;
-  flex-direction: column;;
-} 
+  flex-direction: column;
+  ;
+}
 
 .on-my-watch-title {
   padding-top: 10px;
@@ -9,9 +10,9 @@
 
 .navbar-buttons {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   padding: 40px 30px 20px 0;
-  }
+}
 
 
 .home-button {
@@ -23,7 +24,7 @@
   display: flex;
   justify-content: space-between;
   width: 700px;
- 
+
 }
 
 .poster-and-text {
@@ -32,7 +33,7 @@
 
 .card {
   /* display: flex; */
-  /* flex-wrap: wrap; */ 
+  /* flex-wrap: wrap; */
   padding-top: 50px;
   margin-left: 250px;
   margin-right: 200px;
@@ -44,12 +45,12 @@
 
 /* .card:hover {
   /* box-shadow: 0 0 4em 0px rgba(0, 0, 0, 0.4); */
-  /* transform: scale(1.005);
+/* transform: scale(1.005);
   transition: 500ms linear */
 /* }  */
 
 
-.entire-login-form{
+.entire-login-form {
   /* border: 2px solid; */
   width: 300px;
   height: 400px;
@@ -59,11 +60,15 @@
   background-size: cover; */
 }
 
-#login-form, .login-form{
+#login-form,
+.login-form {
   text-align: center;
   margin-top: 70px;
 }
-#username-field, #password, #confirm-password {
+
+#username-field,
+#password,
+#confirm-password {
   margin: 10px;
 }
 
@@ -87,7 +92,7 @@
 
 
 .form-controls {
-  display:flex;
+  display: flex;
   justify-content: space-between;
   width: 300px;
   text-align: center;
@@ -106,63 +111,63 @@
   width: 70vw;
 }
 
- .homepage-sidebar-and-cards {
-   display: flex;
- }
+.homepage-sidebar-and-cards {
+  display: flex;
+}
 
- .homepage-sidebar {
-   border: 4px solid black;
-   width: 25vw;
-   margin: 20px 0 0 20px;
-   font-size: 25px;
-   padding: 0px 20px 0 20px;
-   background-color: #293e8a;
-   color: white;
-   border-radius: 10px;
-   height: 600px;
-   list-style-type: none;
- }
+.homepage-sidebar {
+  border: 4px solid black;
+  width: 25vw;
+  margin: 20px 0 0 20px;
+  font-size: 25px;
+  padding: 0px 20px 0 20px;
+  background-color: #293e8a;
+  color: white;
+  border-radius: 10px;
+  height: 600px;
+  list-style-type: none;
+}
 
- .my-stuff {
-   font-size: 50px;
-   padding-left: 15px;
-   text-decoration: underline;
- }
+.my-stuff {
+  font-size: 50px;
+  padding-left: 15px;
+  text-decoration: underline;
+}
 
- .watchlist-cards {
-   display: flex;
-   padding-left: 20px;
-   align-items: center;
-   justify-content: center;
- }
+.watchlist-cards {
+  display: flex;
+  padding-left: 20px;
+  align-items: center;
+  justify-content: center;
+}
 
- .detail-page {
-   display: grid;
-   grid-template-columns: repeat(2, 1fr);
- }
+.detail-page {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 
- .detail-page-text {
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   justify-content:flex-start;
-   margin-right: 40px;
-   padding-top: 40px;
- }
+.detail-page-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-right: 40px;
+  padding-top: 40px;
+}
 
- .individual-comment {
-   border: 3px solid #293e8a;
-   margin-left: 15px;
-   margin-bottom: 10px;
-   border-radius: 5px;
-   width: 75vw;
-   box-shadow: 0 0 3em 0px rgba(0, 0, 0, 0.3);
- }
+.individual-comment {
+  border: 3px solid #293e8a;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  width: 75vw;
+  box-shadow: 0 0 3em 0px rgba(0, 0, 0, 0.3);
+}
 
- .comment-form {
-   width: 75vw;
-   margin-left: 10px;
- }
+.comment-form {
+  width: 75vw;
+  margin-left: 10px;
+}
 
 .comment-button {
   background-color: #04AA6D;
@@ -202,6 +207,13 @@
   display: flex;
 }
 
+.movieBox {
+  display: flex;
+  flex-wrap: wrap;
+}
 
- 
+.movieIcon {
+  padding: 10px;
 
+  margin-bottom: auto;
+}

@@ -103,7 +103,7 @@ export default function RecForm(props) {
 
 
     function handleSubmit() {
-        setSubmitComplete(true)
+
         logData()
         axios
             .post(
@@ -131,7 +131,7 @@ export default function RecForm(props) {
                     },
                 }
             )
-            .then(console.log)
+            .then(setSubmitComplete(true))
             .catch((error) => {
                 setError(error.message);
             });

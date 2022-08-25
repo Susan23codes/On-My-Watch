@@ -19,9 +19,9 @@ export default function FollowingCard(props) {
             <div className='following-list-item'>
                 <div className='following-list-names' >
                     <div className='following-list-name-and-avatar' style={{ fontSize: 40, paddingLeft: 40, listStyleType: "none", color: '#293e8a' }}>
-                        <Avatar sx={{ bgcolor: red[500], mr:2 }} aria-label="recipe">
+                        <Avatar sx={{ bgcolor: red[500], mr: 2 }} aria-label="recipe">
                             {followingObject.followee.charAt(0).toUpperCase()}
-                        </Avatar> 
+                        </Avatar>
                         {followingObject.followee}
                         {isExpanded ? (
                             <Tooltip title="See Less" arrow>
@@ -49,7 +49,7 @@ export default function FollowingCard(props) {
                                             <>
                                                 <p><strong>Title: </strong>{cardObject.title}</p>
                                                 <p><strong>Medium: </strong>{cardObject.medium}</p>
-                                                <p><strong>Genre: </strong>{cardObject.genre}</p>
+
                                                 <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
                                             </>
                                         </div>
