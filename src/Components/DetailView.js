@@ -36,6 +36,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { DarkMode } from '@mui/icons-material';
 import { CardActionArea, Tooltip } from '@mui/material';
 import { flexbox, maxWidth } from '@mui/system';
+import MoreMovies from "./MoreMovies";
 
 
 const ExpandMore = styled((props) => {
@@ -461,32 +462,34 @@ export default function DetailView(props) {
 
                         </div>
                         <Card className="card-detail" sx={{ bgcolor: '#e9eef0', width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
-                            
-                                <CardHeader
-                                    sx={{
-                                        pt: 0,
-                                    }}
-                                    avatar={
-                                        <Avatar sx={{
-                                            bgcolor: red[500], width: 56, height: 56
-                                        }} aria-label="recipe">
-                                            {cardDetail.user.charAt(0).toUpperCase()}
-                                        </Avatar>
-                                    }
-                                    titleTypographyProps={{ variant: 'h3' }}
-                                    action={getAddedToWatchedListIcon()}
-                                    title={cardDetail.title}
-                                    subheader=
 
-                                    {<Tooltip title="See other recommendations by this user">
-                                        <CardActionArea
-                                            sx={{ fontSize: 20 }}>
-                                            Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
-                                                .format('MM/DD/YY')}
-                                        </CardActionArea>
-                                    </Tooltip>}
-                                />
-                            
+                            <CardHeader
+                                sx={{
+                                    pt: 0,
+                                }}
+                                avatar={
+                                    <Avatar sx={{
+                                        bgcolor: red[500], width: 56, height: 56
+                                    }} aria-label="recipe">
+                                        {cardDetail.user.charAt(0).toUpperCase()}
+                                    </Avatar>
+                                }
+                                titleTypographyProps={{ variant: 'h3' }}
+                                action={getAddedToWatchedListIcon()}
+
+
+                                title={cardDetail.title}
+                                subheader=
+
+                                {<Tooltip title="See other recommendations by this user">
+                                    <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)}>
+                                        Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
+                                            .format('MM/DD/YY')}
+                                    </CardActionArea>
+                                </Tooltip>}
+
+                            />
+
                             <div className='poster-and-text'>
                                 <div className='poster'>
                                     <CardMedia
@@ -505,9 +508,28 @@ export default function DetailView(props) {
                                     <Typography paragraph>
                                         <strong>Watched on:</strong> {cardDetail.streaming_service}
                                     </Typography>
-                                    {/* <Typography paragraph>
-                                        <strong>Genre:</strong> {cardDetail.genre}
-                                    </Typography> */}
+                                    <Typography paragraph>
+
+                                        {cardDetail.genre !== null &&
+                                            <>
+                                                <div>
+                                                    <div className='movieBox'>
+                                                        <strong>Genre:</strong>
+
+                                                        {cardDetail.genre.map(genre => {
+                                                            return (
+                                                                <div>
+                                                                    {genre.key}&ensp;
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            </>
+                                        }
+
+                                    </Typography>
+
                                     <Typography paragraph>
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
                                     </Typography>
@@ -568,7 +590,9 @@ export default function DetailView(props) {
                             </Collapse>
 
                         </Card>
+
                     </div>
+
                     {showAddComment && (
                         <>
                             <h2 className='comment-form'>Want to join in the conversation?  Add a comment below!</h2>
@@ -590,8 +614,10 @@ export default function DetailView(props) {
                             </div>
                         </>
                     )}
+
                 </>
-            }
+            }<strong>More Movies Like This:</strong><br></br>
+            {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
         </>
     )
 

@@ -53,6 +53,11 @@ export default function SingleCard(props) {
     const [expanded, setExpanded] = useState(false);
     const [onWatchList, setOnWatchList] = useState(false)
     const [error, setError] = useState(null)
+    const [genreArray, setGenreArray] = useState([])
+
+    /* for (let i = 0; i < cardObject.genre.length; i++) {
+         console.log(cardObject.genre[i].key)
+     }*/
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -62,6 +67,13 @@ export default function SingleCard(props) {
     // console.log(`QL: ${params.id}`)
 
     useEffect(() => {
+        /* if (cardObject.genre !== null)
+             for (let i = 0; i < cardObject.genre.length; i++) {
+                 console.log(cardObject.genre[i].key
+                 )
+                 setGenreArray(genreArray.push(cardObject.genre[i].key))
+             }
+         console.log(genreArray)*/
         if (cardObject.saved_by.includes(username)) {
             setOnWatchList(true)
             console.log("yes")
@@ -177,7 +189,7 @@ export default function SingleCard(props) {
                     <CardMedia
                         component="img"
                         height="230"
-                        sx={{width:200, pl: 5}}
+                        sx={{ width: 200, pl: 5 }}
                         image={cardObject.poster}
                         alt="Poster"
                     />
@@ -189,9 +201,31 @@ export default function SingleCard(props) {
                     <Typography paragraph>
                         <strong>Streaming on:</strong> {cardObject.streaming_service}
                     </Typography>
-                    {/* <Typography paragraph>
-                        <strong>Genre:</strong> {cardObject.genre}
-                    </Typography> */}
+
+                    <Typography paragraph>
+
+                        {cardObject.genre !== null &&
+                            <>
+                                <div>
+                                    <div className='movieBox'>
+                                        <strong>Genre:</strong>
+
+                                        {cardObject.genre.map(genre => {
+                                            return (
+                                                <div>
+                                                    {genre.key}&ensp;
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            </>
+                        }
+
+
+
+                    </Typography>
+
                     <Typography paragraph>
                         <strong>Tags: </strong>{cardObject.tag.join(', ')}
                     </Typography>
