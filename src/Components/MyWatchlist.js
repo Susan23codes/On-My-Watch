@@ -15,36 +15,17 @@ export default function MyWatchlist(props) {
             }},)
         .then(res => {
             console.log(res.data)
-            setWatchlist(res.data)
-            // let myWatchlist = (res.data.questions)
-            // console.log(res.data)
-            // setMyQuestionList(myQuestions.reverse())
-            // console.log(myQuestions)
-            // console.log(myQuestionList)
+            setWatchlist(res.data.reverse())
+
     
         })
     }, [] )
     
-    // function handleSeeWatchlist() {
-    //     // console.log("works")
-    //     setError(null)
-
-    //     axios.get(`https://onmywatch.herokuapp.com/api/user/favorite/recommendations/`,
-    //         {
-    //             headers: { Authorization: `Token ${token}` },
-    //         })
-    //         .then((res) => {
-    //             navigate('/mywatchlist');
-    //             console.log(res)
-    //         })
-    //         .catch((error) => {
-    //             setError(error.message)
-    //         })
-    // }
     
     return (
         <>
-        <h1 style={{ textAlign: "center", fontSize: 50}}>My Watchlist</h1>
+        <h1 style={{ textAlign: "center", fontSize: 50, color: "#293e8a",}}>Don't Just Watch TV, Watch Good TV!</h1>
+        <h2 style={{ textAlign: "center", fontSize: 30, color: "#293e8a",}}>My Watchlist:</h2>
         <div className='watchlist-cards'>
         {watchlist && watchlist.map((cardObject, index) => {
                     return (

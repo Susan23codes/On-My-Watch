@@ -29,6 +29,7 @@ export default function FollowUser(props) {
             .then(res => {
                 console.log(res.data)
                 setFollowinglist(res.data)
+
             })
         axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
             .then(res => {
@@ -43,17 +44,36 @@ export default function FollowUser(props) {
     return (
 
         <>
-            <h1 style={{ paddingLeft: 40 }}>Here are the fabulous people I'm following and their recommendations!</h1>
-            <div className='following-list'>
-                {followinglist && followinglist.map((followingObject, index) => {
-                    return (
-                        <FollowingCard 
-                            followingObject={followingObject}
-                            recommendationList={recommendationList}
+            <div className='following-background'
+                style={{ height: '100vh', backgroundColor: '#e4e8ed' }}>
+                <h1 style={{
+                    fontSize: 40,
+                    paddingLeft: 40,
+                    paddingTop: 100,
+                    marginTop: 0,
+                    textAlign: 'center',
+                    color: "#293e8a",
+                }}>
+                    🌟 We May All Be Stars in Our Own Show, But We Definitely Need a Supporting Cast! 🌟</h1>
+                <h1 style={{
+                    paddingLeft: 150,
+                    color: "#293e8a"
+                }}>
+                    Here's Mine:</h1>
+                <div className='following-list'>
+                    {followinglist && followinglist.map((followingObject, index) => {
+                        return (
+                            <div className='following-list-item'>
+                            <FollowingCard
+                                followingObject={followingObject}
+                                recommendationList={recommendationList}
+                                token={token}
                             />
-                    )
-                })
-                }
+                            </div>
+                        )
+                    })
+                    }
+                </div>
             </div>
         </>
     )

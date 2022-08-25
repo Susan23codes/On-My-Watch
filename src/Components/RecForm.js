@@ -177,7 +177,7 @@ export default function RecForm(props) {
                     :
                     <div>                <div className="input-field">
 
-                        <label>First Tell Us What You Watched and then Choose the Appropriate Poster:</label>
+                        <label style={{fontSize: 20}}>First Tell Us What You Watched and then Choose the Appropriate Poster:</label>
                         <br></br>
                         <input
                             className="input"
@@ -214,15 +214,6 @@ export default function RecForm(props) {
                     </div>
 
 
-
-
-
-
-
-
-
-
-
                     {!mediaChosen ? <div></div> :
                         <form action="/action_page.php">
                             <div class="row">
@@ -251,8 +242,17 @@ export default function RecForm(props) {
                                     <label >Your Recommendation</label>
                                 </div>
                                 <div class="col-75">
-                                    <textarea id="subject" name="subject" placeholder="Write something.." onChange={handleChangeRecommendation}
-                                        value={recommendation}></textarea>
+                                    <textarea 
+                                        id="subject"
+                                        name="subject"
+                                        placeholder="Write something.."
+                                        onChange={handleChangeRecommendation}
+                                        value={recommendation}
+                                        cols={40}
+                                        rows={15}>
+
+                                        </textarea>
+                                        
                                 </div>
                             </div>
                             <br></br>

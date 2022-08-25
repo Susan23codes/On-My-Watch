@@ -21,6 +21,7 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
+import Comments from "./Comments";
 import CheckIcon from '@mui/icons-material/Check';
 import { StarIcon } from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -33,7 +34,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import { DarkMode } from '@mui/icons-material';
-import { autocompleteClasses, CardActionArea, Tooltip } from '@mui/material';
+import { CardActionArea, Tooltip } from '@mui/material';
 import { flexbox, maxWidth } from '@mui/system';
 import MoreMovies from "./MoreMovies";
 
@@ -52,7 +53,7 @@ const ExpandMore = styled((props) => {
 
 
 export default function DetailView(props) {
-    const { isLoggedIn, token, SingleCard, cardObject, key, id, username } = props
+    const { isLoggedIn, token, length, username } = props
 
     const [cardDetail, setCardDetail] = useState(null)
     const [expanded, setExpanded] = useState(false);
@@ -61,6 +62,9 @@ export default function DetailView(props) {
     const [error, setError] = useState(null)
     const [isFollowing, setIsFollowing] = useState(false)
     const [followPk, setFollowPk] = useState(null)
+    const [comment, setComment] = useState('')
+    const [showAddComment, setShowAddComment] = useState(false)
+    const [otherUserSameRecommendation, setOtherUserSameRecommendation] = useState(null)
     const navigate = useNavigate()
 
     const handleExpandClick = () => {
@@ -114,16 +118,16 @@ export default function DetailView(props) {
                         // console.log("***")
 
                         if (mappedList.includes(firstRequestResults.user_info.id)) {
-                            console.log("yes")
+                            // console.log("yes")
                             setIsFollowing(true)
                         }
                         else {
                             setIsFollowing(false)
-                            console.log("no")
+                            // console.log("no")
                         }
                     })
 
-                console.log(`Starting watchedList request.  Results of frr: ${firstRequestResults}`)
+
                 axios.get('https://onmywatch.herokuapp.com/api/watchedlist/',
                     {
                         headers: {
@@ -133,19 +137,37 @@ export default function DetailView(props) {
                     .then(res => {
                         let results = (res.data)
                         // firstRequestResults = results
+                        console.log("**+**")
                         console.log(results)
+                        console.log("**+**")
+
                         let mappedList = results.map(result => result.imdbid)
 
                         if (mappedList.includes(firstRequestResults.imdbid)) {
-                            console.log("yes")
+                            // console.log("yes")
                             setIsOnWatchedList(true)
                         }
                         else {
                             setIsOnWatchedList(false)
-                            console.log("no")
+                            // console.log("no")
                         }
 
                     })
+
+                // axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
+                // .then(res => {
+                //     let results = (res.data)
+                // let filteredList = results.filter(result => {
+                //     return result.imdbid === firstRequestResults.imdbid && result.user !== firstRequestResult.user})
+                //     console.log("***")
+                //     console.log(filteredList)
+                //     console.log("***")
+
+                //     setOtherUserSameRecommendation(filteredList)
+                // }
+
+                // })
+
             })
     },
         [])
@@ -225,6 +247,7 @@ export default function DetailView(props) {
             .then((res) => {
                 console.log(`added ${cardDetail.user_info.id}!`)
                 setIsFollowing(true)
+                setFollowPk(res.data.pk)
 
             })
             .catch((error) => {
@@ -246,7 +269,6 @@ export default function DetailView(props) {
             .then((res) => {
                 console.log(`added ${cardDetail.user_info.id}!`)
                 setIsFollowing(false)
-
             })
             .catch((error) => {
                 setError(Object.values(error.response.data))
@@ -268,6 +290,7 @@ export default function DetailView(props) {
                 console.log("You've watched this now!")
                 setIsOnWatchedList(true)
 
+
             })
             .catch((error) => {
                 setError(Object.values(error.response.data))
@@ -284,7 +307,7 @@ export default function DetailView(props) {
                 },
             })
             .then((res) => {
-                console.log("You've watched this now!")
+                console.log("You've deleted this from WATCHED!")
                 setIsOnWatchedList(false)
 
             })
@@ -301,15 +324,23 @@ export default function DetailView(props) {
                 <>
                     <Tooltip title="Add to Watchlist" arrow>
                         <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-                            <AddToQueueIcon sx={{ color: "red" }} />
+                            <AddToQueueIcon sx={{ color: "red" }} className="addtoqueue" />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="See/Add Comments" arrow>
-                        <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
-                            <CommentIcon sx={{ color: "red" }} />
-                        </IconButton>
-                    </Tooltip>
-
+                    {!showAddComment ? (
+                        <Tooltip title="Add a Comment Below" arrow>
+                            <IconButton onClick={() => setShowAddComment(true)} aria-label="add">
+                                <CommentIcon sx={{ color: "red" }} />
+                            </IconButton>
+                        </Tooltip>
+                    ) : (
+                        <Tooltip title="Add a Comment Below" arrow>
+                            <IconButton onClick={() => setShowAddComment(false)} aria-label="add">
+                                <CommentIcon sx={{ color: "red" }} />
+                            </IconButton>
+                        </Tooltip>
+                    )
+                    }
                 </>
             )
         }
@@ -321,11 +352,20 @@ export default function DetailView(props) {
                             <BookmarkAddedIcon sx={{ color: "red" }} />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="See/Add Comments" arrow>
-                        <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
-                            <CommentIcon sx={{ color: "red" }} />
-                        </IconButton>
-                    </Tooltip>
+                    {!showAddComment ? (
+                        <Tooltip title="Add a Comment Below" arrow>
+                            <IconButton onClick={() => setShowAddComment(true)} aria-label="add">
+                                <CommentIcon sx={{ color: "red" }} />
+                            </IconButton>
+                        </Tooltip>
+                    ) : (
+                        <Tooltip title="Add a Comment Below" arrow>
+                            <IconButton onClick={() => setShowAddComment(false)} aria-label="add">
+                                <CommentIcon sx={{ color: "red" }} />
+                            </IconButton>
+                        </Tooltip>
+                    )
+                    }
                     <Tooltip title="Mark as Watched" arrow>
                         <IconButton onClick={() => handleMovetoWatchedList()} aria-label="mark as watched">
                             <CheckCircleOutlineIcon sx={{ color: "red" }} />
@@ -337,11 +377,20 @@ export default function DetailView(props) {
         else if (isLoggedIn && isOnWatchList && isOnWatchedList) {
             return (
                 <>
-                    <Tooltip title="See/Add Comments" arrow>
-                        <IconButton onClick={() => navigate(`/comments/${cardDetail.id}`, { state: { title: cardDetail.title } })} aria-label="add">
-                            <CommentIcon sx={{ color: "red" }} />
-                        </IconButton>
-                    </Tooltip>
+                    {!showAddComment ? (
+                        <Tooltip title="Add a Comment Below" arrow>
+                            <IconButton onClick={() => setShowAddComment(true)} aria-label="add">
+                                <CommentIcon sx={{ color: "red" }} />
+                            </IconButton>
+                        </Tooltip>
+                    ) : (
+                        <Tooltip title="Add a Comment" arrow>
+                            <IconButton onClick={() => setShowAddComment(false)} aria-label="add">
+                                <CommentIcon sx={{ color: "red" }} />
+                            </IconButton>
+                        </Tooltip>
+                    )
+                    }
                     <Tooltip title="You've Watched This" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchedList()} aria-label="delete from watched">
                             <CheckCircleIcon sx={{ color: "red" }} />
@@ -352,6 +401,28 @@ export default function DetailView(props) {
         }
     }
 
+    function handleAddComment(e) {
+        e.preventDefault()
+        setError(null)
+        console.log(comment)
+
+        axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}/comment/`,
+            {
+                comment: comment,
+                recommendation: params.recommendationId
+            },
+            {
+                headers: { Authorization: `Token ${token}` },
+            })
+            .then(res => {
+                setComment('')
+                console.log(comment)
+            })
+            .catch((error) => {
+                setError(error.message)
+            })
+    }
+
 
 
 
@@ -359,29 +430,10 @@ export default function DetailView(props) {
         <>
             {cardDetail &&
                 <>
-                    <h1 style={{ textAlign: 'center' }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
+                    <h1 style={{ textAlign: 'center', marginBottom: 0 }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
                     <div className="detail-page">
                         <div className="detail-page-text">
-                            <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)} sx={{ fontSize: 16 }}>
-                                <h2 ><GiFilmProjector /> Click here to see {cardDetail.user}'s other recommendations!</h2>
-                            </CardActionArea>
-                            <h2><GiFilmProjector /> Click here to see who else has recommended {cardDetail.title}!</h2>
-
-
-                            {!isFollowing ? (
-                                <>
-                                    <CardActionArea sx={{ fontSize: 16 }}>
-                                        <h2 onClick={() => handleFollowUser()}><GiFilmProjector /> Click here to follow {cardDetail.user}!</h2>
-                                    </CardActionArea>
-                                </>
-                            ) : (
-                                <CardActionArea sx={{ fontSize: 16 }}>
-                                    <h2 onClick={() => handleUnfollowUser()}><GiFilmProjector /> You are now following {cardDetail.user}!  Click to unfollow.</h2>
-                                </CardActionArea>
-                            )
-                            }
-
-                            {username === cardDetail.user ? (
+                            {/* {username === cardDetail.user ? (
                                 <>
                                     <h2><GiFilmProjector /> Would you like to delete your recommendation?</h2>
                                     <Button onClick={() => handleDeleteRecommendationCard()}
@@ -392,24 +444,39 @@ export default function DetailView(props) {
                             ) : (
                                 ('')
                             )
+                            }  */}
+                            {username === cardDetail.user ? (
+                                <>
+                                    <div className="delete-recommendation">
+                                        <h2><GiFilmProjector /> Delete your recommendation?</h2>
+                                        <Button onClick={() => handleDeleteRecommendationCard()}
+                                            variant="contained" startIcon={<DeleteIcon />}>
+                                            Delete
+                                        </Button>
+                                    </div>
+                                </>
+                            ) : (
+                                ('')
+                            )
                             }
 
                         </div>
-                        <Card className="card-detail" sx={{ bgcolor: '#e9eef0', width: 550, mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
+                        <Card className="card-detail" sx={{ bgcolor: '#e9eef0', width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
+
                             <CardHeader
                                 sx={{
                                     pt: 0,
-                                    '& .MuiCardHeader-title, css-1qvr50w-MuiTypography-root': {
-                                        width: 250
-                                    }
                                 }}
                                 avatar={
-                                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                    <Avatar sx={{
+                                        bgcolor: red[500], width: 56, height: 56
+                                    }} aria-label="recipe">
                                         {cardDetail.user.charAt(0).toUpperCase()}
                                     </Avatar>
                                 }
-                                titleTypographyProps={{ variant: 'h5' }}
+                                titleTypographyProps={{ variant: 'h3' }}
                                 action={getAddedToWatchedListIcon()}
+
 
                                 title={cardDetail.title}
                                 subheader=
@@ -422,21 +489,24 @@ export default function DetailView(props) {
                                 </Tooltip>}
 
                             />
+
                             <div className='poster-and-text'>
                                 <div className='poster'>
                                     <CardMedia
                                         component="img"
-                                        height="220"
+                                        height="230"
+                                        sx={{ width: 200, pl: 5 }}
                                         image={cardDetail.poster}
                                         alt="TV poster"
                                     />
                                 </div>
-                                <CardContent>
+                                <CardContent className="card-content">
+                                    {/* sx={{ width: 1000 }}> */}
                                     <Typography paragraph>
                                         <strong>Medium:</strong> {cardDetail.medium}
                                     </Typography>
                                     <Typography paragraph>
-                                        <strong>Streaming on:</strong> {cardDetail.streaming_service}
+                                        <strong>Watched on:</strong> {cardDetail.streaming_service}
                                     </Typography>
                                     <Typography paragraph>
 
@@ -457,14 +527,49 @@ export default function DetailView(props) {
                                                 </div>
                                             </>
                                         }
+
                                     </Typography>
+
                                     <Typography paragraph>
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
                                     </Typography>
+                                    <Typography
+                                        className="recommendation"
+                                        sx={{ width: 600 }}>
+                                        <strong>My Recommendation: </strong> {cardDetail.reason}
+                                    </Typography>
                                 </CardContent>
+                                {isFollowing ? (
+                                    <CardActionArea
+                                        onClick={() => handleUnfollowUser()}
+                                        sx={{ width: 150, height: 30 }}>
+                                        <Tooltip title={`Unfollow ${cardDetail.user}`} placement="top-start">
+                                            <img className="follow-image"
+                                                src="/following.png"
+                                                height='100'
+                                                alt="Unfollow"
+
+                                            />
+                                        </Tooltip>
+                                    </CardActionArea>
+                                ) : (
+                                    <CardActionArea
+                                        onClick={() => handleFollowUser()}
+                                        sx={{ width: 150, height: 30 }}>
+                                        <Tooltip title={`Follow ${cardDetail.user}`} placement="top-start">
+                                            <img className="follow-image"
+                                                src="/follow.png"
+                                                height='90'
+                                                alt="Follow"
+                                            />
+                                        </Tooltip>
+                                    </CardActionArea>
+                                )}
+
                             </div>
+
                             <CardActions disableSpacing>
-                                Click to see my recommendation!
+                                Click to see comments!
                                 <ExpandMore
                                     expand={expanded}
                                     onClick={handleExpandClick}
@@ -476,15 +581,39 @@ export default function DetailView(props) {
                             </CardActions>
                             <Collapse in={expanded} timeout="auto" unmountOnExit>
                                 <CardContent>
-                                    {/* <Typography paragraph>Why I Recommend this:</Typography> */}
                                     <Typography paragraph>
-                                        {cardDetail.reason}
+                                        <Comments
+                                            token={token}
+                                        />
                                     </Typography>
                                 </CardContent>
                             </Collapse>
+
                         </Card>
 
                     </div>
+
+                    {showAddComment && (
+                        <>
+                            <h2 className='comment-form'>Want to join in the conversation?  Add a comment below!</h2>
+                            <div className='comment-form'>
+                                <form>
+                                    <textarea
+                                        value={comment}
+                                        className="write-comment"
+                                        placeholder='Write a comment'
+                                        rows={10}
+                                        cols={50}
+                                        onChange={(e) => setComment(e.target.value)}
+                                    >
+
+                                    </textarea>
+                                </form>
+
+                                <button type="button" onClick={handleAddComment} className="comment-button">Submit Comment</button>
+                            </div>
+                        </>
+                    )}
 
                 </>
             }<strong>More Movies Like This:</strong><br></br>
