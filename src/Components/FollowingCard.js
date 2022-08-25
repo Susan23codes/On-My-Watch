@@ -9,6 +9,8 @@ import { Tooltip, CardActionArea } from '@mui/material';
 import { red } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
@@ -32,11 +34,11 @@ export default function FollowingCard(props) {
         transform: 'translate(-50%, -50%)',
         width: 700,
         // bgcolor: 'background.paper',
-        bgcolor:'#c1c5c9',
+        bgcolor: '#c1c5c9',
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-      };
+    };
 
     function handleUnfollowUser() {
         setError(null)
@@ -70,7 +72,7 @@ export default function FollowingCard(props) {
                         {followingObject.followee.charAt(0).toUpperCase()}
                     </Avatar>
                     {followingObject.followee}
-                    
+
                     {/* {isExpanded ? (
                         <Tooltip title="See Less" arrow>
                             <IconButton onClick={() => setIsExpanded(false)} aria-label="mark as watched">
@@ -89,23 +91,28 @@ export default function FollowingCard(props) {
                             style={{ backgroundColor: '#293e8a', color: 'white', borderRadius: 15 }}
                         >
                             Unfollow {followingObject.followee}</button>
-                            <Tooltip title="Click to see Recommendations">
-                        <QuestionMarkIcon  onClick={handleOpen}></QuestionMarkIcon>
+                        <Tooltip title="Click to see Recommendations">
+                            <QuestionMarkIcon onClick={handleOpen}></QuestionMarkIcon>
                         </Tooltip>
                     </div>
                 </div>
 
             </div>
             {/* {isExpanded ? ( */}
-                <>
-                    <Modal
+            <>
+                <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
-                    >
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={open}>
                         <Box className='following-list-cards' sx={style} >
-                            
+
                             {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
                                 .map((cardObject, index) => {
                                     return (
@@ -128,8 +135,9 @@ export default function FollowingCard(props) {
                                 }
                                 )}
                         </Box>
-                    </Modal>
-                </>
+                    </Fade>
+                </Modal>
+            </>
             {/* ) : (
                 ('')
             )
