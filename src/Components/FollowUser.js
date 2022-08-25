@@ -7,6 +7,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import IconButton from '@mui/material/IconButton';
 import { Tooltip } from '@mui/material';
 import FollowingCard from './FollowingCard';
+import { ModalHover } from 'react-modal-hover'
 
 
 
@@ -45,7 +46,7 @@ export default function FollowUser(props) {
 
         <>
             <div className='following-background'
-                style={{ height: '100vh', backgroundColor: '#e4e8ed' }}>
+                style={{ height: '100vh', backgroundColor: '#c1c5c9' }}>
                 <h1 style={{
                     fontSize: 40,
                     paddingLeft: 40,
@@ -61,15 +62,27 @@ export default function FollowUser(props) {
                 }}>
                     Here's Mine:</h1>
                 <div className='following-list'>
+
                     {followinglist && followinglist.map((followingObject, index) => {
                         return (
                             <div className='following-list-item'>
-                            <FollowingCard
-                                followingObject={followingObject}
-                                recommendationList={recommendationList}
-                                token={token}
-                            />
+                                <>
+                                    <FollowingCard
+                                        followingObject={followingObject}
+                                        recommendationList={recommendationList}
+                                        token={token}
+                                    />
+
+                                <ModalHover onHover={<h3>Hello World</h3>}>
+                                    <FollowingCard
+                                        followingObject={followingObject}
+                                        recommendationList={recommendationList}
+                                        token={token}
+                                    />
+                                </ModalHover>
+                                </>
                             </div>
+
                         )
                     })
                     }

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 
 
 
+
+
 export default function MyWatchlist(props) {
     const {navigate, token, SingleCard, isLoggedIn, username} = props
     const [error, setError] = useState(null)
@@ -29,6 +31,7 @@ export default function MyWatchlist(props) {
         <div className='watchlist-cards'>
         {watchlist && watchlist.map((cardObject, index) => {
                     return (
+                    
                         <SingleCard 
                             cardObject={cardObject}
                             key={index}
@@ -38,6 +41,7 @@ export default function MyWatchlist(props) {
                             username={username}
                             navigate={navigate}
                             />
+                            
                     )
         }
         )}
