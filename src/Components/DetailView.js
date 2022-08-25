@@ -22,6 +22,7 @@ import { red } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import Comments from "./Comments";
+import TheatersIcon from '@mui/icons-material/Theaters';
 import CheckIcon from '@mui/icons-material/Check';
 import { StarIcon } from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -64,6 +65,7 @@ export default function DetailView(props) {
     const [followPk, setFollowPk] = useState(null)
     const [comment, setComment] = useState('')
     const [showAddComment, setShowAddComment] = useState(false)
+    const [showRelatedMovies, setShowRelatedMovies] = useState(false)
     const [otherUserSameRecommendation, setOtherUserSameRecommendation] = useState(null)
     const navigate = useNavigate()
 
@@ -337,6 +339,19 @@ export default function DetailView(props) {
         if (isLoggedIn && !isOnWatchList) {
             return (
                 <>
+                    {!showRelatedMovies ? (
+                        <Tooltip title="See Related Movies Below" arrow>
+                            <IconButton onClick={() => setShowRelatedMovies(true)} aria-label="add">
+                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                            </IconButton>
+                        </Tooltip>
+                    ) : (
+                        <Tooltip title="See Related Movies Below" arrow>
+                            <IconButton onClick={() => setShowRelatedMovies(false)} aria-label="add">
+                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                            </IconButton>
+                        </Tooltip>
+                    )}
                     <Tooltip title="Add to Watchlist" arrow>
                         <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
                             <AddToQueueIcon sx={{ color: "red" }} className="addtoqueue" />
@@ -362,6 +377,19 @@ export default function DetailView(props) {
         else if (isLoggedIn && isOnWatchList && !isOnWatchedList) {
             return (
                 <>
+                    {!showRelatedMovies ? (
+                        <Tooltip title="See Related Movies Below" arrow>
+                            <IconButton onClick={() => setShowRelatedMovies(true)} aria-label="add">
+                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                            </IconButton>
+                        </Tooltip>
+                    ) : (
+                        <Tooltip title="See Related Movies Below" arrow>
+                            <IconButton onClick={() => setShowRelatedMovies(false)} aria-label="add">
+                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                            </IconButton>
+                        </Tooltip>
+                    )}
                     <Tooltip title="Added to Watchlist!" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
                             <BookmarkAddedIcon sx={{ color: "red" }} />
@@ -392,6 +420,19 @@ export default function DetailView(props) {
         else if (isLoggedIn && isOnWatchList && isOnWatchedList) {
             return (
                 <>
+                    {!showRelatedMovies ? (
+                        <Tooltip title="See Related Movies Below" arrow>
+                            <IconButton onClick={() => setShowRelatedMovies(true)} aria-label="add">
+                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                            </IconButton>
+                        </Tooltip>
+                    ) : (
+                        <Tooltip title="See Related Movies Below" arrow>
+                            <IconButton onClick={() => setShowRelatedMovies(false)} aria-label="add">
+                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                            </IconButton>
+                        </Tooltip>
+                    )}
                     {!showAddComment ? (
                         <Tooltip title="Add a Comment Below" arrow>
                             <IconButton onClick={() => setShowAddComment(true)} aria-label="add">
@@ -446,7 +487,7 @@ export default function DetailView(props) {
         <>
             {cardDetail &&
                 <>
-                    <h1 style={{ textAlign: 'center', marginBottom: 0 }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
+                    <h1 style={{  marginLeft:'80px', marginBottom: 0 }}>You have great taste!  Here are some more details about {cardDetail.title}!</h1>
                     <div className="detail-page">
                         <div className="detail-page-text">
                             {/* {username === cardDetail.user ? (
@@ -518,18 +559,18 @@ export default function DetailView(props) {
 
                                     <div className="avatars-and-medium">
                                         <div className="medium-and-watched-on">
-                                        <Typography paragraph>
-                                            <strong>Medium:</strong> {cardDetail.medium}
-                                        </Typography>
+                                            <Typography paragraph>
+                                                <strong>Medium:</strong> {cardDetail.medium}
+                                            </Typography>
 
-                                        <Typography paragraph>
-                                            <strong>Watched on:</strong> {cardDetail.streaming_service}
-                                        </Typography>
-                                        <Typography paragraph>
+                                            <Typography paragraph>
+                                                <strong>Watched on:</strong> {cardDetail.streaming_service}
+                                            </Typography>
+                                            <Typography paragraph>
 
-                                     
 
-                                    </Typography>
+
+                                            </Typography>
                                         </div>
                                         <div className="avatars-who-else">
                                             {otherUserSameRecommendation && otherUserSameRecommendation.slice(0, 4).map((user, index) => {
@@ -569,12 +610,13 @@ export default function DetailView(props) {
                                                         })}
                                                     </div>
                                                 </div>
-                                            </>
-                                        }
-                                    
+                                           
+                                        </>
+                                    }
+
                                     <Typography paragraph>
 
-                                        
+
 
                                     </Typography>
 
@@ -586,35 +628,35 @@ export default function DetailView(props) {
                                         sx={{ width: 600 }}>
                                         <strong>My Recommendation: </strong> {cardDetail.reason}
                                     </Typography>
-                                </CardContent>                             
+                                </CardContent>
 
-                                    {isFollowing ? (
-                                        <CardActionArea
-                                            onClick={() => handleUnfollowUser()}
-                                            sx={{ width: 150, height: 30 }}>
-                                            <Tooltip title={`Unfollow ${cardDetail.user}`} placement="top-start">
-                                                <img className="follow-image"
-                                                    src="/following.png"
-                                                    height='100'
-                                                    alt="Unfollow"
+                                {isFollowing ? (
+                                    <CardActionArea
+                                        onClick={() => handleUnfollowUser()}
+                                        sx={{ width: 150, height: 30 }}>
+                                        <Tooltip title={`Unfollow ${cardDetail.user}`} placement="top-start">
+                                            <img className="follow-image"
+                                                src="/following.png"
+                                                height='100'
+                                                alt="Unfollow"
 
-                                                />
-                                            </Tooltip>
-                                        </CardActionArea>
-                                    ) : (
-                                        <CardActionArea
-                                            onClick={() => handleFollowUser()}
-                                            sx={{ width: 150, height: 30 }}>
-                                            <Tooltip title={`Follow ${cardDetail.user}`} placement="top-start">
-                                                <img className="follow-image"
-                                                    src="/follow.png"
-                                                    height='90'
-                                                    alt="Follow"
-                                                />
-                                            </Tooltip>
-                                        </CardActionArea>
-                                    )}
-                                
+                                            />
+                                        </Tooltip>
+                                    </CardActionArea>
+                                ) : (
+                                    <CardActionArea
+                                        onClick={() => handleFollowUser()}
+                                        sx={{ width: 150, height: 30 }}>
+                                        <Tooltip title={`Follow ${cardDetail.user}`} placement="top-start">
+                                            <img className="follow-image"
+                                                src="/follow.png"
+                                                height='90'
+                                                alt="Follow"
+                                            />
+                                        </Tooltip>
+                                    </CardActionArea>
+                                )}
+
                             </div>
 
                             <CardActions disableSpacing>
@@ -664,10 +706,15 @@ export default function DetailView(props) {
                         </>
                     )}
 
-                </> 
-                
-            }<strong>More Movies Like This:</strong><br></br>
-            {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
+                </>
+
+            }
+            {showRelatedMovies && (
+                <>
+                    <div style={{textAlign:'center', height:'100px', fontSize:'40px'}}><strong>More Movies Like This:</strong></div>
+                    {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
+                </>
+            )}
         </>
     )
 
