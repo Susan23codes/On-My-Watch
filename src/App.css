@@ -347,11 +347,6 @@
 
 
 
-
-
-
-
-
 .movieIcon {
   padding: 10px;
 
@@ -369,8 +364,11 @@
 }
 
 .center {
-  margin: auto;
+  /* margin: auto; */
+  margin-left: 80px;
   width: 80%;
-  border: 5px solid;
+  border: 5px solid #293e8a;
   padding: 5px;
+  background-color: #e4e8ed;
+
 }
