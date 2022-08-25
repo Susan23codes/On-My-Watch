@@ -197,14 +197,14 @@ export default function RecForm(props) {
                             ? <div>
 
                                 <div className="media" >{mediaObj.title}<br></br>
-                                    <img src={mediaObj.image} alt="mediaImage" data-id={mediaObj.id} width="150" height="200"></img>
+                                    <img src={mediaObj.image} className='formImage' alt="mediaImage" data-id={mediaObj.id} width="150" height="200"></img>
                                 </div>
 
                             </div >
-                            : <div> <div className="mediaBox">
+                            : <div> <div className="mediaBox3">
                                 {mediaObj.map((media) => (
-                                    <div className="mediaTitle" >{media.title}<br></br>
-                                        <img src={media.image} alt="mediaImage" data-id={media.id} height="200" onClick={handleChoseMedia}></img>
+                                    <div className="mediaTitle"  >{media.title}<br></br>
+                                        <img src={media.image} className='formImage' alt="mediaImage" data-id={media.id} height="200" onClick={handleChoseMedia}></img>
                                     </div>
 
                                 ))}

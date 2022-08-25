@@ -210,10 +210,28 @@
 .movieBox {
   display: flex;
   flex-wrap: wrap;
+
 }
 
 .movieIcon {
   padding: 10px;
 
-  margin-bottom: auto;
+
+}
+
+.movieBox2 {
+  display: flex;
+  flex-wrap: wrap;
+  border: #04AA6D;
+  border-style: double;
+  justify-content: center;
+
+
+}
+
+.center {
+  margin: auto;
+  width: 80%;
+  border: 5px solid;
+  padding: 5px;
 }

@@ -5,7 +5,7 @@ export default function RecForm(props) {
 
 
     return (
-        <> {props.object.related_shows !== null && <div><div className="movieBox">
+        <><div className="outBox"> {props.object.related_shows !== null && <div><div className='movieBox2 center'>
             {props.object.related_shows.map(movie => {
                 return (
 
@@ -16,7 +16,7 @@ export default function RecForm(props) {
                 )
             })}
         </div></div>}
-
+        </div>
         </>
     )
 

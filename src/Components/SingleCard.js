@@ -207,18 +207,18 @@ export default function SingleCard(props) {
 
                         {cardObject.genre !== null &&
                             <>
-                                <strong>genre:</strong> <div>
-                                    <ul>
-                                        <ul>
-                                            {cardObject.genre.map(genre => {
-                                                return (
-                                                    <li >
-                                                        {genre.key}
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </ul>
+                                <div>
+                                    <div className='movieBox'>
+                                        <strong>Genre:</strong>
+
+                                        {cardObject.genre.map(genre => {
+                                            return (
+                                                <div>
+                                                    {genre.key}&ensp;
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
                             </>
                         }

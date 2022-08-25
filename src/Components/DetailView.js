@@ -415,7 +415,7 @@ export default function DetailView(props) {
                                 subheader=
 
                                 {<Tooltip title="See other recommendations by this user">
-                                    <CardActionArea onClick={() => navigate(`/more/${cardObject.user_info.id}`)}>
+                                    <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)}>
                                         Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
                                             .format('MM/DD/YY')}
                                     </CardActionArea>
@@ -440,6 +440,23 @@ export default function DetailView(props) {
                                     </Typography>
                                     <Typography paragraph>
 
+                                        {cardDetail.genre !== null &&
+                                            <>
+                                                <div>
+                                                    <div className='movieBox'>
+                                                        <strong>Genre:</strong>
+
+                                                        {cardDetail.genre.map(genre => {
+                                                            return (
+                                                                <div>
+                                                                    {genre.key}&ensp;
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            </>
+                                        }
                                     </Typography>
                                     <Typography paragraph>
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
