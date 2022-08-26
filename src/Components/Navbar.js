@@ -29,11 +29,11 @@ export default function Navbar(props) {
             }}>
 
                 {!isLoggedIn ? (
-                    <Toolbar className='toolbar' sx={{ height: 150 }}>
-                        <Typography className='on-my-watch-title' component="div" sx={{ fontFamily:"Yeseva_One", flexGrow: 1, fontSize: 80 }}>
+                    <Toolbar className='toolbar' sx={{ height: 120 }}>
+                        <Typography className='on-my-watch-title' component="div" sx={{ flexGrow: 1, fontSize: 80 }}>
                             📺n My Watch
                         </Typography>
-                        <Typography component="div" paragraph sx={{ fontSize: 30 }}>
+                        <Typography component="div" paragraph sx={{ fontSize: 30, paddingBottom:'5px' }}>
                             Come find your next favorite show!
                         </Typography>
                     </Toolbar>
@@ -69,14 +69,6 @@ export default function Navbar(props) {
                                     setLocation('search')
                                 }} color="inherit" sx={{ fontSize: 20, }}> Search </Button>
                             </div></div>
-
-
-
-
-
-
-
-
 
                             : <div><div className='recommendation-button'>
                                 <Button onClick={() => {

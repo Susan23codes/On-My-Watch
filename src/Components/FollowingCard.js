@@ -9,6 +9,8 @@ import { Tooltip, CardActionArea } from '@mui/material';
 import { red } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
@@ -32,11 +34,11 @@ export default function FollowingCard(props) {
         transform: 'translate(-50%, -50%)',
         width: 700,
         // bgcolor: 'background.paper',
-        bgcolor:'#c1c5c9',
+        bgcolor: '#c1c5c9',
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-      };
+    };
 
     function handleUnfollowUser() {
         setError(null)
@@ -70,42 +72,33 @@ export default function FollowingCard(props) {
                         {followingObject.followee.charAt(0).toUpperCase()}
                     </Avatar>
                     {followingObject.followee}
-                    
-                    {/* {isExpanded ? (
-                        <Tooltip title="See Less" arrow>
-                            <IconButton onClick={() => setIsExpanded(false)} aria-label="mark as watched">
-                                <ExpandLessIcon />
-                            </IconButton>
-                        </Tooltip>
-                    ) : (
-                        <Tooltip title="See Info" arrow>
-                            <IconButton onClick={() => setIsExpanded(true)} aria-label="mark as watched">
-                                <ExpandMoreIcon />
-                            </IconButton>
-                        </Tooltip>
-                    )} */}
                     <div className='unfollow-and-modal-question-mark'>
                         <button onClick={() => { handleUnfollowUser(); refreshPage() }}
                             style={{ backgroundColor: '#293e8a', color: 'white', borderRadius: 15 }}
                         >
                             Unfollow {followingObject.followee}</button>
-                            <Tooltip title="Click to see Recommendations">
-                        <QuestionMarkIcon  onClick={handleOpen}></QuestionMarkIcon>
+                        <Tooltip title="See Recommendations">
+                            <QuestionMarkIcon onClick={handleOpen}></QuestionMarkIcon>
                         </Tooltip>
                     </div>
                 </div>
 
             </div>
-            {/* {isExpanded ? ( */}
-                <>
-                    <Modal
+            <>
+                <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
-                    >
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={open}>
                         <Box className='following-list-cards' sx={style} >
                             
+
                             {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
                                 .map((cardObject, index) => {
                                     return (
@@ -116,9 +109,8 @@ export default function FollowingCard(props) {
                                                         <img src={cardObject.poster} width='70' alt='poster' />
                                                     </div>
                                                     <div className='following-text'>
-                                                        <p><strong>Title: </strong>{cardObject.title}</p>
-                                                        <p><strong>Medium: </strong>{cardObject.medium}</p>
-                                                        {/* <p><strong>Genre: </strong>{cardObject.genre}</p> */}
+                                                        <p>{cardObject.title}</p>
+                                                        <p>{cardObject.medium}</p>
                                                         <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
                                                     </div>
                                                 </div>
@@ -127,14 +119,11 @@ export default function FollowingCard(props) {
                                     )
                                 }
                                 )}
+                                
                         </Box>
-                    </Modal>
-                </>
-            {/* ) : (
-                ('')
-            )
-            } */}
-
+                    </Fade>
+                </Modal>
+            </>
         </>
     )
 }

@@ -45,8 +45,9 @@ export default function FollowUser(props) {
 
         <>
             <div className='following-background'
-                style={{ height: '100vh', backgroundColor: '#c1c5c9' }}>
-                <h1 style={{
+                style={{ height: '100vh' }}>
+                    {/* <div style={{fontSize: '25px', marginTop: '25px', marginLeft: '40px', marginBottom: '40px'}}>Following</div> */}
+                {/* <h1 style={{
                     fontSize: 40,
                     paddingLeft: 40,
                     paddingTop: 100,
@@ -58,8 +59,8 @@ export default function FollowUser(props) {
                 <h1 style={{
                     paddingLeft: 150,
                     color: "#293e8a"
-                }}>
-                    Here's Mine:</h1>
+                }}> */}
+                    {/* Here's Mine:</h1> */}
                 <div className='following-list'>
 
                     {followinglist && followinglist.map((followingObject, index) => {

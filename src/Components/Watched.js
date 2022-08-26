@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 
 
+
 export default function Watched(props) {
     const { navigate, token, SingleCard, isLoggedIn, username } = props
     const [error, setError] = useState(null)
@@ -25,7 +26,7 @@ export default function Watched(props) {
     return (
         <>
             <div className='watched-background'>
-                <h1 style={{ textAlign: "center", fontSize: 50, marginTop: 0 }}>I've already watched these fantastic shows:</h1>
+                {/* <h1 style={{ textAlign: "center", fontSize: 50, marginTop: 0 }}>I've already watched these fantastic shows:</h1> */}
                 <div className='watchlist-cards'>
                     {alreadyWatched && alreadyWatched.map((cardObject, index) => {
                         return (
