@@ -177,7 +177,7 @@ export default function RecForm(props) {
                     :
                     <div>                <div className="input-field">
 
-                        <label style={{fontSize: 20}}>First Tell Us What You Watched and then Choose the Appropriate Poster:</label>
+                        <label style={{ fontSize: 20 }}>First Tell Us What You Watched and then Choose the Appropriate Poster:</label>
                         <br></br>
                         <input
                             className="input"
@@ -191,13 +191,13 @@ export default function RecForm(props) {
                 }</div>
 
 
-                <div>
+                <div className="formBox">
                     <div>
                         <div>{mediaChosen
                             ? <div>
 
                                 <div className="media" >{mediaObj.title}<br></br>
-                                    <img src={mediaObj.image} className='formImage' alt="mediaImage" data-id={mediaObj.id} width="150" height="200"></img>
+                                    <img src={mediaObj.image} className='formImage' alt="mediaImage" data-id={mediaObj.id} width="" height="500"></img>
                                 </div>
 
                             </div >
@@ -220,7 +220,7 @@ export default function RecForm(props) {
 
                             </div>
                             <div class="row">
-                                <div class="col-25">
+                                <div>
                                     <label >Streaming Platform</label>
                                 </div>
                                 <div class="col-75">
@@ -229,7 +229,7 @@ export default function RecForm(props) {
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-25">
+                                <div >
                                     <label >Tags</label>
                                 </div>
                                 <div class="col-75">
@@ -238,25 +238,25 @@ export default function RecForm(props) {
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-25">
+                                <div >
                                     <label >Your Recommendation</label>
                                 </div>
                                 <div class="col-75">
-                                    <textarea 
+                                    <textarea
                                         id="subject"
                                         name="subject"
                                         placeholder="Write something.."
                                         onChange={handleChangeRecommendation}
                                         value={recommendation}
-                                        cols={40}
-                                        rows={15}>
+                                        cols={100}
+                                        rows={14}>
 
-                                        </textarea>
-                                        
+                                    </textarea>
+
                                 </div>
                             </div>
                             <br></br>
-                            <div class="row">
+                            <div class="row submissionArea">
                                 <div >{submitComplete ? <div><div class="submissionMessage">Submission Complete!</div><img src="/singleloopcheck.gif" className="checkGif" alt="gifImage" height="120"  ></img></div> : <input type="button" value="Submit" onClick={handleSubmit}></input>
                                 }</div>
 
