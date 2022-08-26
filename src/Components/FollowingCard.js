@@ -72,33 +72,18 @@ export default function FollowingCard(props) {
                         {followingObject.followee.charAt(0).toUpperCase()}
                     </Avatar>
                     {followingObject.followee}
-
-                    {/* {isExpanded ? (
-                        <Tooltip title="See Less" arrow>
-                            <IconButton onClick={() => setIsExpanded(false)} aria-label="mark as watched">
-                                <ExpandLessIcon />
-                            </IconButton>
-                        </Tooltip>
-                    ) : (
-                        <Tooltip title="See Info" arrow>
-                            <IconButton onClick={() => setIsExpanded(true)} aria-label="mark as watched">
-                                <ExpandMoreIcon />
-                            </IconButton>
-                        </Tooltip>
-                    )} */}
                     <div className='unfollow-and-modal-question-mark'>
                         <button onClick={() => { handleUnfollowUser(); refreshPage() }}
                             style={{ backgroundColor: '#293e8a', color: 'white', borderRadius: 15 }}
                         >
                             Unfollow {followingObject.followee}</button>
-                        <Tooltip title="Click to see Recommendations">
+                        <Tooltip title="See Recommendations">
                             <QuestionMarkIcon onClick={handleOpen}></QuestionMarkIcon>
                         </Tooltip>
                     </div>
                 </div>
 
             </div>
-            {/* {isExpanded ? ( */}
             <>
                 <Modal
                     open={open}
@@ -112,6 +97,7 @@ export default function FollowingCard(props) {
                 >
                     <Fade in={open}>
                         <Box className='following-list-cards' sx={style} >
+                            
 
                             {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
                                 .map((cardObject, index) => {
@@ -123,9 +109,8 @@ export default function FollowingCard(props) {
                                                         <img src={cardObject.poster} width='70' alt='poster' />
                                                     </div>
                                                     <div className='following-text'>
-                                                        <p><strong>Title: </strong>{cardObject.title}</p>
-                                                        <p><strong>Medium: </strong>{cardObject.medium}</p>
-                                                        {/* <p><strong>Genre: </strong>{cardObject.genre}</p> */}
+                                                        <p>{cardObject.title}</p>
+                                                        <p>{cardObject.medium}</p>
                                                         <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
                                                     </div>
                                                 </div>
@@ -134,15 +119,11 @@ export default function FollowingCard(props) {
                                     )
                                 }
                                 )}
+                                
                         </Box>
                     </Fade>
                 </Modal>
             </>
-            {/* ) : (
-                ('')
-            )
-            } */}
-
         </>
     )
 }

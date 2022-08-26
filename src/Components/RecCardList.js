@@ -36,7 +36,7 @@ export default function RecCardList(props) {
                     <>
 
                         <div className='homepage-sidebar'>
-                            <ul className='my-stuff'>My Stuff</ul>
+                            <ul className='my-stuff'></ul>
                             <li><GiFilmProjector /><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
                             <li><GiFilmProjector /><Link to={"/following"} style={{ textDecoration: 'none', color: 'white' }}> Following</Link></li><br />
                             <li><GiFilmProjector /><Link to={"/search"} style={{ textDecoration: 'none', color: 'white' }}> Search</Link></li><br />
@@ -46,7 +46,7 @@ export default function RecCardList(props) {
                     </>
                 }
                 {!isLoggedIn &&
-                    <div className='homepage-sidebar'>
+                    <div className='homepage-sidebar-logged-out'>
                         <ul className='my-stuff'></ul>
                         <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Need inspiration for a new show?  You've come to the right place!</li><br />
                         <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Browse the latest recommendations for new ideas!</li><br />
@@ -62,12 +62,12 @@ export default function RecCardList(props) {
 
                 <div className='homepage-cards-and-welcome'>
                     {isLoggedIn &&
-                        <h1 style={{ paddingLeft: 30 }}>Welcome, {username}!  Check out these latest recommendations!</h1>
+                        <p style={{  fontSize: 25 }}>Welcome, {username}!  Check out these latest recommendations!</p>
                     }
-                    {!isLoggedIn &&
-                        <h2 style={{ paddingLeft: 30 }}>See the latest recommendations below!  Log in or sign up to access other great features!</h2>
-                    }
-                    <div className='card'>
+                    {/* {!isLoggedIn &&
+                        <p style={{ paddingLeft: 20, fontSize: 25 }}>See the latest recommendations below!  Log in or sign up to access other great features!</p>
+                    } */}
+                    <div className='card' style={{ height: '400px'}}>
                         {!recommendationList &&
                             <img src="/loadingAnimation.gif"
                                 className="checkGif"
@@ -81,7 +81,6 @@ export default function RecCardList(props) {
                             interval={3000}
                             fullHeightHover={false}
                             // IndicatorIcon={false}
-                            navButtonsAlwaysVisible={true}
                         >
                             {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username)
                                 .map((cardObject, index) => {

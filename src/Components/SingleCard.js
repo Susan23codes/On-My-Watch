@@ -13,6 +13,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
@@ -54,6 +55,7 @@ export default function SingleCard(props) {
     const [onWatchList, setOnWatchList] = useState(false)
     const [error, setError] = useState(null)
     const [genreArray, setGenreArray] = useState([])
+    const [isOnWatchedList, setIsOnWatchedList] = useState(false)
 
     /* for (let i = 0; i < cardObject.genre.length; i++) {
          console.log(cardObject.genre[i].key)
@@ -126,6 +128,25 @@ export default function SingleCard(props) {
             })
     }
 
+    function handleDeleteFromWatchedList() {
+        setError(null)
+        axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardObject.id}/watchedlist`,
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                },
+            })
+            .then((res) => {
+                console.log("You've deleted this from WATCHED!")
+                setIsOnWatchedList(false)
+
+            })
+            .catch((error) => {
+                setError(Object.values(error.response.data))
+                console.log(error)
+            })
+    }
+
 
     function getWatchListIcon() {
         if (isLoggedIn && !onWatchList) {
@@ -135,14 +156,21 @@ export default function SingleCard(props) {
                         <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
                             <AddToQueueIcon sx={{ color: "red" }} />
                         </IconButton>
-                    </Tooltip></>
+                    </Tooltip>
+
+                </>
             )
-        } else if (isLoggedIn && onWatchList) {
+        } else if (isLoggedIn && isOnWatchedList) {
             return (
                 <>
                     <Tooltip title="Added to Watchlist!" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
                             <BookmarkAddedIcon sx={{ color: "red" }} />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="You've Watched This" arrow>
+                        <IconButton onClick={() => handleDeleteFromWatchedList()} aria-label="delete from watched">
+                            <CheckCircleIcon sx={{ color: "red" }} />
                         </IconButton>
                     </Tooltip>
                 </>
@@ -155,7 +183,7 @@ export default function SingleCard(props) {
 
     return (
         <Card sx={{
-            width: 550, height: 392, mr: 2, mb: 2, border: 2, pt: 2, bgcolor: '#e9eef0', boxShadow: 3,
+            width: 550, height: 392, mr: 2, mb: 2, border: 1, pt: 2, bgcolor: '#e9eef0', boxShadow: 3,
             "&:hover": {
                 boxShadow: 9,
             },
@@ -212,13 +240,9 @@ export default function SingleCard(props) {
                                     <div className='movieBox'>
                                         <strong>Genre: </strong>
 
-                                        {cardObject.genre.map(genre => {
-                                            return (
-                                                <div>
-                                                    &ensp;{genre.key}&ensp;
-                                                </div>
-                                            )
-                                        })}
+                                        <div>
+                                            &ensp;{cardObject.genre.map((genreObj) => genreObj.key).join(', ')}
+                                        </div>
                                     </div>
                                 </div>
                             </>
@@ -235,7 +259,7 @@ export default function SingleCard(props) {
             </div>
             {isLoggedIn &&
                 <CardActions>
-                    <Button onClick={() => navigate(`/detail/${cardObject.id}`)} size="small">Click to See More!</Button>
+                    <Button onClick={() => navigate(`/detail/${cardObject.id}`)} size="small">See More</Button>
                 </CardActions>
             }
         </Card>

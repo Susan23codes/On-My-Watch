@@ -26,8 +26,7 @@ export default function MyWatchlist(props) {
     
     return (
         <>
-        <h1 style={{ textAlign: "center", fontSize: 50, color: "#293e8a",}}>Don't Just Watch TV, Watch Good TV!</h1>
-        <h2 style={{ textAlign: "center", fontSize: 30, color: "#293e8a",}}>My Watchlist:</h2>
+        <p style={{ textAlign: "left", fontSize: 30, fontStyle:'italic', color: "#293e8a",}}>Don't Just Watch TV, Watch Good TV</p>
         <div className='watchlist-cards'>
         {watchlist && watchlist.map((cardObject, index) => {
                     return (
