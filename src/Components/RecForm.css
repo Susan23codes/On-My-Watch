@@ -3,6 +3,7 @@
 }
 
 input[type=text],
+input[type=password],
 select,
 textarea {
     width: 100%;
@@ -33,8 +34,9 @@ input[type=button]:hover {
 
 .container {
     border-radius: 5px;
-    background-color: #f2f2f2;
+
     padding: 20px;
+
 }
 
 .col-25 {
@@ -94,4 +96,20 @@ input[type=button]:hover {
     margin-left: auto;
     margin-right: auto;
     flex-wrap: wrap;
+}
+
+.media {
+
+    padding: 15px 30px;
+    font-weight: 500
+}
+
+.formBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.submissionArea {
+    padding-right: 24%;
 }
