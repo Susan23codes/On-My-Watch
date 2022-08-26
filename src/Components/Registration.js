@@ -31,13 +31,6 @@ export default function Registration(props) {
             event.preventDefault()
             setError(null)
 
-            // axios.patch('http://example.herokuapp.com/users', imageFile, {
-            //     headers: {
-            //         Authorization: `Token ${token}`,
-            //         'Content-Type': imageFile.type,
-            //         'Content-Disposition': `attachment; filename=${imageFile.name}`
-            //     },
-            // })
 
             axios.post('https://onmywatch.herokuapp.com/auth/token/login/', {
                 username: username,
@@ -47,17 +40,35 @@ export default function Registration(props) {
                 .then((res) => {
                     const token = res.data.auth_token
                     setAuth(username, token)
-                    navigate('/')
-                })
+                    // navigate('/')
+                
                 .catch((error) => {
                     setError(error.message)
                 })
-        })
-            .catch((error) => {
-                setError(Object.values(error.response.data))
-                console.log(error)
+
+                 axios.patch('http://example.herokuapp.com/api/upload/', imageFile, {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        'Content-Type': imageFile.type,
+                        'Content-Disposition': `attachment; filename=${imageFile.name}`
+                    }},
+                 )
+                        .then((res) => {
+                            navigate('/')
+                        })
+                        .catch((error) => {
+                            setError(error.message)
+                        })
+                })
             })
-    }
+        }
+   
+
+            // .catch((error) => {
+            //     setError(Object.values(error.response.data))
+            //     console.log(error)
+            // })
+
 
 
     return (
@@ -68,19 +79,19 @@ export default function Registration(props) {
             <form id="registration-form" onSubmit={handleRegistrationSubmit}>
 
                 <div className="form-controls">
-                    <label htmlFor="username-field">Username </label>
+                    <label className="label" htmlFor="username-field">Username </label>
                     <input id="username-field" type="text" placeholder="Create a username" onChange={(e) => setUsername(e.target.value)} required />
                 </div>
                 <div className="form-controls">
-                    <label htmlFor="password-field">Password </label>
+                    <label className="label" htmlFor="password-field">Password </label>
                     <input id="password" type="password" placeholder="Create a password" onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <div className="form-controls">
-                    <label htmlFor="confirm-password-field">Confirm Password </label>
+                    <label className="label" htmlFor="confirm-password-field">Confirm Password </label>
                     <input id="confirm-password" type="password" placeholder="Confirm password" onChange={(e) => setConfirmPass(e.target.value)} required />
                 </div>
                 <div className="form-controls">
-                    <label htmlFor="image-upload-field">Upload a Profile Pic</label>
+                    <label  htmlFor="image-upload-field">Upload a Profile Pic</label>
                     <input id="image" type="file" placeholder="Upload an Image" ref={imageFileInput} />
                 </div>
                 <div className="form-submit">

@@ -20,7 +20,7 @@ export default function RecCardList(props) {
     useEffect(() => {
         axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
             .then(res => {
-                let results = (res.data.reverse())
+                let results = (res.data)
                 setRecommendationList(results)
                 console.log(results)
 
@@ -82,7 +82,7 @@ export default function RecCardList(props) {
                             fullHeightHover={false}
                             // IndicatorIcon={false}
                         >
-                            {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username)
+                            {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username).slice(0, 25)
                                 .map((cardObject, index) => {
                                     return (
                                         <SingleCard
