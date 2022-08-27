@@ -52,34 +52,37 @@ function App() {
 
   return (
     <>
-    {!isLoggedIn &&
-          <LandingPage
-            navigate={navigate}
-            setAuth={setAuth}
-          />
-    }
-    {isLoggedIn &&
     <>
-      <Navbar
+      { isLoggedIn && <Navbar
         navigate={navigate}
         handleLogout={handleLogout}
         isLoggedIn={isLoggedIn}
-      /> 
+      /> }
       <Routes>
         <Route
 
           path="/login"
-          element={<Login
+          element={<><Navbar
+            navigate={navigate}
+            handleLogout={handleLogout}
+            isLoggedIn={isLoggedIn}
+          /><Login
             setAuth={setAuth}
             isLoggedIn={isLoggedIn}
-          />}
+            navigate={navigate}
+            handleLogout={handleLogout}
+          /></>}
         />
         <Route
           path="/register"
-          element={<Registration
+          element={<><Navbar
+            navigate={navigate}
+            handleLogout={handleLogout}
+            isLoggedIn={isLoggedIn}
+          /><Registration
             navigate={navigate}
             setAuth={setAuth}
-          />}
+          /></>}
         />
        
         <Route
@@ -105,12 +108,18 @@ function App() {
         />
         <Route
           path="/"
-          element={<RecCardList
+          element={!isLoggedIn ? (
+            <LandingPage
+              navigate={navigate}
+              setAuth={setAuth}
+            />
+          ) : (
+      <RecCardList
             isLoggedIn={isLoggedIn}
             token={token}
             navigate={navigate}
             username={username}
-          />}
+          />)}
         />
         <Route
           path="/mywatchlist"
@@ -179,7 +188,6 @@ function App() {
 
       </Routes>
       </>
-    }
     </>
           
             );
