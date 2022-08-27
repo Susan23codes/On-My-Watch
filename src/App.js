@@ -10,6 +10,7 @@ import FollowUser from './Components/FollowUser';
 import Registration from './Components/Registration';
 import Comments from './Components/Comments';
 import RecForm from './Components/RecForm';
+import LandingPage from './Components/LandingPage';
 import FollowingCard from './Components/FollowingCard';
 import axios from 'axios'
 import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
@@ -51,11 +52,19 @@ function App() {
 
   return (
     <>
+    {!isLoggedIn &&
+          <LandingPage
+            navigate={navigate}
+            setAuth={setAuth}
+          />
+    }
+    {isLoggedIn &&
+    <>
       <Navbar
         navigate={navigate}
         handleLogout={handleLogout}
         isLoggedIn={isLoggedIn}
-      />
+      /> 
       <Routes>
         <Route
 
@@ -72,6 +81,7 @@ function App() {
             setAuth={setAuth}
           />}
         />
+       
         <Route
           path="/new"
           element={<RecForm
@@ -168,8 +178,11 @@ function App() {
 
 
       </Routes>
+      </>
+    }
     </>
-  );
+          
+            );
 }
 
 export default App;
