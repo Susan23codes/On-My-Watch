@@ -33,10 +33,10 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import MenuIcon from '@mui/icons-material/Menu';
-import { DarkMode } from '@mui/icons-material';
 import { CardActionArea, Tooltip } from '@mui/material';
-import { flexbox, maxWidth } from '@mui/system';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Backdrop from '@mui/material/Backdrop';
 import MoreMovies from "./MoreMovies";
 
 
@@ -65,14 +65,32 @@ export default function DetailView(props) {
     const [followPk, setFollowPk] = useState(null)
     const [comment, setComment] = useState('')
     const [showAddComment, setShowAddComment] = useState(false)
-    const [showRelatedMovies, setShowRelatedMovies] = useState(false)
+    // const [showRelatedMovies, setShowRelatedMovies] = useState(false)
     const [otherUserSameRecommendation, setOtherUserSameRecommendation] = useState(null)
+    const [open, setOpen] = useState(false)
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     const navigate = useNavigate()
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     }
 
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 700,
+        // bgcolor: 'background.paper',
+        bgcolor: '#c1c5c9',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     const params = useParams()
     console.log(params)
@@ -354,25 +372,36 @@ export default function DetailView(props) {
         }
     }
 
+    function handleDelete() {
+
+        if (username === cardDetail.user) {
+            return (
+                <Tooltip title="Delete Your Recommendation" arrow>
+                    <IconButton onClick={() => handleDeleteRecommendationCard()} aria-label="delete">
+                        <DeleteIcon sx={{ color: "red" }} className="see-related" />
+                    </IconButton>
+                </Tooltip>
+            )
+        } else {
+            return (
+                ('')
+            )
+        }
+    }
+
     function getAddedToWatchedListIcon() {
         if (isLoggedIn && !isOnWatchList) {
             return (
                 <>
+                    {handleDelete()}
                     {handleIsFollowing()}
 
-                    {!showRelatedMovies ? (
-                        <Tooltip title="See Related Movies Below" arrow>
-                            <IconButton onClick={() => setShowRelatedMovies(true)} aria-label="add">
-                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
-                            </IconButton>
-                        </Tooltip>
-                    ) : (
-                        <Tooltip title="See Related Movies Below" arrow>
-                            <IconButton onClick={() => setShowRelatedMovies(false)} aria-label="add">
-                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
-                            </IconButton>
-                        </Tooltip>
-                    )}
+                    <Tooltip title="Related Shows" arrow>
+                        <IconButton onClick={handleOpen} aria-label="add">
+                            <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                        </IconButton>
+                    </Tooltip>
+
                     <Tooltip title="Add to Watchlist" arrow>
                         <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
                             <AddToQueueIcon sx={{ color: "red" }} className="addtoqueue" />
@@ -385,21 +414,16 @@ export default function DetailView(props) {
         else if (isLoggedIn && isOnWatchList && !isOnWatchedList) {
             return (
                 <>
+                    {handleDelete()}
                     {handleIsFollowing()}
 
-                    {!showRelatedMovies ? (
-                        <Tooltip title="See Related Movies Below" arrow>
-                            <IconButton onClick={() => setShowRelatedMovies(true)} aria-label="add">
-                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
-                            </IconButton>
-                        </Tooltip>
-                    ) : (
-                        <Tooltip title="See Related Movies Below" arrow>
-                            <IconButton onClick={() => setShowRelatedMovies(false)} aria-label="add">
-                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
-                            </IconButton>
-                        </Tooltip>
-                    )}
+
+                    <Tooltip title="See Related Movies Below" arrow>
+                        <IconButton onClick={handleOpen} aria-label="add">
+                            <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                        </IconButton>
+                    </Tooltip>
+
                     <Tooltip title="Added to Watchlist!" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
                             <BookmarkAddedIcon sx={{ color: "red" }} />
@@ -417,21 +441,16 @@ export default function DetailView(props) {
         else if (isLoggedIn && isOnWatchList && isOnWatchedList) {
             return (
                 <>
+                    {handleDelete()}
                     {handleIsFollowing()}
 
-                    {!showRelatedMovies ? (
-                        <Tooltip title="See Related Movies Below" arrow>
-                            <IconButton onClick={() => setShowRelatedMovies(true)} aria-label="add">
-                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
-                            </IconButton>
-                        </Tooltip>
-                    ) : (
-                        <Tooltip title="See Related Movies Below" arrow>
-                            <IconButton onClick={() => setShowRelatedMovies(false)} aria-label="add">
-                                <TheatersIcon sx={{ color: "red" }} className="see-related" />
-                            </IconButton>
-                        </Tooltip>
-                    )}
+
+                    <Tooltip title="See Related Movies Below" arrow>
+                        <IconButton onClick={handleOpen} aria-label="add">
+                            <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                        </IconButton>
+                    </Tooltip>
+
                     {handleShowComment()}
                     <Tooltip title="You've Watched This" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchedList()} aria-label="delete from watched">
@@ -508,36 +527,20 @@ export default function DetailView(props) {
                 <>
                     {/* <p style={{  marginLeft:'80px', marginBottom: 0 }}>You have great taste!</p> */}
                     <div className="detail-page">
-                        <div className="detail-page-text">
 
-                            {username === cardDetail.user ? (
-                                <>
-                                    <div className="delete-recommendation">
-                                        <h2><GiFilmProjector /> Delete your recommendation?</h2>
-                                        <Button onClick={() => handleDeleteRecommendationCard()}
-                                            variant="contained" startIcon={<DeleteIcon />}>
-                                            Delete
-                                        </Button>
-                                    </div>
-                                </>
-                            ) : (
-                                ('')
-                            )
-                            }
-
-                        </div>
                         <Card className="card-detail" sx={{ bgcolor: '#e9eef0', width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
 
                             <CardHeader
                                 sx={{
                                     pt: 0,
                                 }}
-                                avatar={
-                                    <Avatar sx={{
-                                        bgcolor: red[500], width: 56, height: 56
-                                    }} aria-label="avatar">
+                                avatar={cardDetail.user_info.image ? (
+                                    <Avatar src={cardDetail.user_info.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
+                                ) : (
+                                    <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
                                         {cardDetail.user.charAt(0).toUpperCase()}
                                     </Avatar>
+                                )
                                 }
                                 titleTypographyProps={{ variant: 'h3' }}
                                 action={getAddedToWatchedListIcon()}
@@ -603,21 +606,19 @@ export default function DetailView(props) {
                                             }
                                         </div>
                                     </div>
-                                   
-                                 
+
+
 
                                     {cardDetail.genre !== null &&
                                         <>
                                             <div>
                                                 <div className='movieBox'>
                                                     <strong>Genre: </strong>
+                                                    <div>
+                                                        &ensp;{cardDetail.genre.map((genreObj) => genreObj.key).join(', ')}
+                                                    </div>
 
-                                                    
-                                                            <div>
-                                                                &ensp;{cardDetail.genre.map((genreObj) => genreObj.key).join(', ')}
-                                                            </div>
-                                                        
-                                                    
+
                                                 </div>
                                             </div>
 
@@ -625,9 +626,6 @@ export default function DetailView(props) {
                                     }
 
                                     <Typography paragraph>
-
-
-
                                     </Typography>
 
                                     <Typography paragraph>
@@ -642,6 +640,7 @@ export default function DetailView(props) {
 
 
                             </div>
+
 
                             <CardActions className="see-comments">
                                 See comments
@@ -693,12 +692,26 @@ export default function DetailView(props) {
                 </>
 
             }
-            {showRelatedMovies && (
-                <>
-                    <div style={{ textAlign: 'start', fontStyle: 'italic', marginLeft: '10px', marginTop: '30px', height: '100px', fontSize: '30px' }}><strong>More Movies Like This:</strong></div>
-                    {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
-                </>
-            )}
+            {/* {showRelatedMovies && ( */}
+            <>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}>
+                    {/* <Fade in={open}> */}
+                    <Box sx={style}>
+                        <div style={{ textAlign: 'start', fontStyle: 'italic', marginLeft: '10px', marginTop: '30px', height: '100px', fontSize: '30px' }}><strong>More Shows Like This:</strong></div>
+                        {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
+                    </Box>
+                    {/* </Fade> */}
+                </Modal>
+            </>
+
         </>
     )
 

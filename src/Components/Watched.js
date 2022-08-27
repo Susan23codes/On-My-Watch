@@ -28,6 +28,13 @@ export default function Watched(props) {
             <div className='watched-background'>
                 {/* <h1 style={{ textAlign: "center", fontSize: 50, marginTop: 0 }}>I've already watched these fantastic shows:</h1> */}
                 <div className='watchlist-cards'>
+                {!alreadyWatched &&
+                            <img src="/loadingAnimation.gif"
+                                className="checkGif"
+                                alt="gifImage"
+                                height="200"
+                                style={{ paddingRight: 200, marginTop: 100 }}>
+                            </img>}
                     {alreadyWatched && alreadyWatched.map((cardObject, index) => {
                         return (
                             <SingleCard

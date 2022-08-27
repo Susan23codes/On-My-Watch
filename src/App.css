@@ -112,12 +112,10 @@
 .card {
   /* display: flex; */
   /* flex-wrap: wrap; */
-  padding-top: 40px;
+  padding-top: 30px;
   margin-left: 250px;
   margin-right: 200px;
 }
-
-
 
 
 .entire-login-form {
@@ -135,7 +133,9 @@
   margin-top: 70px;
 }
 
-
+.label {
+  width: 79px;
+}
 
 #username-field,
 #password,
@@ -157,8 +157,13 @@
   margin: 10px 10px 10px 10px;
 }
 
+
 .registration-text {
   padding-top: 40px;
+}
+
+.upload-pic {
+  width: 110px
 }
 
 
@@ -170,6 +175,7 @@
   margin: auto;
   margin-top: 10px;
   align-items: center;
+  /* font-family:monospace */
 }
 
 .form-submit {
@@ -290,33 +296,30 @@
 
 .unfollow-and-modal-question-mark {
   display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
   justify-content: space-between;
-  width: 400px
+  height: 100px;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 .following-list {
   display: flex;
   flex-wrap: wrap;
   padding-top: 60px;
-  /* border: 3px solid; */
-  width: 80vw;
-  /* justify-content: center; */
+  width: 90vw;
   padding-right: 40px;
-  margin: auto
+  margin: auto;
 }
 
 .following-list-item {
   width: 330px;
   padding-left: 5px;
-  margin-right: 30px;
-
+  margin-right: 50px;
 }
 
-.following-list-names {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-}
 
 .following-list-cards {
   height: 600px;
@@ -340,10 +343,6 @@
   align-items: flex-start;
 }
 
-/* .following-background {
-  background-image: url('/public/Old_television.png');
-  background-size: cover;
-} */
 
 .following-info {
   display: flex;
@@ -354,18 +353,25 @@
   padding-left: 5px;
 }
 
+.avatar-and-name {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px
+}
+
 .following-list-name-and-avatar {
   display: flex;
   flex-wrap: wrap;
   border-radius: 5px;
-  /* justify-content: space-around; */
+  justify-content: space-between;
   width: 350px;
   border: 1px solid #293e8a;
   height: 100px;
-  padding-top: 20px;
+  /* padding-top: 20px; */
   background-color: #e4e8ed;
   padding-right: 5px;
   margin-bottom: 30px;
+  margin-right: 20px;
   box-shadow: 5px 5px 9px 2px rgba(0, 0, 0, 0.23)
 }
 
@@ -424,8 +430,12 @@
 
 .movieIcon {
   padding: 10px;
+}
 
-
+.movieIcon2 {
+  overflow-y: scroll;
+  overflow-x: visible;
+  height: 600px;
 }
 
 .movieBox2 {
