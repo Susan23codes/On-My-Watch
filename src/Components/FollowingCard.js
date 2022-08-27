@@ -12,7 +12,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 
 
@@ -67,18 +67,31 @@ export default function FollowingCard(props) {
     return (
         <>
             <div className='following-list-names' >
-                <div className='following-list-name-and-avatar' style={{ fontSize: 40, paddingLeft: 40, listStyleType: "none", }}>
-                    <Avatar sx={{ bgcolor: red[500], mr: 2 }} aria-label="recipe">
+                <div className='following-list-name-and-avatar' style={{ fontSize: 40, listStyleType: "none", }}>
+                    <div className='avatar-and-name'>
+                    <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60}} aria-label="recipe">
                         {followingObject.followee.charAt(0).toUpperCase()}
                     </Avatar>
                     {followingObject.followee}
+                    </div>
                     <div className='unfollow-and-modal-question-mark'>
-                        <button onClick={() => { handleUnfollowUser(); refreshPage() }}
+                    <Tooltip title={`Unfollow ${followingObject.followee}`} placement="top-start">
+                        <IconButton onClick={() => {handleUnfollowUser(); refreshPage()}} aria-label="unfollow">
+                            <img className="follow-image"
+                                src="/following.png"
+                                height='24'
+                                padding='8'
+                                alt="Unfollow"
+
+                            />
+                        </IconButton>
+                    </Tooltip>
+                        {/* <button onClick={() => { handleUnfollowUser(); refreshPage() }}
                             style={{ backgroundColor: '#293e8a', color: 'white', borderRadius: 15 }}
                         >
-                            Unfollow {followingObject.followee}</button>
+                            Unfollow {followingObject.followee}</button> */}
                         <Tooltip title="See Recommendations">
-                            <QuestionMarkIcon onClick={handleOpen}></QuestionMarkIcon>
+                            <VisibilityIcon onClick={handleOpen}></VisibilityIcon>
                         </Tooltip>
                     </div>
                 </div>

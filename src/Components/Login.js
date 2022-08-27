@@ -39,11 +39,11 @@ export default function Login({ setAuth, isLoggedIn }) {
                 {error && <div className='error'>{error}</div>}
                 <form id="login-form" onSubmit={handleSubmit}>
                     <div className="form-controls">
-                        <label htmlFor="username-field">Username</label>
+                        <label className="label" htmlFor="username-field">Username</label>
                         <input id="username-field" type="text" onChange={(e) => setUsername(e.target.value)} />
                     </div>
                     <div className="form-controls">
-                        <label htmlFor="password-field">Password  </label>
+                        <label className="label" htmlFor="password-field">Password  </label>
                         <input id="password" type="password" onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className="form-submit">

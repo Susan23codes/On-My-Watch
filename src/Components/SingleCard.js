@@ -195,10 +195,13 @@ export default function SingleCard(props) {
                         width: 250
                     }
                 }}
-                avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                avatar={cardObject.user_info.image ? (
+                    <Avatar src={cardObject.user_info.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" /> 
+                    ) : (
+                    <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
                         {cardObject.user.charAt(0).toUpperCase()}
                     </Avatar>
+                )
                 }
                 titleTypographyProps={{ variant: 'h5' }}
 
