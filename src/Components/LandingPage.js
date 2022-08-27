@@ -4,6 +4,15 @@ import Button from '@mui/material/Button';
 export default function LandingPage(props) {
     const {navigate} = props
 
+    let mediums = [
+        {
+        name: "movie"
+    },
+    {
+        name: "show"
+    }
+]
+
 
     return (
         <>
@@ -23,7 +32,7 @@ export default function LandingPage(props) {
                 </div>
             </div>
             <div className="landing-page-text">
-                <p style={{ fontSize: '45px' }}>Come find your next favorite show!</p>
+                <p style={{ fontSize: '60px' }}>Come find your next favorite show!</p>
                 <p>Sign in or register to follow people and see their recommendations</p>
                 <p >Browse the latest recommendations for new ideas</p>
                 <p>Search for inspiration</p>
