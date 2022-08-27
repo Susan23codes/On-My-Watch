@@ -50,7 +50,7 @@ export default function Registration(props) {
                         headers: {
                             Authorization: `Token ${token}`,
                             'Content-Type': imageFile.type,
-                            'Content-Disposition': `attachment; filename=${imageFile.name}`
+                            'Content-Disposition': `attachment; filename=${imageFile.name}`,
                         }},
                         )
                         .then((res) => {
