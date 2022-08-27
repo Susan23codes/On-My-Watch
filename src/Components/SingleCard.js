@@ -232,7 +232,7 @@ export default function SingleCard(props) {
                         <strong>Medium:</strong> {cardObject.medium}
                     </Typography>
                     <Typography paragraph>
-                        <strong>Streaming on:</strong> {cardObject.streaming_service}
+                        <strong>Watched on:</strong> {cardObject.streaming_service}
                     </Typography>
 
                     <Typography paragraph>
