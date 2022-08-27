@@ -22,6 +22,7 @@ export default function Registration(props) {
             alert("Passwords don't match!")
         }
         const imageFile = imageFileInput.current.files[0]
+        console.log(imageFile)
 
         axios.post('https://onmywatch.herokuapp.com/auth/users/', {
             username: username,
@@ -42,23 +43,24 @@ export default function Registration(props) {
                     setAuth(username, token)
                     // navigate('/')
                 
-                .catch((error) => {
-                    setError(error.message)
-                })
-
-                 axios.patch('http://example.herokuapp.com/api/upload/', imageFile, {
-                    headers: {
-                        Authorization: `Token ${token}`,
-                        'Content-Type': imageFile.type,
-                        'Content-Disposition': `attachment; filename=${imageFile.name}`
-                    }},
-                 )
+                // .catch((error) => {
+                //     setError(error.message)
+                    
+                    axios.patch('https://onmywatch.herokuapp.com/api/upload/', imageFile, {
+                        headers: {
+                            Authorization: `Token ${token}`,
+                            'Content-Type': imageFile.type,
+                            'Content-Disposition': `attachment; filename=${imageFile.name}`
+                        }},
+                        )
                         .then((res) => {
+                            console.log("got this far")
                             navigate('/')
-                        })
+                        },)
                         .catch((error) => {
                             setError(error.message)
                         })
+                    // })
                 })
             })
         }
