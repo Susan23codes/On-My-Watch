@@ -20,7 +20,9 @@ export default function RecCardList(props) {
     useEffect(() => {
         axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
             .then(res => {
-                let results = (res.data)
+                console.log("Date")
+                console.log(new Date(res.data[0].created_at))
+                let results = (res.data.sort((a,b) => new Date(b.created_at) - new Date(a.created_at)))
                 setRecommendationList(results)
                 console.log(results)
 

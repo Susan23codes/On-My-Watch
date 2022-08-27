@@ -118,6 +118,10 @@
   padding-top: 40px;
 }
 
+.upload-pic {
+  width: 110px
+}
+
 
 .form-controls {
   display: flex;
@@ -382,8 +386,12 @@
 
 .movieIcon {
   padding: 10px;
+}
 
-
+.movieIcon2 {
+  overflow-y: scroll;
+  overflow-x: visible;
+  height: 600px;
 }
 
 .movieBox2 {

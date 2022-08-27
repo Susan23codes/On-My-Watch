@@ -45,7 +45,7 @@ export default function Registration(props) {
                 
                 // .catch((error) => {
                 //     setError(error.message)
-                    
+                    if (imageFile ) {
                     axios.patch('https://onmywatch.herokuapp.com/api/upload/', imageFile, {
                         headers: {
                             Authorization: `Token ${token}`,
@@ -55,11 +55,12 @@ export default function Registration(props) {
                         )
                         .then((res) => {
                             console.log("got this far")
-                            navigate('/')
                         },)
                         .catch((error) => {
                             setError(error.message)
-                        })
+                        })}
+
+                        navigate('/')
                     // })
                 })
             })
@@ -93,7 +94,9 @@ export default function Registration(props) {
                     <input id="confirm-password" type="password" placeholder="Confirm password" onChange={(e) => setConfirmPass(e.target.value)} required />
                 </div>
                 <div className="form-controls">
-                    <label  htmlFor="image-upload-field">Upload a Profile Pic</label>
+                    <div className="upload-pic">
+                    <label  htmlFor="image-upload-field">Upload a Profile Pic (Optional)</label>
+                    </div>
                     <input id="image" type="file" placeholder="Upload an Image" ref={imageFileInput} />
                 </div>
                 <div className="form-submit">
