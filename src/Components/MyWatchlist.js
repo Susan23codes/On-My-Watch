@@ -2,9 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 
-
-
-
 export default function MyWatchlist(props) {
     const { navigate, token, SingleCard, isLoggedIn, username } = props
     const [error, setError] = useState(null)

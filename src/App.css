@@ -95,6 +95,7 @@
   width: 70vw;
   justify-content: space-between;
   align-items: flex-start;
+  margin-left: 20px
 }
 
 .card-header {
@@ -124,7 +125,12 @@
   height: 400px;
   text-align: center;
   margin: auto;
+}
 
+.more-by-this-user {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 #login-form,

@@ -547,7 +547,7 @@ export default function DetailView(props) {
                                 title={cardDetail.title}
                                 subheader=
                                 {<Tooltip title="See other recommendations by this user">
-                                    <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)}>
+                                    <CardActionArea sx= {{fontSize:'15px'}} onClick={() => navigate(`/more/${cardDetail.user_info.id}`)}>
                                         Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
                                             .format('MM/DD/YY')}
                                     </CardActionArea>
@@ -560,8 +560,8 @@ export default function DetailView(props) {
                                 <div className='poster'>
                                     <CardMedia
                                         component="img"
-                                        height="230"
-                                        sx={{ width: 200, pl: 5 }}
+                                        height="300"
+                                        sx={{ width: 250, pl: 5 }}
                                         image={cardDetail.poster}
                                         alt="TV poster"
                                     />

@@ -46,8 +46,6 @@ const ExpandMore = styled((props) => {
 }));
 
 
-
-
 export default function SingleCard(props) {
     const { cardObject, id, isLoggedIn, token, username, navigate } = props
 
@@ -57,9 +55,6 @@ export default function SingleCard(props) {
     const [genreArray, setGenreArray] = useState([])
     const [isOnWatchedList, setIsOnWatchedList] = useState(false)
 
-    /* for (let i = 0; i < cardObject.genre.length; i++) {
-         console.log(cardObject.genre[i].key)
-     }*/
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -69,13 +64,6 @@ export default function SingleCard(props) {
     // console.log(`QL: ${params.id}`)
 
     useEffect(() => {
-        /* if (cardObject.genre !== null)
-             for (let i = 0; i < cardObject.genre.length; i++) {
-                 console.log(cardObject.genre[i].key
-                 )
-                 setGenreArray(genreArray.push(cardObject.genre[i].key))
-             }
-         console.log(genreArray)*/
         if (cardObject.saved_by.includes(username)) {
             setOnWatchList(true)
             console.log("yes")
