@@ -20,7 +20,6 @@
   -o-background-size: cover;
   background-size: cover; 
   opacity: .4;
-  /* position: fixed; */
   z-index: -1
 } 
 
@@ -49,31 +48,25 @@
 }
 
 .on-my-watch-title {
-  padding-top: 10px;
+  padding-left: 10px;
+  
 }
 
 .navbar-buttons {
   display: flex;
   justify-content: space-between;
   padding: 40px 30px 20px 0;
+  align-items: flex-end;
 }
 
-
-.home-button {
+.navbar-buttons-not-title {
   display: flex;
-  padding-left: 30px;
-}
-
-.recommendation-button {
-  display: flex;
-  justify-content: space-between;
-  width: 700px;
-
+  width: 65vw;
+  justify-content:space-around;
 }
 
 .poster-and-text {
   display: flex;
-  /* margin-left: 200px; */
 }
 
 .avatar-title-tooltips {
@@ -91,7 +84,6 @@
 .card-content {
   display: flex;
   flex-direction: column;
-  /* border: 2px solid; */
   width: 70vw;
   justify-content: space-between;
   align-items: flex-start;
@@ -99,10 +91,8 @@
 }
 
 .card-header {
-  /* padding-left: 200px; */
   display: flex;
   justify-content: space-between;
-  /* align-items: flex-start; */
 }
 
 .follow-image {
@@ -111,8 +101,6 @@
 }
 
 .card {
-  /* display: flex; */
-  /* flex-wrap: wrap; */
   padding-top: 30px;
   margin-left: 250px;
   margin-right: 200px;
@@ -120,7 +108,6 @@
 
 
 .entire-login-form {
-  /* border: 2px solid; */
   width: 300px;
   height: 400px;
   text-align: center;
@@ -136,7 +123,7 @@
 #login-form,
 .login-form {
   text-align: center;
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 .label {
@@ -181,7 +168,6 @@
   margin: auto;
   margin-top: 10px;
   align-items: center;
-  /* font-family:monospace */
 }
 
 .form-submit {
@@ -200,8 +186,8 @@
 
 .homepage-sidebar {
   border: 1px solid black;
-  width: 20vw;
-  margin: 100px 0 0 10px;
+  width: 17vw;
+  margin: 100px 0 0 20px;
   font-size: 20px;
   padding: 20px 20px 0 20px;
   background-color: #293e8a;
@@ -223,10 +209,6 @@
   height: 600px;
   list-style-type: none;
 }
-
-/* .my-stuff {
-  padding-bottom: 20px;
-} */
 
 
 .watchlist-cards {
@@ -314,7 +296,7 @@
 .following-list {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 60px;
+  padding-top: 40px;
   width: 90vw;
   padding-right: 40px;
   margin: auto;
@@ -324,6 +306,7 @@
   width: 330px;
   padding-left: 5px;
   margin-right: 50px;
+  margin-bottom: 30px;
 }
 
 
@@ -373,7 +356,6 @@
   width: 350px;
   border: 1px solid #293e8a;
   height: 100px;
-  /* padding-top: 20px; */
   background-color: #e4e8ed;
   padding-right: 5px;
   margin-bottom: 30px;
@@ -389,8 +371,6 @@
 .movieBox {
   display: flex;
   flex-wrap: wrap;
-
-
 }
 
 .delete-recommendation {
@@ -408,7 +388,6 @@
 
 .avatars-and-medium {
   display: flex;
-  /* border: 2px solid; */
   width: 600px;
   height: 80px;
   justify-content: space-between;
@@ -421,18 +400,7 @@
 
 .avatars-who-else {
   display: flex;
-  /* border: 2px solid; */
 }
-
-
-/* .watched-background {
-  background: url('/public/Old_television.png') ;  
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; 
-  
-} */
 
 .movieIcon {
   padding: 10px;
@@ -450,12 +418,9 @@
   border: #04AA6D;
   border-style: double;
   justify-content: center;
-
-
 }
 
 .center {
-  /* margin: auto; */
   margin-left: 80px;
   width: 80%;
   border: 1px solid #293e8a;

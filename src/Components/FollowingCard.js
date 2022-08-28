@@ -66,6 +66,7 @@ export default function FollowingCard(props) {
 
     return (
         <>
+        
             <div className='following-list-names' >
                 <div className='following-list-name-and-avatar' style={{ fontSize: 40, listStyleType: "none", }}>
                     <div className='avatar-and-name'>
@@ -101,8 +102,8 @@ export default function FollowingCard(props) {
                 <Modal
                     open={open}
                     onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
+                    aria-labelledby="modal-following-recommendations"
+                    aria-describedby="modal-recommendations"
                     BackdropComponent={Backdrop}
                     BackdropProps={{
                         timeout: 500,

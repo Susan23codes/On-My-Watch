@@ -4,10 +4,20 @@ import { Navigate } from 'react-router-dom'
 
 
 
+
 export default function Login({ setAuth, isLoggedIn }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
+    const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
     const handleSubmit = (event) => {
         event.preventDefault()

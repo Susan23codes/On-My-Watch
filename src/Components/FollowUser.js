@@ -44,29 +44,28 @@ export default function FollowUser(props) {
     return (
 
         <>
-            <div className='following-background'
-                style={{ height: '100vh' }}>
-                    
-                <div className='following-list'>
 
-                    {followinglist && followinglist.map((followingObject, index) => {
-                        return (
-                            <div className='following-list-item'>
-                                <>
-                                    <FollowingCard
-                                        followingObject={followingObject}
-                                        recommendationList={recommendationList}
-                                        token={token}
-                                    />
 
-                                </>
-                            </div>
+            <p style={{fontSize:'40px', marginLeft:'20px', fontStyle:'italic'}}>Following:</p>
+            <div className='following-list'>
+                {followinglist && followinglist.map((followingObject, index) => {
+                    return (
+                        <div className='following-list-item'>
+                            <>
+                                <FollowingCard
+                                    followingObject={followingObject}
+                                    recommendationList={recommendationList}
+                                    token={token}
+                                />
 
-                        )
-                    })
-                    }
-                </div>
+                            </>
+                        </div>
+
+                    )
+                })
+                }
             </div>
+
         </>
     )
 
