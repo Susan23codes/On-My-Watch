@@ -1,4 +1,4 @@
-import SingleCard from "./SingleCard";
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
@@ -11,33 +11,25 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
-import { GiFilmProjector } from 'react-icons/gi';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
+import CloseIcon from '@mui/icons-material/Close';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import Comments from "./Comments";
 import TheatersIcon from '@mui/icons-material/Theaters';
-import CheckIcon from '@mui/icons-material/Check';
-import { StarIcon } from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import { CardActionArea, Tooltip } from '@mui/material';
 import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 import MoreMovies from "./MoreMovies";
+import { flexbox } from '@mui/system';
 
 
 const ExpandMore = styled((props) => {
@@ -705,7 +697,12 @@ export default function DetailView(props) {
                     }}>
                     {/* <Fade in={open}> */}
                     <Box sx={style}>
-                        <div style={{ textAlign: 'start', fontStyle: 'italic', marginLeft: '10px', marginTop: '30px', height: '100px', fontSize: '30px' }}><strong>More Shows Like This:</strong></div>
+                        <div className='close-icon-and-title'>
+                        <CardActionArea style={{width:'30px', height:'30px'}}>
+                    <CloseIcon  style={{height:'40px', width:'40px'}} onClick={handleClose}/>
+                    </CardActionArea>
+                        <div style={{ textAlign: 'start', fontStyle: 'italic', marginLeft: '10px', height: '100px', fontSize: '30px' }}><strong>More Shows Like This:</strong></div>
+                        </div>
                         {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
                     </Box>
                     {/* </Fade> */}

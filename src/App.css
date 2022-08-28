@@ -426,5 +426,16 @@
   border: 1px solid #293e8a;
   padding: 5px;
   background-color: #e4e8ed;
-
 }
+
+.close-icon-and-title {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+/* .close-icon-and-following {
+  display: flex;
+  flex-direction: column;
+} */
+
