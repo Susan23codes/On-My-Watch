@@ -6,7 +6,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import CloseIcon from '@mui/icons-material/Close';
+import { CardActionArea } from '@mui/material';
+
+
 
 
 
@@ -141,6 +144,11 @@ export default function LandingPage(props) {
             <Dialog open={openLogin} onClose={handleCloseLogin}>
                 <DialogContent>
                     <DialogContentText>
+                        <div className='close-icon-login'>
+                    <CardActionArea style={{width:'30px', height:'30px'}}>
+                    <CloseIcon  style={{height:'30px', width:'30px'}} onClick={handleCloseLogin}/>
+                    </CardActionArea>
+                    </div>
                         <div className="entire-login-form">
                             <h2 className='login-form'>Please Log In!</h2>
                             {error && <div className='error'>{error}</div>}
@@ -168,6 +176,11 @@ export default function LandingPage(props) {
             <Dialog open={openRegister} onClose={handleCloseRegister}>
                 <DialogContent>
                     <DialogContentText>
+                    <div className='close-icon-login'>
+                    <CardActionArea style={{width:'30px', height:'30px'}}>
+                    <CloseIcon  style={{height:'30px', width:'30px'}} onClick={handleCloseRegister}/>
+                    </CardActionArea>
+                    </div>
                         {error && <div>{error}</div>}
                         <h2 style={{ textAlign: 'center' }}>Sign up and starting watching great TV!</h2>
                         

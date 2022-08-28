@@ -71,9 +71,15 @@ export default function FollowingCard(props) {
             <div className='following-list-names' >
                 <div className='following-list-name-and-avatar' style={{ fontSize: 40, listStyleType: "none", }}>
                     <div className='avatar-and-name'>
-                        <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
-                            {followingObject.followee.charAt(0).toUpperCase()}
-                        </Avatar>
+                        {followingObject.user_info.image ? (
+                            <Avatar src={followingObject.user_info.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
+
+                        ) : (
+                            <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
+                                {followingObject.followee.charAt(0).toUpperCase()}
+                            </Avatar>
+                        )
+                        }
                         {followingObject.followee}
                     </div>
                     <div className='unfollow-and-modal-question-mark'>
@@ -111,36 +117,42 @@ export default function FollowingCard(props) {
                     }}
                 >
                     <Fade in={open}>
-                        <Box className='following-list-cards' sx={style} >
-                            {/* <div className='close-icon-and-following'> */}
+                        <Box sx={style} >
+                            <div className='close-icon-login'>
+                                <CardActionArea style={{ width: '30px', height: '30px' }}>
+                                    <CloseIcon style={{ height: '30px', width: '30px' }} onClick={handleClose} />
+                                </CardActionArea>
+                            </div>
+                            <div className='following-list-cards' >
+                                {/* <div className='close-icon-and-following'> */}
                                 {/* <div>
                                     <CardActionArea style={{ width: '30px', height: '30px' }}>
                                         <CloseIcon style={{ height: '40px', width: '40px' }} onClick={handleClose} />
                                     </CardActionArea>
                                 </div> */}
-                                
-                                    {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
-                                        .map((cardObject, index) => {
-                                            return (
-                                                <div className='following-smaller-card'>
-                                                    <>
-                                                        <div className='following-info'>
-                                                            <div>
-                                                                <img src={cardObject.poster} width='70' alt='poster' />
-                                                            </div>
-                                                            <div className='following-text'>
-                                                                <p>{cardObject.title}</p>
-                                                                <p>{cardObject.medium}</p>
-                                                                <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
-                                                            </div>
+
+                                {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
+                                    .map((cardObject, index) => {
+                                        return (
+                                            <div className='following-smaller-card'>
+                                                <>
+                                                    <div className='following-info'>
+                                                        <div>
+                                                            <img src={cardObject.poster} width='70' alt='poster' />
                                                         </div>
-                                                    </>
-                                                </div>
-                                            )
-                                        }
-                                        )}
+                                                        <div className='following-text'>
+                                                            <p>{cardObject.title}</p>
+                                                            <p>{cardObject.medium}</p>
+                                                            <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            </div>
+                                        )
+                                    }
+                                    )}
                                 {/* </div> */}
-                           
+                            </div>
                         </Box>
                     </Fade>
                 </Modal>
