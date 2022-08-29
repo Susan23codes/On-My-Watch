@@ -26,8 +26,8 @@ export default function UserRecs(props) {
 
 
     return (
-        <div>
-            {data !== '' && <h1>{data.map((data, index) =>
+        <div >
+            {data !== '' && <h1 className="more-by-this-user">{data.map((data, index) =>
                 <SingleCard cardObject={data}
                     key={index}
                     id={data.id}

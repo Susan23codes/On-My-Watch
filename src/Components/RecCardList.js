@@ -47,7 +47,7 @@ export default function RecCardList(props) {
                         </div>
                     </>
                 }
-                {!isLoggedIn &&
+                {/* {!isLoggedIn &&
                     <div className='homepage-sidebar-logged-out'>
                         <ul className='my-stuff'></ul>
                         <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Need inspiration for a new show?  You've come to the right place!</li><br />
@@ -60,7 +60,7 @@ export default function RecCardList(props) {
 
 
                     </div>
-                }
+                } */}
 
                 <div className='homepage-cards-and-welcome'>
                     {isLoggedIn &&

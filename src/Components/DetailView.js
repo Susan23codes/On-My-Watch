@@ -1,4 +1,4 @@
-import SingleCard from "./SingleCard";
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
@@ -11,33 +11,25 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
-import { GiFilmProjector } from 'react-icons/gi';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
+import CloseIcon from '@mui/icons-material/Close';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import Comments from "./Comments";
 import TheatersIcon from '@mui/icons-material/Theaters';
-import CheckIcon from '@mui/icons-material/Check';
-import { StarIcon } from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import { CardActionArea, Tooltip } from '@mui/material';
 import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 import MoreMovies from "./MoreMovies";
+import { flexbox } from '@mui/system';
 
 
 const ExpandMore = styled((props) => {
@@ -67,6 +59,7 @@ export default function DetailView(props) {
     const [showAddComment, setShowAddComment] = useState(false)
     // const [showRelatedMovies, setShowRelatedMovies] = useState(false)
     const [otherUserSameRecommendation, setOtherUserSameRecommendation] = useState(null)
+
     const [open, setOpen] = useState(false)
 
     const handleOpen = () => setOpen(true);
@@ -175,39 +168,25 @@ export default function DetailView(props) {
                 axios.get(`https://onmywatch.herokuapp.com/api/search/recommendations/?search=${firstRequestResults.imdbid}`)
                     .then(res => {
                         let results = (res.data)
-                        console.log("***")
+                        // console.log("***")
                         console.log(results)
-                        console.log("***")
+                        // console.log("***")
                         let filteredList = results.filter(result => {
                             return result.imdbid === firstRequestResults.imdbid && result.user !== firstRequestResults.user
                         })
-                        // console.log("***")
+                        console.log("***")
                         console.log(filteredList)
-                        // console.log("***")
+                        console.log("***")
                         // console.log(filteredList.map(listObject => listObject.user.charAt(0).toUpperCase()))
-                        let avatarForWhoElseRecommended = filteredList.map(listObject => listObject.user)
-                        console.log(avatarForWhoElseRecommended)
-
-                        setOtherUserSameRecommendation(avatarForWhoElseRecommended)
+                        let userInfoForWhoElseRecommended = filteredList.map(listObject => listObject.user_info)
+                        console.log(userInfoForWhoElseRecommended)
+                        setOtherUserSameRecommendation(userInfoForWhoElseRecommended)
                     })
 
             })
     },
         [])
 
-    function seeWhoElseRecommended() {
-        // axios.get(`https://onmywatch.herokuapp.com/api/search/recommendations/?search=${firstRequestResults.imdbid}&${otherUserSameRecommendation}`)
-        //             .then(res => {
-        //                 let results = (res.data)
-        //                 console.log("***")
-        //                 console.log(results)
-        //                 console.log("***")
-        //             })
-
-        // let userFilteredList = otherUserSameRecommendation.filter((one, index) => one === user)
-        console.log(otherUserSameRecommendation)
-
-    }
 
 
 
@@ -541,13 +520,13 @@ export default function DetailView(props) {
                                         {cardDetail.user.charAt(0).toUpperCase()}
                                     </Avatar>
                                 )
-                                }
+                                } 
                                 titleTypographyProps={{ variant: 'h3' }}
                                 action={getAddedToWatchedListIcon()}
                                 title={cardDetail.title}
                                 subheader=
                                 {<Tooltip title="See other recommendations by this user">
-                                    <CardActionArea onClick={() => navigate(`/more/${cardDetail.user_info.id}`)}>
+                                    <CardActionArea sx={{ fontSize: '15px' }} onClick={() => navigate(`/more/${cardDetail.user_info.id}`)}>
                                         Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
                                             .format('MM/DD/YY')}
                                     </CardActionArea>
@@ -560,8 +539,8 @@ export default function DetailView(props) {
                                 <div className='poster'>
                                     <CardMedia
                                         component="img"
-                                        height="230"
-                                        sx={{ width: 200, pl: 5 }}
+                                        height="300"
+                                        sx={{ width: 250, pl: 5 }}
                                         image={cardDetail.poster}
                                         alt="TV poster"
                                     />
@@ -587,12 +566,17 @@ export default function DetailView(props) {
                                         <div className="avatars-who-else">
                                             {otherUserSameRecommendation && otherUserSameRecommendation.slice(0, 4).map((user, index) => {
                                                 return (
-                                                    <Tooltip title={`${user} has also recommended this!`} placement="top-start">
-                                                        <Avatar key={index} onClick={seeWhoElseRecommended} sx={{
-                                                            bgcolor: red[500], width: 56, height: 56
-                                                        }} aria-label="avatar">
-                                                            {user.charAt(0).toUpperCase()}
-                                                        </Avatar>
+                                                    <Tooltip title={`${user.username} has also recommended this!`} placement="top-start">
+
+                                                        {user.image ? (
+                                                            <Avatar src={user.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
+                                                        ) : (
+                                                            
+                                                            <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
+                                                                {user.username.charAt(0).toUpperCase()}
+                                                            </Avatar>
+                                                        )
+                                                        }
                                                     </Tooltip>
                                                 )
                                             })
@@ -697,15 +681,20 @@ export default function DetailView(props) {
                 <Modal
                     open={open}
                     onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
+                    aria-labelledby="modal-related-shows"
+                    aria-describedby="modal-related-shows"
                     BackdropComponent={Backdrop}
                     BackdropProps={{
                         timeout: 500,
                     }}>
                     {/* <Fade in={open}> */}
                     <Box sx={style}>
-                        <div style={{ textAlign: 'start', fontStyle: 'italic', marginLeft: '10px', marginTop: '30px', height: '100px', fontSize: '30px' }}><strong>More Shows Like This:</strong></div>
+                        <div className='close-icon-and-title'>
+                            <CardActionArea style={{ width: '30px', height: '30px' }}>
+                                <CloseIcon style={{ height: '40px', width: '40px' }} onClick={handleClose} />
+                            </CardActionArea>
+                            <div style={{ textAlign: 'start', fontStyle: 'italic', marginLeft: '10px', height: '100px', fontSize: '30px' }}><strong>More Shows Like This:</strong></div>
+                        </div>
                         {cardDetail !== null && <MoreMovies object={cardDetail}></MoreMovies>}
                     </Box>
                     {/* </Fade> */}

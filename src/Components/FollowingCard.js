@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
+import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
@@ -66,26 +67,33 @@ export default function FollowingCard(props) {
 
     return (
         <>
+
             <div className='following-list-names' >
                 <div className='following-list-name-and-avatar' style={{ fontSize: 40, listStyleType: "none", }}>
                     <div className='avatar-and-name'>
-                    <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60}} aria-label="recipe">
-                        {followingObject.followee.charAt(0).toUpperCase()}
-                    </Avatar>
-                    {followingObject.followee}
+                        {followingObject.user_info.image ? (
+                            <Avatar src={followingObject.user_info.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
+
+                        ) : (
+                            <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
+                                {followingObject.followee.charAt(0).toUpperCase()}
+                            </Avatar>
+                        )
+                        }
+                        {followingObject.followee}
                     </div>
                     <div className='unfollow-and-modal-question-mark'>
-                    <Tooltip title={`Unfollow ${followingObject.followee}`} placement="top-start">
-                        <IconButton onClick={() => {handleUnfollowUser(); refreshPage()}} aria-label="unfollow">
-                            <img className="follow-image"
-                                src="/following.png"
-                                height='24'
-                                padding='8'
-                                alt="Unfollow"
+                        <Tooltip title={`Unfollow ${followingObject.followee}`} placement="top-start">
+                            <IconButton onClick={() => { handleUnfollowUser(); refreshPage() }} aria-label="unfollow">
+                                <img className="follow-image"
+                                    src="/following.png"
+                                    height='24'
+                                    padding='8'
+                                    alt="Unfollow"
 
-                            />
-                        </IconButton>
-                    </Tooltip>
+                                />
+                            </IconButton>
+                        </Tooltip>
                         {/* <button onClick={() => { handleUnfollowUser(); refreshPage() }}
                             style={{ backgroundColor: '#293e8a', color: 'white', borderRadius: 15 }}
                         >
@@ -101,38 +109,50 @@ export default function FollowingCard(props) {
                 <Modal
                     open={open}
                     onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
+                    aria-labelledby="modal-following-recommendations"
+                    aria-describedby="modal-recommendations"
                     BackdropComponent={Backdrop}
                     BackdropProps={{
                         timeout: 500,
                     }}
                 >
                     <Fade in={open}>
-                        <Box className='following-list-cards' sx={style} >
-                            
+                        <Box sx={style} >
+                            <div className='close-icon-login'>
+                                <CardActionArea style={{ width: '30px', height: '30px' }}>
+                                    <CloseIcon style={{ height: '30px', width: '30px' }} onClick={handleClose} />
+                                </CardActionArea>
+                            </div>
+                            <div className='following-list-cards' >
+                                {/* <div className='close-icon-and-following'> */}
+                                {/* <div>
+                                    <CardActionArea style={{ width: '30px', height: '30px' }}>
+                                        <CloseIcon style={{ height: '40px', width: '40px' }} onClick={handleClose} />
+                                    </CardActionArea>
+                                </div> */}
 
-                            {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
-                                .map((cardObject, index) => {
-                                    return (
-                                        <div className='following-smaller-card'>
-                                            <>
-                                                <div className='following-info'>
-                                                    <div>
-                                                        <img src={cardObject.poster} width='70' alt='poster' />
+                                {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
+                                    .map((cardObject, index) => {
+                                        return (
+                                            <div className='following-smaller-card'>
+                                                <>
+                                                    <div className='following-info'>
+                                                        <div>
+                                                            <img src={cardObject.poster} width='70' alt='poster' />
+                                                        </div>
+                                                        <div className='following-text'>
+                                                            <p>{cardObject.title}</p>
+                                                            <p>{cardObject.medium}</p>
+                                                            <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
+                                                        </div>
                                                     </div>
-                                                    <div className='following-text'>
-                                                        <p>{cardObject.title}</p>
-                                                        <p>{cardObject.medium}</p>
-                                                        <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
-                                                    </div>
-                                                </div>
-                                            </>
-                                        </div>
-                                    )
-                                }
-                                )}
-                                
+                                                </>
+                                            </div>
+                                        )
+                                    }
+                                    )}
+                                {/* </div> */}
+                            </div>
                         </Box>
                     </Fade>
                 </Modal>
