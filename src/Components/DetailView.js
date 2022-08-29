@@ -57,7 +57,6 @@ export default function DetailView(props) {
     const [followPk, setFollowPk] = useState(null)
     const [comment, setComment] = useState('')
     const [showAddComment, setShowAddComment] = useState(false)
-    // const [showRelatedMovies, setShowRelatedMovies] = useState(false)
     const [otherUserSameRecommendation, setOtherUserSameRecommendation] = useState(null)
 
     const [open, setOpen] = useState(false)
@@ -123,12 +122,6 @@ export default function DetailView(props) {
         await handleColor(a.data)
 
     }
-
-
-
-
-
-
 
 
 
@@ -232,10 +225,7 @@ export default function DetailView(props) {
                             console.log(userInfoForWhoElseRecommended)
                             setOtherUserSameRecommendation(userInfoForWhoElseRecommended)
                         })
-
-
                 })
-
     },
         [])
 
@@ -264,6 +254,7 @@ export default function DetailView(props) {
             })
     }
 
+
     function handleDeleteFromWatchList() {
         console.log("deleted!")
         setIsOnWatchList(false)
@@ -283,6 +274,7 @@ export default function DetailView(props) {
             })
     }
 
+
     function handleDeleteRecommendationCard() {
         setError(null)
 
@@ -298,6 +290,7 @@ export default function DetailView(props) {
                 setError(error.message)
             })
     }
+
 
     function handleFollowUser() {
         setError(null)
@@ -343,6 +336,7 @@ export default function DetailView(props) {
 
     }
 
+
     function handleMovetoWatchedList() {
         setError(null)
         axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardDetail.id}/watchedlist`,
@@ -364,6 +358,7 @@ export default function DetailView(props) {
             })
     }
 
+
     function handleDeleteFromWatchedList() {
         setError(null)
         axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardDetail.id}/watchedlist`,
@@ -382,6 +377,7 @@ export default function DetailView(props) {
                 console.log(error)
             })
     }
+
 
     function handleShowComment() {
         if (!showAddComment) {
@@ -403,6 +399,7 @@ export default function DetailView(props) {
         }
     }
 
+
     function handleDelete() {
 
         if (username === cardDetail.user) {
@@ -419,6 +416,7 @@ export default function DetailView(props) {
             )
         }
     }
+
 
     function getAddedToWatchedListIcon() {
         if (isLoggedIn && !isOnWatchList) {
@@ -493,6 +491,7 @@ export default function DetailView(props) {
         }
     }
 
+
     function handleAddComment(e) {
         e.preventDefault()
         setError(null)
@@ -514,6 +513,7 @@ export default function DetailView(props) {
                 setError(error.message)
             })
     }
+
 
     function handleIsFollowing() {
         if (isFollowing) {
