@@ -255,13 +255,9 @@
   box-shadow: 0 0 3em 0px rgba(0, 0, 0, 0.3);
 }
 
-.comment-form {
-  width: 75vw;
-  margin-left: 10px;
-}
-
 .individual-comment {
   border: 3px solid #293e8a;
+  background-color: white;
   margin-left: 15px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -271,7 +267,12 @@
 
 .comment-form {
   width: 75vw;
-  margin-left: 80px;
+  margin-left: 60px;
+  font-size: 17px;
+}
+
+.write-comment {
+  width: 500px;
 }
 
 

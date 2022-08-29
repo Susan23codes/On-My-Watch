@@ -29,7 +29,11 @@ import { CardActionArea, Tooltip } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
 import MoreMovies from "./MoreMovies";
-import { flexbox } from '@mui/system';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 const ExpandMore = styled((props) => {
@@ -61,6 +65,7 @@ export default function DetailView(props) {
     const [otherUserSameRecommendation, setOtherUserSameRecommendation] = useState(null)
     const [openRelated, setOpenRelated] = useState(false)
     const [openMoreByUser, setOpenMoreByUser] = useState(false)
+    const [openMakeComment, setOpenMakeComment] = useState(false)
 
     const [color, setColor] = useState('#e9eef0')
 
@@ -94,6 +99,9 @@ export default function DetailView(props) {
 
 
     const handleMoreByUserClose = () => setOpenMoreByUser(false);
+
+    const handleOpenComment = () => setOpenMakeComment(true)
+    const handleCloseComment = () => setOpenMakeComment(false)
 
     const navigate = useNavigate()
 
@@ -382,25 +390,25 @@ export default function DetailView(props) {
             })
     }
 
-    function handleShowComment() {
-        if (!showAddComment) {
-            return (
-                <Tooltip title="Add a Comment Below" arrow>
-                    <IconButton onClick={() => setShowAddComment(true)} aria-label="add">
-                        <CommentIcon sx={{ color: "red" }} />
-                    </IconButton>
-                </Tooltip>
-            )
-        } else {
-            return (
-                <Tooltip title="Add a Comment Below" arrow>
-                    <IconButton onClick={() => setShowAddComment(false)} aria-label="add">
-                        <CommentIcon sx={{ color: "red" }} />
-                    </IconButton>
-                </Tooltip>
-            )
-        }
-    }
+    // function handleShowComment() {
+    //     if (!showAddComment) {
+    //         return (
+    //             <Tooltip title="Add a Comment Below" arrow>
+    //                 <IconButton onClick={handleOpenComment} aria-label="add">
+    //                     <CommentIcon sx={{ color: "red" }} />
+    //                 </IconButton>
+    //             </Tooltip>
+    //         )
+    //     } else {
+    //         return (
+    //             <Tooltip title="Add a Comment Below" arrow>
+    //                 <IconButton onClick={handleCloseComment} aria-label="add">
+    //                     <CommentIcon sx={{ color: "red" }} />
+    //                 </IconButton>
+    //             </Tooltip>
+    //         )
+    //     }
+    // }
 
     function handleDelete() {
 
@@ -431,13 +439,17 @@ export default function DetailView(props) {
                             <TheatersIcon sx={{ color: "red" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
-
+                    <Tooltip title="Add Comment" arrow>
+                        <IconButton onClick={handleOpenComment} aria-label="add">
+                            <CommentIcon sx={{ color: "red" }} className="see-related" />
+                        </IconButton>
+                    </Tooltip>
                     <Tooltip title="Add to Watchlist" arrow>
                         <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
                             <AddToQueueIcon sx={{ color: "red" }} className="addtoqueue" />
                         </IconButton>
                     </Tooltip>
-                    {handleShowComment()}
+                    {/* {handleShowComment()} */}
                 </>
             )
         }
@@ -447,8 +459,12 @@ export default function DetailView(props) {
                     {handleDelete()}
                     {handleIsFollowing()}
 
-
-                    <Tooltip title="See Related Movies Below" arrow>
+                    <Tooltip title="Add Comment" arrow>
+                        <IconButton onClick={handleOpenComment} aria-label="add">
+                            <CommentIcon sx={{ color: "red" }} className="see-related" />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Related Shows" arrow>
                         <IconButton onClick={handleRelatedMoviesOpen} aria-label="add">
                             <TheatersIcon sx={{ color: "red" }} className="see-related" />
                         </IconButton>
@@ -459,7 +475,7 @@ export default function DetailView(props) {
                             <BookmarkAddedIcon sx={{ color: "red" }} />
                         </IconButton>
                     </Tooltip>
-                    {handleShowComment()}
+                    {/* {handleShowComment()} */}
                     <Tooltip title="Mark as Watched" arrow>
                         <IconButton onClick={() => handleMovetoWatchedList()} aria-label="mark as watched">
                             <CheckCircleOutlineIcon sx={{ color: "red" }} />
@@ -474,14 +490,18 @@ export default function DetailView(props) {
                     {handleDelete()}
                     {handleIsFollowing()}
 
-
-                    <Tooltip title="See Related Movies Below" arrow>
+                    <Tooltip title="Add Comment" arrow>
+                        <IconButton onClick={handleOpenComment} aria-label="add">
+                            <CommentIcon sx={{ color: "red" }} className="see-related" />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Related Shows" arrow>
                         <IconButton onClick={handleRelatedMoviesOpen} aria-label="add">
                             <TheatersIcon sx={{ color: "red" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
 
-                    {handleShowComment()}
+                    {/* {handleShowComment()} */}
                     <Tooltip title="You've Watched This" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchedList()} aria-label="delete from watched">
                             <CheckCircleIcon sx={{ color: "red" }} />
@@ -507,6 +527,7 @@ export default function DetailView(props) {
             })
             .then(res => {
                 setComment('')
+                setOpenMakeComment(false)
                 console.log(comment)
             })
             .catch((error) => {
@@ -722,27 +743,34 @@ export default function DetailView(props) {
 
                     </div>
 
-                    {showAddComment && (
+                    {/* {showAddComment && ( */}
                         <>
-                            <h2 className='comment-form'>Want to join in the conversation?  Add a comment below.</h2>
-                            <div className='comment-form'>
-                                <form>
-                                    <textarea
-                                        value={comment}
-                                        className="write-comment"
-                                        placeholder='Write a comment'
-                                        rows={10}
-                                        cols={50}
-                                        onChange={(e) => setComment(e.target.value)}
-                                    >
+                            <Dialog open={openMakeComment} onClose={handleCloseComment} width='1000px'>
+                                <DialogContentText sx={{width:'1000px'}}>
 
-                                    </textarea>
-                                </form>
+                                    <h2 className='comment-form'>Want to join in the conversation?  Add a comment below.</h2>
+                                    <div className='comment-form'>
+                                        <form>
+                                            <textarea
+                                                value={comment}
+                                                className="write-comment"
+                                                placeholder='Write a comment'
+                                                rows={10}
+                                                cols={50}
+                                                onChange={(e) => setComment(e.target.value)}
+                                            >
 
-                                <button type="button" onClick={handleAddComment} className="comment-button">Submit Comment</button>
-                            </div>
+                                            </textarea>
+                                        </form>
+                                    </div>
+                                </DialogContentText>
+                                <DialogActions>
+                                    <button type="button" onClick={handleAddComment} className="comment-button">Submit Comment</button>
+                                </DialogActions>
+
+                            </Dialog>
                         </>
-                    )}
+                    {/* )} */}
 
                 </>
 
@@ -790,20 +818,20 @@ export default function DetailView(props) {
                             </CardActionArea>
                         </div>
                         {data !== '' && <h1 className="more-by-this-user">{data.map((data, index) =>
-                            <div className='following-smaller-card'>
-                            <>
-                                <div className='following-info'>
-                                    <div className='other-user-poster'>
-                                        <img src={data.poster} width='70' alt='poster' />
+                            <div className='following-smaller-card' style={{marginRight:'7px'}}>
+                                <>
+                                    <div className='following-info'>
+                                        <div className='other-user-poster'>
+                                            <img src={data.poster} width='70' alt='poster' />
+                                        </div>
+                                        <div className='other-user-text'>
+                                            <p>{data.title}</p>
+                                            <p>{data.medium}</p>
+                                            <Link to={`/detail/${data.id}`}>Go to full recommendation card</Link>
+                                        </div>
                                     </div>
-                                    <div className='other-user-text'>
-                                        <p>{data.title}</p>
-                                        <p>{data.medium}</p>
-                                        <Link to={`/detail/${data.id}`}>Go to full recommendation card</Link>
-                                    </div>
-                                </div>
-                            </>
-                        </div>
+                                </>
+                            </div>
                         )} </h1>}
                     </Box>
                 </Modal>
