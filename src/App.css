@@ -3,25 +3,27 @@
   color: white;
   justify-content: space-between;
 }
- .login-register {
-   display: flex;
-   margin-right: 10px;
- }
 
- .title{
-   display: flex;
-   align-items: center;
-   margin-left: 10px;
- }
+.login-register {
+  display: flex;
+  margin-right: 10px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
 .landing-page-body {
-  background: url('/public/film_image.jpg') ;  
+  background: url('/public/film_image.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover; 
+  background-size: cover;
   opacity: .4;
   z-index: -1
-} 
+}
 
 .landing-page-text {
   position: fixed;
@@ -31,15 +33,16 @@
   margin-left: 40px;
   margin-top: 40px
 }
+
 .overlay {
   position: fixed;
   height: 100vh;
-    width: 100vw;
-    background: black;
-    overflow: hidden;
-    z-index: 0;
-    opacity: .8
- }
+  width: 100vw;
+  background: black;
+  overflow: hidden;
+  z-index: 0;
+  opacity: .8
+}
 
 .toolbar {
   display: flex;
@@ -49,7 +52,7 @@
 
 .on-my-watch-title {
   padding-left: 10px;
-  
+
 }
 
 .navbar-buttons {
@@ -62,7 +65,7 @@
 .navbar-buttons-not-title {
   display: flex;
   width: 65vw;
-  justify-content:space-around;
+  justify-content: space-around;
 }
 
 .poster-and-text {
@@ -115,7 +118,7 @@
 }
 
 .more-by-this-user {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -446,3 +449,21 @@
   flex-direction: column;
 } */
 
+
+.movieTitleTest {
+
+  width: 350px;
+  word-break: keep-all;
+  word-wrap: keep-all;
+}
+
+.searchBox {
+  align-items: center;
+}
+
+.Search {
+  padding-left: 25%;
+  border-style: solid;
+  border: black;
+  width: 80%;
+}

@@ -22,23 +22,36 @@ export default function RecForm(props) {
     const [tags, setTags] = useState([])
     const [recommendation, setRecommendation] = useState([])
     const [error, setError] = useState('')
+    const [emotion, setEmotion] = useState({
+        "emotions_detected": [
+            "anger"
+        ],
+        "emotion_scores": {
+            "anger": 0.09726930964706901,
+            "disgust": 0.045160579551742214,
+            "sadness": 0.015571307354332055,
+            "fear": 0.013315186787932039,
+            "surprise": 0.0002625598717371884,
+            "joy": 0
+        },
+        "thresholds": {
+            "disgust": 0.04,
+            "sadness": 0.04,
+            "anger": 0.04,
+            "joy": 0.04,
+            "surprise": 0.04,
+            "fear": 0.04
+        },
+        "version": "7.0.8",
+        "author": "twinword inc.",
+        "email": "help@twinword.com",
+        "result_code": "200",
+        "result_msg": "Success"
+    })
     console.log(error)
 
 
-
     function logData() {
-        /* console.log(mediaObj)
-         console.log(IMDBid)
-         console.log(mediaObj.genres)
-         console.log(mediaObj.title)
-         console.log(tags)
-         console.log(streaming_on)
-         console.log(recommendation)
-         console.log(mediaObj.image)
-         console.log(mediaObj.type)
-         console.log(props.token)
-         console.log(props.username)
-         console.log(mediaObj.plot)*/
 
         console.log(mediaObj.genres)
         console.log(mediaObj.id)
@@ -52,8 +65,25 @@ export default function RecForm(props) {
         console.log(mediaObj.similars)
         console.log(mediaObj.keywordList)
         console.log(mediaObj.actorList)
+        console.log(JSON.stringify(emotion))
 
     }
+    const options = {
+        method: 'GET',
+        url: 'https://twinword-emotion-analysis-v1.p.rapidapi.com/analyze/',
+        params: {
+            text: recommendation
+        },
+        headers: {
+            'X-RapidAPI-Key': '9158ae4b07msh28a956118045d24p16ea00jsn7c0c5666fd33',
+            'X-RapidAPI-Host': 'twinword-emotion-analysis-v1.p.rapidapi.com'
+        }
+    };
+
+
+
+
+
 
     function movieSearch() {
         setMediaObj(
@@ -102,10 +132,19 @@ export default function RecForm(props) {
 
 
 
-    function handleSubmit() {
+    async function handleSubmit() {
+        let a = await axios.request(options);
 
-        logData()
-        axios
+        console.log(a);
+        /** .then(function (response) {
+            setEmotion(response.data);
+        }).catch(function (error) {
+            console.error(error);
+        });
+
+        //logData()
+        console.log(a)*/
+        await axios
             .post(
                 "https://onmywatch.herokuapp.com/api/recommendation/",
                 {
@@ -124,6 +163,8 @@ export default function RecForm(props) {
                     related_shows: mediaObj.similars,
                     keywords: mediaObj.keywordList,
                     actors: mediaObj.actorList,
+                    emotion: a.data,
+                    watched_by: [],
 
                 },
                 {
@@ -142,6 +183,7 @@ export default function RecForm(props) {
         const tempID = String(event.target.getAttribute('data-id'))
         SpecificMovieSearch(tempID)
         setIMDBid(tempID);
+
 
         //   setGenre(mediaObj.genreList)
         //  setMediaImage(mediaObj.image)
@@ -218,12 +260,12 @@ export default function RecForm(props) {
                     {!mediaChosen ? <div></div> :
                         <form action="/action_page.php">
                             <div class="row">
-
+                                <div>
+                                    <label >Watched On</label>
+                                </div>
                             </div>
                             <div class="row">
-                                <div>
-                                    <label >Streaming Platform</label>
-                                </div>
+
                                 <div class="col-75">
                                     <StreamingTagSelector updateStreaming={setStreaming_on}></StreamingTagSelector>
 

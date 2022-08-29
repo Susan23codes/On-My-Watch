@@ -70,7 +70,7 @@ export default function StreamingTagSelector(props) {
     return (
         <div>
             <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-chip-label">Streamed on..</InputLabel>
+                <InputLabel id="demo-multiple-chip-label">Watched on..</InputLabel>
                 <Select
                     labelId="demo-multiple-chip-label"
                     id="demo-multiple-chip"

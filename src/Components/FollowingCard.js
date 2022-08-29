@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GiFilmProjector } from 'react-icons/gi';
 import { Link } from 'react-router-dom'
@@ -24,6 +24,9 @@ export default function FollowingCard(props) {
     const [error, setError] = useState(null)
     const [isFollowing, setIsFollowing] = useState(true)
     const [open, setOpen] = useState(false)
+    /* for (let i = 0; i < cardObject.genre.length; i++) {
+         console.log(cardObject.genre[i].key)
+     }*/
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -63,6 +66,7 @@ export default function FollowingCard(props) {
     function refreshPage() {
         window.location.reload(false);
     }
+
 
 
     return (
@@ -134,7 +138,7 @@ export default function FollowingCard(props) {
                                 {recommendationList && recommendationList.filter(cardObject => cardObject.user === followingObject.followee)
                                     .map((cardObject, index) => {
                                         return (
-                                            <div className='following-smaller-card'>
+                                            <div className={`following-smaller-card`}>
                                                 <>
                                                     <div className='following-info'>
                                                         <div>
