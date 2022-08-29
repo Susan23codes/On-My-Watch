@@ -71,19 +71,17 @@ export default function DetailView(props) {
     /* for (let i = 0; i < cardObject.genre.length; i++) {
          console.log(cardObject.genre[i].key)
      }*/
-    function handleColor() {
-        if (cardDetail.emotion !== null) {
-            if (cardDetail.emotion.emotions_detected[0] !== null) {
-                //   console.log(Object.keys(cardObject.emotion.emotion_scores).reduce((a, b) => cardObject.emotion.emotion_scores[a] > cardObject.emotion.emotion_scores[b] ? a : b))
+    function handleColor(card) {
+        console.log('handled color')
+        if (card.emotion !== null) {
+            if (card.emotion.emotions_detected[0] !== null) {
 
-
-                //      console.log(cardObject.emotion.emotions_detected[0])
-                if (cardDetail.emotion.emotions_detected[0] === 'joy') { setColor(joy) }
-                if (cardDetail.emotion.emotions_detected[0] === 'anger') { setColor(anger) }
-                if (cardDetail.emotion.emotions_detected[0] === 'sadness') { setColor(sad) }
-                if (cardDetail.emotion.emotions_detected[0] === 'disgust') { setColor(disgust) }
-                if (cardDetail.emotion.emotions_detected[0] === 'surprise') { setColor(surprise) }
-                if (cardDetail.emotion.emotions_detected[0] === 'fear') { setColor(fear) }
+                if (card.emotion.emotions_detected[0] === 'joy') { setColor(joy) }
+                if (card.emotion.emotions_detected[0] === 'anger') { setColor(anger) }
+                if (card.emotion.emotions_detected[0] === 'sadness') { setColor(sad) }
+                if (card.emotion.emotions_detected[0] === 'disgust') { setColor(disgust) }
+                if (card.emotion.emotions_detected[0] === 'surprise') { setColor(surprise) }
+                if (card.emotion.emotions_detected[0] === 'fear') { setColor(fear) }
             }
 
         }
@@ -115,104 +113,129 @@ export default function DetailView(props) {
     const params = useParams()
     console.log(params)
 
+
+
+
+    async function ColorCall() {
+        let a = await (axios.get(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}`)
+        )
+        console.log(a)
+        await handleColor(a.data)
+
+    }
+
+
+
+
+
+
+
+
+
+
     let firstRequestResults = null
     useEffect(() => {
-
+        ColorCall()
         axios.get(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}`)
-            .then(res => {
-                let results = (res.data)
-                console.log('first axios')
-                setCardDetail(results)
-                firstRequestResults = results
-                console.log(results)
-                if (results.saved_by.includes(username)) {
-                    setIsOnWatchList(true)
-                    // console.log("yes")
-                }
-                else {
-                    setIsOnWatchList(false)
-                    // console.log("no")
-                }
+            .then(
+                res => {
+                    let results = (res.data)
+                    console.log('first axios')
+                    setCardDetail(results)
+
+                    firstRequestResults = results
+                    console.log(results)
+
+                    if (results.saved_by.includes(username)) {
+                        setIsOnWatchList(true)
+                        // console.log("yes")
+                    }
+                    else {
+                        setIsOnWatchList(false)
+                        // console.log("no")
+                    }
 
 
 
-                axios.get('https://onmywatch.herokuapp.com/api/following/',
-                    {
-                        headers: {
-                            Authorization: `Token ${token}`,
-                        }
-                    })
-                    .then(res => {
-                        let results = (res.data)
-                        console.log(res.data)
-
-                        let filteredList = results.filter(result => result.followee_id === firstRequestResults.user_info.id)
-                        if (filteredList.length === 1) {
-                            setFollowPk(filteredList[0].id)
-                        }
-
-
-                        let mappedList = results.map(result => result.followee_id)
-                        // console.log("***")
-                        // console.log(filteredList)
-                        console.log(mappedList)
-                        // console.log("***")
-
-                        if (mappedList.includes(firstRequestResults.user_info.id)) {
-                            // console.log("yes")
-                            setIsFollowing(true)
-                        }
-                        else {
-                            setIsFollowing(false)
-                            // console.log("no")
-                        }
-                    })
-
-
-                axios.get('https://onmywatch.herokuapp.com/api/watchedlist/',
-                    {
-                        headers: {
-                            Authorization: `Token ${token}`,
-                        }
-                    })
-                    .then(res => {
-                        let results = (res.data)
-                        // firstRequestResults = results
-                        console.log(results)
-
-                        let mappedList = results.map(result => result.imdbid)
-
-                        if (mappedList.includes(firstRequestResults.imdbid)) {
-                            // console.log("yes")
-                            setIsOnWatchedList(true)
-                        }
-                        else {
-                            setIsOnWatchedList(false)
-                            // console.log("no")
-                        }
-
-                    })
-
-                axios.get(`https://onmywatch.herokuapp.com/api/search/recommendations/?search=${firstRequestResults.imdbid}`)
-                    .then(res => {
-                        let results = (res.data)
-                        // console.log("***")
-                        console.log(results)
-                        // console.log("***")
-                        let filteredList = results.filter(result => {
-                            return result.imdbid === firstRequestResults.imdbid && result.user !== firstRequestResults.user
+                    axios.get('https://onmywatch.herokuapp.com/api/following/',
+                        {
+                            headers: {
+                                Authorization: `Token ${token}`,
+                            }
                         })
-                        console.log("***")
-                        console.log(filteredList)
-                        console.log("***")
-                        // console.log(filteredList.map(listObject => listObject.user.charAt(0).toUpperCase()))
-                        let userInfoForWhoElseRecommended = filteredList.map(listObject => listObject.user_info)
-                        console.log(userInfoForWhoElseRecommended)
-                        setOtherUserSameRecommendation(userInfoForWhoElseRecommended)
-                    })
+                        .then(res => {
+                            let results = (res.data)
+                            console.log(res.data)
 
-            })
-        handleColor()
+                            let filteredList = results.filter(result => result.followee_id === firstRequestResults.user_info.id)
+                            if (filteredList.length === 1) {
+                                setFollowPk(filteredList[0].id)
+                            }
+
+
+                            let mappedList = results.map(result => result.followee_id)
+                            // console.log("***")
+                            // console.log(filteredList)
+                            console.log(mappedList)
+                            // console.log("***")
+
+                            if (mappedList.includes(firstRequestResults.user_info.id)) {
+                                // console.log("yes")
+                                setIsFollowing(true)
+                            }
+                            else {
+                                setIsFollowing(false)
+                                // console.log("no")
+                            }
+                        })
+
+
+                    axios.get('https://onmywatch.herokuapp.com/api/watchedlist/',
+                        {
+                            headers: {
+                                Authorization: `Token ${token}`,
+                            }
+                        })
+                        .then(res => {
+                            let results = (res.data)
+                            // firstRequestResults = results
+                            console.log(results)
+
+                            let mappedList = results.map(result => result.imdbid)
+
+                            if (mappedList.includes(firstRequestResults.imdbid)) {
+                                // console.log("yes")
+                                setIsOnWatchedList(true)
+                            }
+                            else {
+                                setIsOnWatchedList(false)
+                                // console.log("no")
+                            }
+
+                        })
+
+                    axios.get(`https://onmywatch.herokuapp.com/api/search/recommendations/?search=${firstRequestResults.imdbid}`)
+                        .then(res => {
+                            let results = (res.data)
+                            // console.log("***")
+                            console.log(results)
+                            // console.log("***")
+                            let filteredList = results.filter(result => {
+                                return result.imdbid === firstRequestResults.imdbid && result.user !== firstRequestResults.user
+                            })
+                            console.log("***")
+                            console.log(filteredList)
+                            console.log("***")
+
+                            // console.log(filteredList.map(listObject => listObject.user.charAt(0).toUpperCase()))
+                            let userInfoForWhoElseRecommended = filteredList.map(listObject => listObject.user_info)
+                            console.log(userInfoForWhoElseRecommended)
+                            setOtherUserSameRecommendation(userInfoForWhoElseRecommended)
+                        })
+
+
+                })
+
     },
         [])
 
