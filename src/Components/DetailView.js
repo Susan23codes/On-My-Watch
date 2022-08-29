@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { styled } from '@mui/material/styles';
 import moment from 'moment'
 import Card from '@mui/material/Card';
@@ -46,7 +46,7 @@ const ExpandMore = styled((props) => {
 
 
 export default function DetailView(props) {
-    const { isLoggedIn, token, length, username } = props
+    const { isLoggedIn, token, length, username, SingleCard } = props
 
     const [cardDetail, setCardDetail] = useState(null)
     const [expanded, setExpanded] = useState(false);
@@ -57,11 +57,13 @@ export default function DetailView(props) {
     const [followPk, setFollowPk] = useState(null)
     const [comment, setComment] = useState('')
     const [showAddComment, setShowAddComment] = useState(false)
-    // const [showRelatedMovies, setShowRelatedMovies] = useState(false)
+    const [data, setData] = useState('')
     const [otherUserSameRecommendation, setOtherUserSameRecommendation] = useState(null)
+    const [openRelated, setOpenRelated] = useState(false)
+    const [openMoreByUser, setOpenMoreByUser] = useState(false)
 
-    const [open, setOpen] = useState(false)
     const [color, setColor] = useState('#e9eef0')
+
     const sad = '#a9def9'
     const joy = '#ede7b1'
     const fear = '#e4c1f9'
@@ -87,8 +89,11 @@ export default function DetailView(props) {
         }
     }
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleRelatedMoviesOpen = () => setOpenRelated(true);
+    const handleRelatedMoviesClose = () => setOpenRelated(false);
+
+
+    const handleMoreByUserClose = () => setOpenMoreByUser(false);
 
     const navigate = useNavigate()
 
@@ -123,12 +128,6 @@ export default function DetailView(props) {
         await handleColor(a.data)
 
     }
-
-
-
-
-
-
 
 
 
@@ -428,7 +427,7 @@ export default function DetailView(props) {
                     {handleIsFollowing()}
 
                     <Tooltip title="Related Shows" arrow>
-                        <IconButton onClick={handleOpen} aria-label="add">
+                        <IconButton onClick={handleRelatedMoviesOpen} aria-label="add">
                             <TheatersIcon sx={{ color: "red" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
@@ -450,7 +449,7 @@ export default function DetailView(props) {
 
 
                     <Tooltip title="See Related Movies Below" arrow>
-                        <IconButton onClick={handleOpen} aria-label="add">
+                        <IconButton onClick={handleRelatedMoviesOpen} aria-label="add">
                             <TheatersIcon sx={{ color: "red" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
@@ -477,7 +476,7 @@ export default function DetailView(props) {
 
 
                     <Tooltip title="See Related Movies Below" arrow>
-                        <IconButton onClick={handleOpen} aria-label="add">
+                        <IconButton onClick={handleRelatedMoviesOpen} aria-label="add">
                             <TheatersIcon sx={{ color: "red" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
@@ -550,6 +549,26 @@ export default function DetailView(props) {
     }
 
 
+    function handleMoreByUserOpen() {
+
+
+        axios.get(`https://onmywatch.herokuapp.com/api/user/${cardDetail.user_info.id}/recommendations/`,
+            {},
+            {
+                Authorization: `Token ${props.token}`,
+            }
+        )
+            .then((res) => {
+                console.log("********")
+                console.log(res.data);
+                setData(res.data);
+                setOpenMoreByUser(true);
+            });
+    }
+
+
+
+
 
 
     return (
@@ -568,7 +587,7 @@ export default function DetailView(props) {
                                 avatar={cardDetail.user_info.image ? (
                                     <Avatar src={cardDetail.user_info.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
                                 ) : (
-                                    <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
+                                    <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="avatar">
                                         {cardDetail.user.charAt(0).toUpperCase()}
                                     </Avatar>
                                 )
@@ -578,7 +597,7 @@ export default function DetailView(props) {
                                 title={cardDetail.title}
                                 subheader=
                                 {<Tooltip title="See other recommendations by this user">
-                                    <CardActionArea sx={{ fontSize: '15px' }} onClick={() => navigate(`/more/${cardDetail.user_info.id}`)}>
+                                    <CardActionArea sx={{ fontSize: '15px' }} onClick={handleMoreByUserOpen}>
                                         Recommended by: {cardDetail.user} on {moment(cardDetail.created_at)
                                             .format('MM/DD/YY')}
                                     </CardActionArea>
@@ -624,7 +643,7 @@ export default function DetailView(props) {
                                                             <Avatar src={user.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
                                                         ) : (
 
-                                                            <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
+                                                            <Avatar sx={{ bgcolor: red[500], mr: '1px', height: 60, width: 60 }} aria-label="recipe">
                                                                 {user.username.charAt(0).toUpperCase()}
                                                             </Avatar>
                                                         )
@@ -731,8 +750,8 @@ export default function DetailView(props) {
             {/* {showRelatedMovies && ( */}
             <>
                 <Modal
-                    open={open}
-                    onClose={handleClose}
+                    open={openRelated}
+                    onClose={handleRelatedMoviesClose}
                     aria-labelledby="modal-related-shows"
                     aria-describedby="modal-related-shows"
                     BackdropComponent={Backdrop}
@@ -743,7 +762,7 @@ export default function DetailView(props) {
                     <Box sx={style}>
                         <div className='close-icon-and-title'>
                             <CardActionArea style={{ width: '30px', height: '30px' }}>
-                                <CloseIcon style={{ height: '40px', width: '40px' }} onClick={handleClose} />
+                                <CloseIcon style={{ height: '40px', width: '40px' }} onClick={handleRelatedMoviesClose} />
                             </CardActionArea>
                             <div style={{ textAlign: 'start', fontStyle: 'italic', marginLeft: '10px', height: '100px', fontSize: '30px' }}><strong>More Shows Like This:</strong></div>
                         </div>
@@ -752,6 +771,43 @@ export default function DetailView(props) {
                     {/* </Fade> */}
                 </Modal>
             </>
+
+            <div>
+                <Modal
+                    open={openMoreByUser}
+                    onClose={handleMoreByUserClose}
+                    aria-labelledby="modal-related-shows"
+                    aria-describedby="modal-related-shows"
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}>
+                    <Box sx={style} className='following-list-cards'>
+                        <div className='close-icon-login'>
+
+                            <CardActionArea style={{ width: '30px', height: '30px' }}>
+                                <CloseIcon style={{ height: '30px', width: '30px' }} onClick={handleMoreByUserClose} />
+                            </CardActionArea>
+                        </div>
+                        {data !== '' && <h1 className="more-by-this-user">{data.map((data, index) =>
+                            <div className='following-smaller-card'>
+                            <>
+                                <div className='following-info'>
+                                    <div className='other-user-poster'>
+                                        <img src={data.poster} width='70' alt='poster' />
+                                    </div>
+                                    <div className='other-user-text'>
+                                        <p>{data.title}</p>
+                                        <p>{data.medium}</p>
+                                        <Link to={`/detail/${data.id}`}>Go to full recommendation card</Link>
+                                    </div>
+                                </div>
+                            </>
+                        </div>
+                        )} </h1>}
+                    </Box>
+                </Modal>
+            </div>
 
         </>
     )

@@ -20,8 +20,8 @@ export default function LandingPage(props) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
-    const [openLogin, setOpenLogin] = React.useState(false);
-    const [openRegister, setOpenRegister] = React.useState(false);
+    const [openLogin, setOpenLogin] = useState(false);
+    const [openRegister, setOpenRegister] = useState(false);
     const [confirmPass, setConfirmPass] = useState('')
     const [email, setEmail] = useState('')
 

@@ -22,7 +22,7 @@ export default function RecCardList(props) {
             .then(res => {
                 console.log("Date")
                 console.log(new Date(res.data[0].created_at))
-                let results = (res.data.sort((a,b) => new Date(b.created_at) - new Date(a.created_at)))
+                let results = (res.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)))
                 setRecommendationList(results)
                 console.log(results)
 
@@ -47,29 +47,14 @@ export default function RecCardList(props) {
                         </div>
                     </>
                 }
-                {/* {!isLoggedIn &&
-                    <div className='homepage-sidebar-logged-out'>
-                        <ul className='my-stuff'></ul>
-                        <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Need inspiration for a new show?  You've come to the right place!</li><br />
-                        <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Browse the latest recommendations for new ideas!</li><br />
-                        <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Sign in or Register to follow people and see their recommendations!</li><br />
-                        <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Search for your next favorite show!</li><br />
 
-                        <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Make your own recommendations!</li><br />
-                        <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Add recommendations to your Watchlist! </li>
-
-
-                    </div>
-                } */}
 
                 <div className='homepage-cards-and-welcome'>
                     {isLoggedIn &&
-                        <p style={{  fontSize: 25 }}>Welcome, {username}!  Check out these latest recommendations!</p>
+                        <p style={{ fontSize: 25 }}>Welcome, {username}!  Check out these latest recommendations!</p>
                     }
-                    {/* {!isLoggedIn &&
-                        <p style={{ paddingLeft: 20, fontSize: 25 }}>See the latest recommendations below!  Log in or sign up to access other great features!</p>
-                    } */}
-                    <div className='card' style={{ height: '400px'}}>
+
+                    <div className='card' style={{ height: '400px' }}>
                         {!recommendationList &&
                             <img src="/loadingAnimation.gif"
                                 className="checkGif"
@@ -82,9 +67,11 @@ export default function RecCardList(props) {
                             CycleNavigation
                             interval={3000}
                             fullHeightHover={false}
-                            // IndicatorIcon={false}
+                        // IndicatorIcon={false}
                         >
-                            {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username).slice(0, 25)
+                            {/* {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username).slice(0, 25) */}
+                            {recommendationList && recommendationList.slice(0, 25)
+
                                 .map((cardObject, index) => {
                                     return (
                                         <SingleCard
