@@ -10,6 +10,7 @@ import FollowUser from './Components/FollowUser';
 import Registration from './Components/Registration';
 import Comments from './Components/Comments';
 import RecForm from './Components/RecForm';
+import LandingPage from './Components/LandingPage';
 import FollowingCard from './Components/FollowingCard';
 import axios from 'axios'
 import { Routes, Route, useNavigate, useParams, useRoutes, BrowserRouter as Router } from 'react-router-dom'
@@ -51,27 +52,39 @@ function App() {
 
   return (
     <>
-      <Navbar
+    <>
+      { isLoggedIn && <Navbar
         navigate={navigate}
         handleLogout={handleLogout}
         isLoggedIn={isLoggedIn}
-      />
+      /> }
       <Routes>
         <Route
 
           path="/login"
-          element={<Login
+          element={<><Navbar
+            navigate={navigate}
+            handleLogout={handleLogout}
+            isLoggedIn={isLoggedIn}
+          /><Login
             setAuth={setAuth}
             isLoggedIn={isLoggedIn}
-          />}
+            navigate={navigate}
+            handleLogout={handleLogout}
+          /></>}
         />
         <Route
           path="/register"
-          element={<Registration
+          element={<><Navbar
+            navigate={navigate}
+            handleLogout={handleLogout}
+            isLoggedIn={isLoggedIn}
+          /><Registration
             navigate={navigate}
             setAuth={setAuth}
-          />}
+          /></>}
         />
+       
         <Route
           path="/new"
           element={<RecForm
@@ -95,12 +108,18 @@ function App() {
         />
         <Route
           path="/"
-          element={<RecCardList
+          element={!isLoggedIn ? (
+            <LandingPage
+              navigate={navigate}
+              setAuth={setAuth}
+            />
+          ) : (
+      <RecCardList
             isLoggedIn={isLoggedIn}
             token={token}
             navigate={navigate}
             username={username}
-          />}
+          />)}
         />
         <Route
           path="/mywatchlist"
@@ -168,8 +187,10 @@ function App() {
 
 
       </Routes>
+      </>
     </>
-  );
+          
+            );
 }
 
 export default App;

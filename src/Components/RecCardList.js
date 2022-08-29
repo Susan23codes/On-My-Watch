@@ -20,7 +20,9 @@ export default function RecCardList(props) {
     useEffect(() => {
         axios.get('https://onmywatch.herokuapp.com/api/recommendation/')
             .then(res => {
-                let results = (res.data.reverse())
+                console.log("Date")
+                console.log(new Date(res.data[0].created_at))
+                let results = (res.data.sort((a,b) => new Date(b.created_at) - new Date(a.created_at)))
                 setRecommendationList(results)
                 console.log(results)
 
@@ -45,7 +47,7 @@ export default function RecCardList(props) {
                         </div>
                     </>
                 }
-                {!isLoggedIn &&
+                {/* {!isLoggedIn &&
                     <div className='homepage-sidebar-logged-out'>
                         <ul className='my-stuff'></ul>
                         <li style={{ fontSize: 20 }}><GiFilmProjector style={{ marginRight: 10 }} /> Need inspiration for a new show?  You've come to the right place!</li><br />
@@ -58,7 +60,7 @@ export default function RecCardList(props) {
 
 
                     </div>
-                }
+                } */}
 
                 <div className='homepage-cards-and-welcome'>
                     {isLoggedIn &&
@@ -82,7 +84,7 @@ export default function RecCardList(props) {
                             fullHeightHover={false}
                             // IndicatorIcon={false}
                         >
-                            {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username)
+                            {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username).slice(0, 25)
                                 .map((cardObject, index) => {
                                     return (
                                         <SingleCard

@@ -46,8 +46,6 @@ const ExpandMore = styled((props) => {
 }));
 
 
-
-
 export default function SingleCard(props) {
     const { cardObject, id, isLoggedIn, token, username, navigate } = props
 
@@ -91,6 +89,7 @@ export default function SingleCard(props) {
     // console.log(`QL: ${params.id}`)
 
     useEffect(() => {
+
         /* if (cardObject.genre !== null)
              for (let i = 0; i < cardObject.genre.length; i++) {
                  console.log(cardObject.genre[i].key
@@ -99,6 +98,8 @@ export default function SingleCard(props) {
              }
          console.log(genreArray)*/
         handleColor()
+
+
         if (cardObject.saved_by.includes(username)) {
             setOnWatchList(true)
             console.log("yes")
@@ -218,10 +219,13 @@ export default function SingleCard(props) {
                         width: 250
                     }
                 }}
-                avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                avatar={cardObject.user_info.image ? (
+                    <Avatar src={cardObject.user_info.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
+                ) : (
+                    <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
                         {cardObject.user.charAt(0).toUpperCase()}
                     </Avatar>
+                )
                 }
                 titleTypographyProps={{ variant: 'h5' }}
 
@@ -252,7 +256,7 @@ export default function SingleCard(props) {
                         <strong>Medium:</strong> {cardObject.medium}
                     </Typography>
                     <Typography paragraph>
-                        <strong>Streaming on:</strong> {cardObject.streaming_service}
+                        <strong>Watched on:</strong> {cardObject.streaming_service}
                     </Typography>
 
                     <Typography paragraph>

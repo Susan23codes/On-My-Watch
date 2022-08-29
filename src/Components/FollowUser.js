@@ -44,43 +44,28 @@ export default function FollowUser(props) {
     return (
 
         <>
-            <div className='following-background'
-                style={{ height: '100vh' }}>
-                    {/* <div style={{fontSize: '25px', marginTop: '25px', marginLeft: '40px', marginBottom: '40px'}}>Following</div> */}
-                {/* <h1 style={{
-                    fontSize: 40,
-                    paddingLeft: 40,
-                    paddingTop: 100,
-                    marginTop: 0,
-                    textAlign: 'center',
-                    color: "#293e8a",
-                }}>
-                    🌟 We May All Be Stars in Our Own Show, But We Definitely Need a Supporting Cast! 🌟</h1>
-                <h1 style={{
-                    paddingLeft: 150,
-                    color: "#293e8a"
-                }}> */}
-                    {/* Here's Mine:</h1> */}
-                <div className='following-list'>
 
-                    {followinglist && followinglist.map((followingObject, index) => {
-                        return (
-                            <div className='following-list-item'>
-                                <>
-                                    <FollowingCard
-                                        followingObject={followingObject}
-                                        recommendationList={recommendationList}
-                                        token={token}
-                                    />
 
-                                </>
-                            </div>
+            <p style={{fontSize:'40px', marginLeft:'20px', fontStyle:'italic'}}>Following:</p>
+            <div className='following-list'>
+                {followinglist && followinglist.map((followingObject, index) => {
+                    return (
+                        <div className='following-list-item'>
+                            <>
+                                <FollowingCard
+                                    followingObject={followingObject}
+                                    recommendationList={recommendationList}
+                                    token={token}
+                                />
 
-                        )
-                    })
-                    }
-                </div>
+                            </>
+                        </div>
+
+                    )
+                })
+                }
             </div>
+
         </>
     )
 

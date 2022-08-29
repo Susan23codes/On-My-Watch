@@ -150,6 +150,7 @@ export default function RecForm(props) {
                 {
                     description: mediaObj.plot,
                     saved_by: [],
+                    watched_by: [],
                     genre: mediaObj.genreList,
                     imdbid: mediaObj.id,
                     medium: mediaObj.type,

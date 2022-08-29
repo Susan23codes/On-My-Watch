@@ -21,19 +21,19 @@ export default function Navbar(props) {
     function refreshPage() {
         window.location.reload(false);
     }
-
+    // *******
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{
-                bgcolor: "#293e8a",
+                bgcolor: "#293e8a", height: '150px'
             }}>
 
-                {!isLoggedIn ? (
+                {/* {!isLoggedIn ? (
                     <Toolbar className='toolbar' sx={{ height: 120 }}>
                         <Typography className='on-my-watch-title' component="div" sx={{ flexGrow: 1, fontSize: 80 }}>
                             📺n My Watch
                         </Typography>
-                        <Typography component="div" paragraph sx={{ fontSize: 30, paddingBottom:'5px' }}>
+                        <Typography component="div" paragraph sx={{ fontSize: 30, paddingBottom: '5px' }}>
                             Come find your next favorite show!
                         </Typography>
                     </Toolbar>
@@ -43,26 +43,24 @@ export default function Navbar(props) {
                             📺n My Watch
                         </Typography>
                     </Toolbar>
-                )}
+                )} */}
+                {isLoggedIn ? (
 
+                    <div className='navbar-buttons'>
+                        <Typography className='on-my-watch-title' component="div" sx={{ fontSize: 50 }}>
+                            📺n My Watch
+                        </Typography>
 
-                <div className='navbar-buttons'>
-                    <div className='home-button'>
-                        <Button onClick={() => {
-                            navigate('/');
-                            setLocation('home')
-                        }} color="inherit" sx={{ fontSize: 20 }}>Home</Button>
-                    </div>
-
-                    {isLoggedIn && <div>
-                        {(location === 'new')
+                        <div className='navbar-buttons-not-title'>
+                            <>
+                                {/* {(location === 'new')
                             ? <div><div className='recommendation-button'>
                                 <Button onClick={() => {
                                     setLocation('new')
                                     refreshPage();
                                 }
 
-                                } color="inherit" sx={{ fontSize: 20, }}> Make a New Recommendation</Button>
+                                } color="inherit" sx={{ fontSize: 20,  }}> Make a New Recommendation</Button>
 
                                 <Button onClick={() => {
                                     navigate('/search');
@@ -70,7 +68,7 @@ export default function Navbar(props) {
                                 }} color="inherit" sx={{ fontSize: 20, }}> Search </Button>
                             </div></div>
 
-                            : <div><div className='recommendation-button'>
+                            : <div><div className='recommendation-button'> */}
                                 <Button onClick={() => {
                                     setLocation('new')
                                     navigate("/new");
@@ -82,10 +80,21 @@ export default function Navbar(props) {
                                     navigate('/search');
                                     setLocation('search')
                                 }} color="inherit" sx={{ fontSize: 20, }}> Search </Button>
-                            </div></div>
-                        }
-                    </div>}
-                    <div>
+                                <Button onClick={() => {
+                                    handleLogout();
+                                    setLocation('logout')
+                                }} color="inherit" sx={{ fontSize: 20 }}>Logout </Button>
+
+                                <Button onClick={() => {
+                                    navigate('/');
+                                    setLocation('home')
+                                }} color="inherit" sx={{ fontSize: 20 }}>Home</Button>
+
+                                {/* </div> */}
+
+                            </>
+                        </div>
+                        {/* <div>
                         {isLoggedIn ? (
                             <Button onClick={() => {
                                 handleLogout();
@@ -98,8 +107,21 @@ export default function Navbar(props) {
                                 <Button onClick={() => navigate('/register')} color="inherit" sx={{ fontSize: 20 }}>Register </Button>
                             </>
                         )}
+                    </div> */}
                     </div>
-                </div>
+                ) : (
+                    <div className="landing-page-header" style={{ backgroundColor: "#293e8a", height: '150px', width: '100vw' }}>
+                        <>
+                            <div className="title">
+                                <h1 style={{ fontSize: '50px' }}>📺n My Watch</h1>
+                            </div>
+                            <div className='login-register'>
+                                <Button onClick={() => navigate('/login')} color="inherit" sx={{ fontSize: 20 }}>Login </Button>
+                                <Button onClick={() => navigate('/register')} color="inherit" sx={{ fontSize: 20 }}>Register </Button>
+                            </div>
+                        </>
+                    </div>
+                )}
             </AppBar>
         </Box>
     )
