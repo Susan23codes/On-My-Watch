@@ -127,18 +127,18 @@ export default function DetailView(props) {
     console.log(params)
 
 
-
-
     async function ColorCall() {
         let a = await (axios.get(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}`)
         )
         console.log(a)
         await handleColor(a.data)
-
     }
 
 
-
+    function changeLocation(placeToGo){
+        navigate(placeToGo, { replace: true });
+        window.location.reload();
+    }
 
     let firstRequestResults = null
     useEffect(() => {
@@ -833,7 +833,7 @@ export default function DetailView(props) {
                                         <div className='other-user-text'>
                                             <p>{data.title}</p>
                                             <p>{data.medium}</p>
-                                            <Link to={`/detail/${data.id}`}>Go to full recommendation card</Link>
+                                            <Link to={`/detail/${data.id}`} onClick={() => changeLocation(`/detail/${data.id}`)}>Go to full recommendation card</Link>
                                         </div>
                                     </div>
                                 </>

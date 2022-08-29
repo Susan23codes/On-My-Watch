@@ -6,15 +6,19 @@ import { GiFilmProjector } from 'react-icons/gi';
 import Carousel from 'react-material-ui-carousel';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import CloseIcon from '@mui/icons-material/Close';
+import { CardActionArea } from '@mui/material';
 
 
 const style = {
-    position: 'absolute',
+    // position: 'absolute',
+    marginTop: '400px',
+    marginLeft: '400px',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
+    bgcolor: '#d8e0e6',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -51,13 +55,29 @@ export default function RecCardList(props) {
                 {isLoggedIn &&
                     <>
 
-                        <div className='homepage-sidebar'>
+                        {/* <div className='homepage-sidebar'>
                             <ul className='my-stuff'></ul>
                             <li><GiFilmProjector /><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
                             <li><GiFilmProjector /><Link to={"/following"} style={{ textDecoration: 'none', color: 'white' }}> Following</Link></li><br />
                             <li><a href="#" onClick={handleOpen} style={{ textDecoration: 'none', color: 'white' }}><GiFilmProjector /> Sentiment Analysis Color Key</a></li><br />
                             <li><GiFilmProjector /><Link to={"/watched"} style={{ textDecoration: 'none', color: 'white' }}> What I've Watched</Link></li><br />
                             <li><GiFilmProjector /><Link to={"/new"} style={{ textDecoration: 'none', color: 'white' }}> Make a New Recommendation</Link></li>
+                        </div> */}
+                        <div className='homepage-sidebar'>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <GiFilmProjector style={{marginBottom:'23px'}}/>
+                                <GiFilmProjector style={{marginBottom:'27px'}}/>
+                                <GiFilmProjector style={{marginBottom:'45px'}}/>
+                                <GiFilmProjector style={{marginBottom:'47px'}}/>
+                                <GiFilmProjector style={{marginBottom:'23px'}}/>
+                            </div >
+                            <div style={{ display: 'flex', flexDirection: 'column', marginLeft:'20px', }}>
+                                <Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> My Watchlist</Link>
+                                <Link to={"/following"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> Following</Link>
+                                <a href="#" onClick={handleOpen} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> Sentiment Analysis Color Key</a>
+                                <Link to={"/watched"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> What I've Watched</Link>
+                                <Link to={"/new"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> Make a New Recommendation</Link>
+                            </div>
                         </div>
                     </>
                 }
@@ -69,29 +89,34 @@ export default function RecCardList(props) {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                    <div className='color-key' style={{ textAlign: 'center' }}>
-                        <div style={{ fontWeight: 'bold', marginBottom: '20px', textAlign: 'center', fontSize: '30px' }}>
-                            Color Key:
+                        <div className='close-color-key'>
+                            <CardActionArea style={{ width: '20px', height: '20px' }}>
+                                <CloseIcon style={{ height: '20px', width: '20px' }} onClick={handleClose} />
+                            </CardActionArea>
                         </div>
-                        <div className='emotion-names' style={{ backgroundColor: '#A9DEF9' }} >
-                            Sadness
+                        <div className='color-key' style={{ textAlign: 'center' }}>
+                            <div style={{ fontWeight: 'bold', marginBottom: '20px', textAlign: 'center', fontSize: '30px' }}>
+                                Color Key:
+                            </div>
+                            <div className='emotion-names' style={{ backgroundColor: '#A9DEF9' }} >
+                                Sadness
+                            </div>
+                            <div className='emotion-names' style={{ backgroundColor: '#FFFF99' }}>
+                                Joy
+                            </div>
+                            <div className='emotion-names' style={{ backgroundColor: '#E4C1F9' }}>
+                                Fear
+                            </div>
+                            <div className='emotion-names' style={{ backgroundColor: '#EDE7B1' }}>
+                                Disgust
+                            </div>
+                            <div className='emotion-names' style={{ backgroundColor: '#FBC4A3' }}>
+                                Surprise
+                            </div>
+                            <div className='emotion-names' style={{ backgroundColor: '#FF4137' }}>
+                                Anger
+                            </div>
                         </div>
-                        <div className='emotion-names' style={{ backgroundColor: '#FFFF99' }}>
-                            Joy
-                        </div>
-                        <div className='emotion-names' style={{ backgroundColor: '#E4C1F9' }}>
-                            Fear
-                        </div>
-                        <div className='emotion-names' style={{ backgroundColor: '#EDE7B1' }}>
-                            Disgust
-                        </div>
-                        <div className='emotion-names' style={{ backgroundColor: '#FBC4A3' }}>
-                            Surprise
-                        </div>
-                        <div className='emotion-names' style={{ backgroundColor: '#FF4137' }}>
-                            Anger
-                        </div>
-                    </div>
                     </Box>
                 </Modal>
 

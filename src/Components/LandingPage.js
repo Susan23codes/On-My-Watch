@@ -134,21 +134,21 @@ export default function LandingPage(props) {
             </div>
             <div className="landing-page-text">
                 <p style={{ fontSize: '60px' }}>Come find your next favorite show!</p>
-                <p>Sign in or register to follow people and see their recommendations</p>
-                <p >Browse the latest recommendations for new ideas</p>
-                <p>Search for inspiration</p>
-                <p>Make your own recommendations</p>
-                <p>Add shows to your watchlist</p>
+                <p >Sign in or register to follow people and see their recommendations</p>
+                <p style={{paddingLeft: '240px'}}>Browse the latest recommendations for new ideas</p>
+                <p style={{paddingLeft: '470px'}}>Make your own recommendations</p>
+                <p style={{paddingLeft: '570px'}}>Add shows to your watchlist</p>
+                <p style={{paddingLeft: '680px'}}>Search for inspiration</p>
             </div>
 
             <Dialog open={openLogin} onClose={handleCloseLogin}>
                 <DialogContent>
                     <DialogContentText>
                         <div className='close-icon-login'>
-                    <CardActionArea style={{width:'30px', height:'30px'}}>
-                    <CloseIcon  style={{height:'30px', width:'30px'}} onClick={handleCloseLogin}/>
-                    </CardActionArea>
-                    </div>
+                            <CardActionArea style={{ width: '30px', height: '30px' }}>
+                                <CloseIcon style={{ height: '30px', width: '30px' }} onClick={handleCloseLogin} />
+                            </CardActionArea>
+                        </div>
                         <div className="entire-login-form">
                             <h2 className='login-form'>Please Log In!</h2>
                             {error && <div className='error'>{error}</div>}
@@ -176,14 +176,14 @@ export default function LandingPage(props) {
             <Dialog open={openRegister} onClose={handleCloseRegister}>
                 <DialogContent>
                     <DialogContentText>
-                    <div className='close-icon-login'>
-                    <CardActionArea style={{width:'30px', height:'30px'}}>
-                    <CloseIcon  style={{height:'30px', width:'30px'}} onClick={handleCloseRegister}/>
-                    </CardActionArea>
-                    </div>
+                        <div className='close-icon-login'>
+                            <CardActionArea style={{ width: '30px', height: '30px' }}>
+                                <CloseIcon style={{ height: '30px', width: '30px' }} onClick={handleCloseRegister} />
+                            </CardActionArea>
+                        </div>
                         {error && <div>{error}</div>}
                         <h2 style={{ textAlign: 'center' }}>Sign up and starting watching great TV!</h2>
-                        
+
                         <form id="registration-form" onSubmit={handleRegistrationSubmit}>
 
                             <div className="form-controls">

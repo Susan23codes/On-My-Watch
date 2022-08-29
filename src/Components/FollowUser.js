@@ -46,7 +46,7 @@ export default function FollowUser(props) {
         <>
 
 
-            <p style={{fontSize:'40px', marginLeft:'20px', fontStyle:'italic'}}>Following:</p>
+<p style={{ marginLeft: '10px', textAlign: "left", fontSize: 30, fontStyle: 'italic', color: "#293e8a", }}>My Supporting Cast</p>
             <div className='following-list'>
                 {followinglist && followinglist.map((followingObject, index) => {
                     return (
