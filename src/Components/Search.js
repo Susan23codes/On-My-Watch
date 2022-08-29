@@ -68,7 +68,7 @@ export default function Search(props) {
 
 
 
-    return (<div><div> </div><br></br>Search For Your Recommendation<div></div><br></br>
+    return (<div className="searchBox"><div className="Search"><div> </div><br></br>Search For Your Recommendation<div></div><br></br>
         <input
             className="input"
             type="text"
@@ -81,6 +81,10 @@ export default function Search(props) {
             <option value="TV">TV</option>
             <option value="Movie">Movie</option>
             <option value="Both">Both</option>
+            <option value="User">User</option>
+            <option value="Keywords">Keywords</option>
+            <option value="Genre">Genre</option>
+            <option value="Tags">Tags</option>
         </select>
         <input type="button" value="Search" onClick={handleSearch}></input>
 
@@ -99,6 +103,7 @@ export default function Search(props) {
 
 
         </div>
+    </div>
     </div>
     )
     //call api to get list with props.searchType and props.params

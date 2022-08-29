@@ -10,8 +10,8 @@ export default function RecForm(props) {
                 return (
 
                     <div className="movieIcon">
-                       <div style={{fontSize:'25px'}}><strong>{movie.title} </strong> </div><br></br>
-                        <img src={movie.image} style={{border:'1px solid', maxHeight: '420px'}} alt='poster'  width='300px'></img>
+                        <div className="movieTitleTest" style={{ fontSize: '15px' }}><strong>{movie.title} </strong> </div><br></br>
+                        <img src={movie.image} style={{ border: '1px solid', maxHeight: '420px' }} alt='poster' width='300px'></img>
                     </div>
                 )
             })}

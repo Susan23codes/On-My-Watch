@@ -403,3 +403,21 @@
   background-color: #e4e8ed;
 
 }
+
+.movieTitleTest {
+
+  width: 350px;
+  word-break: keep-all;
+  word-wrap: keep-all;
+}
+
+.searchBox {
+  align-items: center;
+}
+
+.Search {
+  padding-left: 25%;
+  border-style: solid;
+  border: black;
+  width: 80%;
+}

@@ -67,6 +67,33 @@ export default function DetailView(props) {
     const [showAddComment, setShowAddComment] = useState(false)
     const [showRelatedMovies, setShowRelatedMovies] = useState(false)
     const [otherUserSameRecommendation, setOtherUserSameRecommendation] = useState(null)
+    const [color, setColor] = useState('#e9eef0')
+    const sad = '#a9def9'
+    const joy = '#ede7b1'
+    const fear = '#e4c1f9'
+    const disgust = '#ede7b1'
+    const surprise = '#fbc4a3'
+    const anger = '#f694c1'
+    /* for (let i = 0; i < cardObject.genre.length; i++) {
+         console.log(cardObject.genre[i].key)
+     }*/
+    function handleColor() {
+        if (cardDetail.emotion !== null) {
+            if (cardDetail.emotion.emotions_detected[0] !== null) {
+                //   console.log(Object.keys(cardObject.emotion.emotion_scores).reduce((a, b) => cardObject.emotion.emotion_scores[a] > cardObject.emotion.emotion_scores[b] ? a : b))
+
+
+                //      console.log(cardObject.emotion.emotions_detected[0])
+                if (cardDetail.emotion.emotions_detected[0] === 'joy') { setColor(joy) }
+                if (cardDetail.emotion.emotions_detected[0] === 'anger') { setColor(anger) }
+                if (cardDetail.emotion.emotions_detected[0] === 'sadness') { setColor(sad) }
+                if (cardDetail.emotion.emotions_detected[0] === 'disgust') { setColor(disgust) }
+                if (cardDetail.emotion.emotions_detected[0] === 'surprise') { setColor(surprise) }
+                if (cardDetail.emotion.emotions_detected[0] === 'fear') { setColor(fear) }
+            }
+
+        }
+    }
     const navigate = useNavigate()
 
     const handleExpandClick = () => {
@@ -79,6 +106,7 @@ export default function DetailView(props) {
 
     let firstRequestResults = null
     useEffect(() => {
+        handleColor()
         axios.get(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}`)
             .then(res => {
                 let results = (res.data)
@@ -526,7 +554,7 @@ export default function DetailView(props) {
                             }
 
                         </div>
-                        <Card className="card-detail" sx={{ bgcolor: '#e9eef0', width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
+                        <Card className="card-detail" sx={{ bgcolor: color, width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
 
                             <CardHeader
                                 sx={{
@@ -603,8 +631,8 @@ export default function DetailView(props) {
                                             }
                                         </div>
                                     </div>
-                                   
-                                 
+
+
 
                                     {cardDetail.genre !== null &&
                                         <>
@@ -612,12 +640,12 @@ export default function DetailView(props) {
                                                 <div className='movieBox'>
                                                     <strong>Genre: </strong>
 
-                                                    
-                                                            <div>
-                                                                &ensp;{cardDetail.genre.map((genreObj) => genreObj.key).join(', ')}
-                                                            </div>
-                                                        
-                                                    
+
+                                                    <div>
+                                                        &ensp;{cardDetail.genre.map((genreObj) => genreObj.key).join(', ')}
+                                                    </div>
+
+
                                                 </div>
                                             </div>
 

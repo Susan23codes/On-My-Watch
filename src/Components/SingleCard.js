@@ -56,11 +56,33 @@ export default function SingleCard(props) {
     const [error, setError] = useState(null)
     const [genreArray, setGenreArray] = useState([])
     const [isOnWatchedList, setIsOnWatchedList] = useState(false)
-
+    const [color, setColor] = useState('#e9eef0')
+    const sad = '#a9def9'
+    const joy = '#ede7b1'
+    const fear = '#e4c1f9'
+    const disgust = '#ede7b1'
+    const surprise = '#fbc4a3'
+    const anger = '#f694c1'
     /* for (let i = 0; i < cardObject.genre.length; i++) {
          console.log(cardObject.genre[i].key)
      }*/
+    function handleColor() {
+        if (cardObject.emotion !== null) {
+            if (cardObject.emotion.emotions_detected[0] !== null) {
+                //   console.log(Object.keys(cardObject.emotion.emotion_scores).reduce((a, b) => cardObject.emotion.emotion_scores[a] > cardObject.emotion.emotion_scores[b] ? a : b))
 
+
+                //      console.log(cardObject.emotion.emotions_detected[0])
+                if (cardObject.emotion.emotions_detected[0] === 'joy') { setColor(joy) }
+                if (cardObject.emotion.emotions_detected[0] === 'anger') { setColor(anger) }
+                if (cardObject.emotion.emotions_detected[0] === 'sadness') { setColor(sad) }
+                if (cardObject.emotion.emotions_detected[0] === 'disgust') { setColor(disgust) }
+                if (cardObject.emotion.emotions_detected[0] === 'surprise') { setColor(surprise) }
+                if (cardObject.emotion.emotions_detected[0] === 'fear') { setColor(fear) }
+            }
+
+        }
+    }
     const handleExpandClick = () => {
         setExpanded(!expanded);
     }
@@ -76,6 +98,7 @@ export default function SingleCard(props) {
                  setGenreArray(genreArray.push(cardObject.genre[i].key))
              }
          console.log(genreArray)*/
+        handleColor()
         if (cardObject.saved_by.includes(username)) {
             setOnWatchList(true)
             console.log("yes")
@@ -183,7 +206,7 @@ export default function SingleCard(props) {
 
     return (
         <Card sx={{
-            width: 550, height: 392, mr: 2, mb: 2, border: 1, pt: 2, bgcolor: '#e9eef0', boxShadow: 3,
+            width: 550, height: 392, mr: 2, mb: 2, border: 1, pt: 2, bgcolor: color, boxShadow: 3,
             "&:hover": {
                 boxShadow: 9,
             },
