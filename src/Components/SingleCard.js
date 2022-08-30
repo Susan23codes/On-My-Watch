@@ -207,7 +207,7 @@ export default function SingleCard(props) {
 
     return (
         <Card sx={{
-            width: 550, height: 392, mr: 2, mb: 2, border: 1, pt: 2, bgcolor: color, boxShadow: 3,
+            width: 550, height: 392, mr: 2, mb: 2, border: '1px solid gray', pt: 2, bgcolor: color, boxShadow: 3,
             "&:hover": {
                 boxShadow: 9,
             },

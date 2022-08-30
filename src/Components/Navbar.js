@@ -25,7 +25,7 @@ export default function Navbar(props) {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{
-                bgcolor: "#293e8a", height: '150px'
+                bgcolor: "#382069", height: '150px'
             }}>
 
                 {/* {!isLoggedIn ? (
