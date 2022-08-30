@@ -8,8 +8,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import CloseIcon from '@mui/icons-material/Close';
 import { CardActionArea } from '@mui/material';
-import MovingText from 'react-moving-text'
-import MovingComponent from 'react-moving-text'
 
 
 
