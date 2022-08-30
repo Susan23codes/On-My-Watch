@@ -54,25 +54,16 @@ export default function RecCardList(props) {
             <div className='homepage-sidebar-and-cards'>
                 {isLoggedIn &&
                     <>
-
-                        {/* <div className='homepage-sidebar'>
-                            <ul className='my-stuff'></ul>
-                            <li><GiFilmProjector /><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
-                            <li><GiFilmProjector /><Link to={"/following"} style={{ textDecoration: 'none', color: 'white' }}> Following</Link></li><br />
-                            <li><a href="#" onClick={handleOpen} style={{ textDecoration: 'none', color: 'white' }}><GiFilmProjector /> Sentiment Analysis Color Key</a></li><br />
-                            <li><GiFilmProjector /><Link to={"/watched"} style={{ textDecoration: 'none', color: 'white' }}> What I've Watched</Link></li><br />
-                            <li><GiFilmProjector /><Link to={"/new"} style={{ textDecoration: 'none', color: 'white' }}> Make a New Recommendation</Link></li>
-                        </div> */}
                         <div className='homepage-sidebar'>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <GiFilmProjector style={{marginBottom:'23px'}}/>
-                                <GiFilmProjector style={{marginBottom:'27px'}}/>
-                                <GiFilmProjector style={{marginBottom:'45px'}}/>
-                                <GiFilmProjector style={{marginBottom:'47px'}}/>
-                                <GiFilmProjector style={{marginBottom:'23px'}}/>
+                                <GiFilmProjector style={{marginTop:'20px'}}/>
+                                <GiFilmProjector style={{marginTop:'23px'}}/>
+                                <GiFilmProjector style={{marginTop:'24px'}}/>
+                                <GiFilmProjector style={{marginTop:'48px'}}/>
+                                <GiFilmProjector style={{marginTop:'49px'}}/>
                             </div >
-                            <div style={{ display: 'flex', flexDirection: 'column', marginLeft:'20px', }}>
-                                <Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> My Watchlist</Link>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginLeft:'18px', }}>
+                                <Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px', marginTop:'20px' }}> My Watchlist</Link>
                                 <Link to={"/following"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> Following</Link>
                                 <a href="#" onClick={handleOpen} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> Sentiment Analysis Color Key</a>
                                 <Link to={"/watched"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> What I've Watched</Link>
@@ -85,8 +76,8 @@ export default function RecCardList(props) {
                 <Modal
                     open={open}
                     onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
+                    aria-labelledby="modal-color-key"
+                    aria-describedby="modal-emotion-color-key"
                 >
                     <Box sx={style}>
                         <div className='close-color-key'>
@@ -123,7 +114,7 @@ export default function RecCardList(props) {
 
                 <div className='homepage-cards-and-welcome'>
                     {isLoggedIn &&
-                        <p style={{ fontSize: 25 }}>Welcome, {username}!  Check out these latest recommendations!</p>
+                        <p style={{ fontSize: 25 }}>Welcome, {username}!  Check out these latest recommendations...</p>
                     }
 
                     <div className='card' style={{ height: '400px' }}>

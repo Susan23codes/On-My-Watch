@@ -73,7 +73,7 @@ export default function FollowingCard(props) {
         <>
 
             <div className='following-list-names' >
-                <div className='following-list-name-and-avatar' style={{ fontSize: 40, listStyleType: "none", }}>
+                <div className='following-list-name-and-avatar' style={{ fontSize: 30, listStyleType: "none", }}>
                     <div className='avatar-and-name'>
                         {followingObject.user_info.image ? (
                             <Avatar src={followingObject.user_info.image} sx={{mr: 2, width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />

@@ -392,26 +392,6 @@ export default function DetailView(props) {
             })
     }
 
-    // function handleShowComment() {
-    //     if (!showAddComment) {
-    //         return (
-    //             <Tooltip title="Add a Comment Below" arrow>
-    //                 <IconButton onClick={handleOpenComment} aria-label="add">
-    //                     <CommentIcon sx={{ color: "red" }} />
-    //                 </IconButton>
-    //             </Tooltip>
-    //         )
-    //     } else {
-    //         return (
-    //             <Tooltip title="Add a Comment Below" arrow>
-    //                 <IconButton onClick={handleCloseComment} aria-label="add">
-    //                     <CommentIcon sx={{ color: "red" }} />
-    //                 </IconButton>
-    //             </Tooltip>
-    //         )
-    //     }
-    // }
-
 
     function handleDelete() {
 
@@ -602,10 +582,9 @@ export default function DetailView(props) {
         <>
             {cardDetail &&
                 <>
-                    {/* <p style={{  marginLeft:'80px', marginBottom: 0 }}>You have great taste!</p> */}
                     <div className="detail-page">
 
-                        <Card className="card-detail" sx={{ bgcolor: color, width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
+                        <Card className="card-detail" sx={{ bgcolor: color, width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: '2px solid gray', pt: 2, gridRowStart: 1 }}>
 
                             <CardHeader
                                 sx={{
