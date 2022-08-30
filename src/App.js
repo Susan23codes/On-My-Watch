@@ -59,7 +59,7 @@ function App() {
         isLoggedIn={isLoggedIn}
       /> }
       <Routes>
-        <Route
+        {/* <Route
 
           path="/login"
           element={<><Navbar
@@ -72,8 +72,8 @@ function App() {
             navigate={navigate}
             handleLogout={handleLogout}
           /></>}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/register"
           element={<><Navbar
             navigate={navigate}
@@ -83,7 +83,7 @@ function App() {
             navigate={navigate}
             setAuth={setAuth}
           /></>}
-        />
+        /> */}
        
         <Route
           path="/new"

@@ -141,7 +141,7 @@ export default function FollowingCard(props) {
                                             <div className={`following-smaller-card`}>
                                                 <>
                                                     <div className='following-info'>
-                                                        <div>
+                                                        <div className='following-poster'>
                                                             <img src={cardObject.poster} width='70' alt='poster' />
                                                         </div>
                                                         <div className='following-text'>
