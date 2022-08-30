@@ -120,11 +120,12 @@ export default function LandingPage(props) {
             <div className="landing-page-header" style={{ backgroundColor: "#382069", height: '150px', width: '100vw' }}>
                 <>
                     <div className="title">
-                        <h1 style={{ fontSize: '50px' }}>📺n My Watch</h1>
+                        <img className="logo" src="onMyWatchLogo.png" alt="logo" ></img>
+                        <h1 style={{ fontSize: '50px', color: 'white' }}>On My Watch</h1>
                     </div>
                     <div className='login-register'>
-                        <Button onClick={handleClickLoginOpen} color="inherit" sx={{ fontSize: 20 }}>Login </Button>
-                        <Button onClick={handleClickRegistrationOpen} color="inherit" sx={{ fontSize: 20 }}>Register </Button>
+                        <Button onClick={handleClickLoginOpen} color="inherit" sx={{ fontSize: 20, color: 'white' }}>Login </Button>
+                        <Button onClick={handleClickRegistrationOpen} color="inherit" sx={{ fontSize: 20, color: 'white' }}>Register </Button>
                     </div>
                 </>
             </div>

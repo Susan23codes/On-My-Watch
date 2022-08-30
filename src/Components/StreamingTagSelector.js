@@ -23,7 +23,7 @@ const MenuProps = {
 const names = [
     'Netflix',
     'Hulu',
-    'Hbo',
+    'HBO',
     'Acorn',
     'Amazon Prime',
     'Disney Plus',
@@ -70,7 +70,7 @@ export default function StreamingTagSelector(props) {
     return (
         <div>
             <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-chip-label">Watched on..</InputLabel>
+                <InputLabel id="demo-multiple-chip-label">Site</InputLabel>
                 <Select
                     labelId="demo-multiple-chip-label"
                     id="demo-multiple-chip"

@@ -55,20 +55,22 @@ export default function RecCardList(props) {
                 {isLoggedIn &&
                     <>
                         <div className='homepage-sidebar'>
+
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <GiFilmProjector style={{marginTop:'20px'}}/>
-                                <GiFilmProjector style={{marginTop:'23px'}}/>
-                                <GiFilmProjector style={{marginTop:'24px'}}/>
-                                <GiFilmProjector style={{marginTop:'48px'}}/>
-                                <GiFilmProjector style={{marginTop:'49px'}}/>
+                                <GiFilmProjector style={{ marginTop: '20px' }} />
+                                <GiFilmProjector style={{ marginTop: '42px' }} />
+                                <GiFilmProjector style={{ marginTop: '42px' }} />
+                                <GiFilmProjector style={{ marginTop: '60px' }} />
+
                             </div >
-                            <div style={{ display: 'flex', flexDirection: 'column', marginLeft:'18px', }}>
-                                <Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px', marginTop:'20px' }}> My Watchlist</Link>
-                                <Link to={"/following"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> Following</Link>
-                                <a href="#" onClick={handleOpen} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> Sentiment Analysis Color Key</a>
-                                <Link to={"/watched"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> What I've Watched</Link>
-                                <Link to={"/new"} style={{ textDecoration: 'none', color: 'white', marginBottom:'20px' }}> Make a New Recommendation</Link>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '18px', }}>
+                                <Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white', marginBottom: '35px', marginTop: '20px' }}> My Watchlist</Link>
+                                <Link to={"/following"} style={{ textDecoration: 'none', color: 'white', marginBottom: '35px' }}> Following</Link>
+                                <Link to={"/watched"} style={{ textDecoration: 'none', color: 'white', marginBottom: '35px' }}> What I've Watched</Link>
+                                <a href="#" onClick={handleOpen} style={{ textDecoration: 'none', color: 'white', marginBottom: '35px' }}> Sentiment Analysis Color Key</a>
+
                             </div>
+
                         </div>
                     </>
                 }
@@ -113,9 +115,11 @@ export default function RecCardList(props) {
 
 
                 <div className='homepage-cards-and-welcome'>
+
                     {isLoggedIn &&
                         <p style={{ fontSize: 25 }}>Welcome, {username}!  Check out these latest recommendations...</p>
                     }
+
 
                     <div className='card' style={{ height: '400px' }}>
                         {!recommendationList &&
@@ -137,7 +141,7 @@ export default function RecCardList(props) {
 
                                 .map((cardObject, index) => {
                                     return (
-                                        <SingleCard
+                                        <SingleCard className='carouselCards'
                                             cardObject={cardObject}
                                             key={index}
                                             id={cardObject.id}
