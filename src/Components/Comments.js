@@ -37,31 +37,11 @@ export default function Comments(props) {
             })
     }, [comment])
 
-    // function handleAddComment(e) {
-    //     e.preventDefault()
-    //     setError(null)
-    //     console.log(comment)
-    
-    //     axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}/comment/`,
-    //     { comment: comment,
-    //       recommendation: params.recommendationId 
-    //     },
-    //         {
-    //             headers: { Authorization: `Token ${token}` },
-    //         })
-    //         .then(res => {
-    //             setComment('')
-    //             console.log(comment)
-    //         })
-    //         .catch((error) => {
-    //             setError(error.message)
-    //         })
-    // }
+
 
 
     return (
     <>
-        {/* <h1 style={{marginLeft:7}}>See what people are saying about {state.title} !</h1> */}
         {commentList && commentList.map((comment, index) => (
                         <>
                             <div className='individual-comment'>
@@ -71,23 +51,6 @@ export default function Comments(props) {
                             </div>
                         </>
                     ))}
-            {/* <h2 className='comment-form'>Want to join in the conversation?  Add a comment below!</h2> */}
-            {/* <div className="comment-form">
-                <form>
-                    <textarea
-                        value={comment}
-                        className="write-comment"
-                        placeholder='Write a comment'
-                        rows={10}
-                        cols={50}
-                        onChange={(e) => setComment(e.target.value)}
-                    >
-
-                    </textarea>
-                </form>
-
-                <button type="button" onClick={handleAddComment} className="comment-button">Submit Comment</button>
-            </div> */}
         </>
 
     )

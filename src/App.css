@@ -46,7 +46,6 @@ html {
   font-size: 30px;
   color: white;
   margin-left: 40px;
-  margin-top: 40px
 }
 
 .overlay {
@@ -71,6 +70,27 @@ html {
 
 .on-my-watch-title {
   color: black;
+}
+
+
+.color-key {
+  /* border: 2px solid; */
+  width: 200px;
+  height: 300px;
+  margin: auto;
+}
+
+.close-color-key {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.emotion-names {
+  width: 150px;
+  height: 30px;
+  margin-Bottom: 10px;
+  margin-left: 22px;
+  padding-top: 4px;
 }
 
 .navbar-buttons {
@@ -209,13 +229,14 @@ html {
 }
 
 .homepage-sidebar {
+  display: flex;
   border: 1px solid black;
   width: 17vw;
-  margin: 100px 0 0 20px;
+  margin: 120px 0 0 20px;
   font-size: 20px;
-  padding: 50px 20px 0 20px;
-  background-color: #382069;
 
+  padding: 20px 20px 0 20px;
+  background-color: #382069;
   color: white;
   border-radius: 4px;
   height: 350px;
@@ -333,9 +354,9 @@ html {
 }
 
 .following-list-item {
-  width: 330px;
+  width: 340px;
   padding-left: 5px;
-  margin-right: 50px;
+  margin-right: 60px;
   margin-bottom: 30px;
 }
 
@@ -551,4 +572,5 @@ html {
 .other-user-poster {
   margin-top: 30px;
 
+  margin-right: 8px;
 }

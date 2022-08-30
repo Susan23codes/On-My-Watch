@@ -134,12 +134,100 @@ export default function LandingPage(props) {
                 </div>
             </div>
             <div className="landing-page-text">
+            {/* <MovingText
+                        // type="unfold"
+                        type="slideInFrom"
+                        duration="1500ms"
+                        delay="2s"
+                        direction="normal"
+                        timing="ease-in"
+                        iteration="1"
+                        fillMode="none"> */}
                 <p style={{ fontSize: '60px' }}>Come find your next favorite show!</p>
-                <p>Sign in or register to follow people and see their recommendations</p>
-                <p >Browse the latest recommendations for new ideas</p>
-                <p>Search for inspiration</p>
-                <p>Make your own recommendations</p>
-                <p>Add shows to your watchlist</p>
+                {/* </MovingText> */}
+                <div >
+                    {/* <MovingText
+                        type="unfold"
+                        // type="fadeInFromRight"
+                        duration="1500ms"
+                        delay="2s"
+                        direction="normal"
+                        timing="ease-in"
+                        iteration="1"
+                        fillMode="none"> */}
+                        Sign in or register to follow people and see their recommendations
+                    {/* </MovingText> */}
+                </div>
+
+                <div >
+                    {/* <MovingComponent
+                        type="unfold"
+                        // type="fadeInFromRight"
+                        duration="1500ms"
+                        delay="4s"
+                        direction="normal"
+                        timing="ease-in"
+                        iteration="1"
+                        fillMode="none"> */}
+                        <p>Browse the latest recommendations for new ideas</p>
+                    {/* </MovingComponent> */}
+                </div>
+
+                <div>
+                    {/* <MovingComponent
+                        type="popIn"
+                        // type="fadeInFromRight"
+                        duration="1500ms"
+                        delay="6s"
+                        direction="normal"
+                        timing="ease-in"
+                        iteration="1"
+                        fillMode="none"> */}
+                        <p >Color-coded cards with sentiment analysis</p>
+                    {/* </MovingComponent> */}
+                </div>
+
+                <div >
+                    {/* <MovingText
+                        type="popIn"
+                        // type="fadeInFromRight"
+                        duration="1500ms"
+                        delay="8s"
+                        direction="normal"
+                        timing="ease-in"
+                        iteration="1"
+                        fillMode="none"> */}
+                        <p >Make your own recommendations</p>
+                    {/* </MovingText> */}
+                </div>
+
+                <div>
+                    {/* <MovingText
+                        type="popIn"
+                        // type="fadeInFromRight"
+                        duration="1500ms"
+                        delay="10s"
+                        direction="normal"
+                        timing="ease-in"
+                        iteration="1"
+                        fillMode="none"> */}
+                        <p>Add shows to your watchlist</p>
+                    {/* </MovingText> */}
+                </div>
+
+                <div >
+                    {/* <MovingText
+                        type="popIn"
+                        // type="fadeInFromRight"
+                        duration="1500ms"
+                        delay="12s"
+                        direction="normal"
+                        timing="ease-in"
+                        iteration="1"
+                        fillMode="none"> */}
+                        <span>Search for inspiration</span>
+                    {/* </MovingText> */}
+                </div>
             </div>
 
             <Dialog open={openLogin} onClose={handleCloseLogin}>

@@ -127,18 +127,18 @@ export default function DetailView(props) {
     console.log(params)
 
 
-
-
     async function ColorCall() {
         let a = await (axios.get(`https://onmywatch.herokuapp.com/api/recommendation/${params.recommendationId}`)
         )
         console.log(a)
         await handleColor(a.data)
-
     }
 
 
-
+    function changeLocation(placeToGo){
+        navigate(placeToGo, { replace: true });
+        window.location.reload();
+    }
 
     let firstRequestResults = null
     useEffect(() => {
@@ -239,10 +239,7 @@ export default function DetailView(props) {
                             console.log(userInfoForWhoElseRecommended)
                             setOtherUserSameRecommendation(userInfoForWhoElseRecommended)
                         })
-
-
                 })
-
     },
         [])
 
@@ -271,6 +268,7 @@ export default function DetailView(props) {
             })
     }
 
+
     function handleDeleteFromWatchList() {
         console.log("deleted!")
         setIsOnWatchList(false)
@@ -290,6 +288,7 @@ export default function DetailView(props) {
             })
     }
 
+
     function handleDeleteRecommendationCard() {
         setError(null)
 
@@ -305,6 +304,7 @@ export default function DetailView(props) {
                 setError(error.message)
             })
     }
+
 
     function handleFollowUser() {
         setError(null)
@@ -350,6 +350,7 @@ export default function DetailView(props) {
 
     }
 
+
     function handleMovetoWatchedList() {
         setError(null)
         axios.post(`https://onmywatch.herokuapp.com/api/recommendation/${cardDetail.id}/watchedlist`,
@@ -371,6 +372,7 @@ export default function DetailView(props) {
             })
     }
 
+
     function handleDeleteFromWatchedList() {
         setError(null)
         axios.delete(`https://onmywatch.herokuapp.com/api/recommendation/${cardDetail.id}/watchedlist`,
@@ -390,25 +392,6 @@ export default function DetailView(props) {
             })
     }
 
-    // function handleShowComment() {
-    //     if (!showAddComment) {
-    //         return (
-    //             <Tooltip title="Add a Comment Below" arrow>
-    //                 <IconButton onClick={handleOpenComment} aria-label="add">
-    //                     <CommentIcon sx={{ color: "red" }} />
-    //                 </IconButton>
-    //             </Tooltip>
-    //         )
-    //     } else {
-    //         return (
-    //             <Tooltip title="Add a Comment Below" arrow>
-    //                 <IconButton onClick={handleCloseComment} aria-label="add">
-    //                     <CommentIcon sx={{ color: "red" }} />
-    //                 </IconButton>
-    //             </Tooltip>
-    //         )
-    //     }
-    // }
 
     function handleDelete() {
 
@@ -426,6 +409,7 @@ export default function DetailView(props) {
             )
         }
     }
+
 
     function getAddedToWatchedListIcon() {
         if (isLoggedIn && !isOnWatchList) {
@@ -512,6 +496,7 @@ export default function DetailView(props) {
         }
     }
 
+
     function handleAddComment(e) {
         e.preventDefault()
         setError(null)
@@ -534,6 +519,7 @@ export default function DetailView(props) {
                 setError(error.message)
             })
     }
+
 
     function handleIsFollowing() {
         if (isFollowing) {
@@ -596,10 +582,9 @@ export default function DetailView(props) {
         <>
             {cardDetail &&
                 <>
-                    {/* <p style={{  marginLeft:'80px', marginBottom: 0 }}>You have great taste!</p> */}
                     <div className="detail-page">
 
-                        <Card className="card-detail" sx={{ bgcolor: color, width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: 2, pt: 2, gridRowStart: 1 }}>
+                        <Card className="card-detail" sx={{ bgcolor: color, width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: '2px solid gray', pt: 2, gridRowStart: 1 }}>
 
                             <CardHeader
                                 sx={{
@@ -827,7 +812,7 @@ export default function DetailView(props) {
                                         <div className='other-user-text'>
                                             <p>{data.title}</p>
                                             <p>{data.medium}</p>
-                                            <Link to={`/detail/${data.id}`}>Go to full recommendation card</Link>
+                                            <Link to={`/detail/${data.id}`} onClick={() => changeLocation(`/detail/${data.id}`)}>Go to full recommendation card</Link>
                                         </div>
                                     </div>
                                 </>

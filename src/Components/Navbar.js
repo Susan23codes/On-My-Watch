@@ -44,6 +44,8 @@ export default function Navbar(props) {
                         setLocation('new')
                     }
 
+
+
                     } color="inherit" sx={{ fontSize: 20, }}>Recommend</Button>
 
                     <Button onClick={() => {
