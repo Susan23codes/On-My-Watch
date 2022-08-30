@@ -145,7 +145,7 @@ export default function FollowingCard(props) {
                                                             <img src={cardObject.poster} width='70' alt='poster' />
                                                         </div>
                                                         <div className='following-text'>
-                                                            <p>{cardObject.title}</p>
+                                                            <p className='following-text-title'>{cardObject.title}</p>
                                                             <p>{cardObject.medium}</p>
                                                             <Link to={`/detail/${cardObject.id}`}>Go to full recommendation card</Link>
                                                         </div>
