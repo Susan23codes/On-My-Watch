@@ -56,11 +56,11 @@ export default function SingleCard(props) {
     const [isOnWatchedList, setIsOnWatchedList] = useState(false)
     const [color, setColor] = useState('#e9eef0')
     const sad = '#a9def9'
-    const joy = '#ede7b1'
+    const joy = '#ffff99'
     const fear = '#e4c1f9'
     const disgust = '#ede7b1'
     const surprise = '#fbc4a3'
-    const anger = '#f694c1'
+    const anger = '#ff4137'
     /* for (let i = 0; i < cardObject.genre.length; i++) {
          console.log(cardObject.genre[i].key)
      }*/

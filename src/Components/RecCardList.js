@@ -22,7 +22,7 @@ export default function RecCardList(props) {
             .then(res => {
                 console.log("Date")
                 console.log(new Date(res.data[0].created_at))
-                let results = (res.data.sort((a,b) => new Date(b.created_at) - new Date(a.created_at)))
+                let results = (res.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)))
                 setRecommendationList(results)
                 console.log(results)
 
@@ -38,12 +38,12 @@ export default function RecCardList(props) {
                     <>
 
                         <div className='homepage-sidebar'>
-                            <ul className='my-stuff'></ul>
-                            <li><GiFilmProjector /><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
-                            <li><GiFilmProjector /><Link to={"/following"} style={{ textDecoration: 'none', color: 'white' }}> Following</Link></li><br />
-                            <li><GiFilmProjector /><Link to={"/search"} style={{ textDecoration: 'none', color: 'white' }}> Search</Link></li><br />
-                            <li><GiFilmProjector /><Link to={"/watched"} style={{ textDecoration: 'none', color: 'white' }}> What I've Watched</Link></li><br />
-                            <li><GiFilmProjector /><Link to={"/new"} style={{ textDecoration: 'none', color: 'white' }}> Make a New Recommendation</Link></li>
+
+                            <li className='sidebarItem'><GiFilmProjector /><Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white' }}> My Watchlist</Link></li><br />
+                            <li className='sidebarItem'><GiFilmProjector /><Link to={"/following"} style={{ textDecoration: 'none', color: 'white' }}> Following</Link></li><br />
+                            <li className='sidebarItem'><GiFilmProjector /><Link to={"/search"} style={{ textDecoration: 'none', color: 'white' }}> Search</Link></li><br />
+                            <li className='sidebarItem'><GiFilmProjector /><Link to={"/watched"} style={{ textDecoration: 'none', color: 'white' }}> What I've Watched</Link></li><br />
+
                         </div>
                     </>
                 }
@@ -63,13 +63,11 @@ export default function RecCardList(props) {
                 } */}
 
                 <div className='homepage-cards-and-welcome'>
-                    {isLoggedIn &&
-                        <p style={{  fontSize: 25 }}>Welcome, {username}!  Check out these latest recommendations!</p>
-                    }
+
                     {/* {!isLoggedIn &&
                         <p style={{ paddingLeft: 20, fontSize: 25 }}>See the latest recommendations below!  Log in or sign up to access other great features!</p>
                     } */}
-                    <div className='card' style={{ height: '400px'}}>
+                    <div className='card' style={{ height: '400px' }}>
                         {!recommendationList &&
                             <img src="/loadingAnimation.gif"
                                 className="checkGif"
@@ -82,12 +80,12 @@ export default function RecCardList(props) {
                             CycleNavigation
                             interval={3000}
                             fullHeightHover={false}
-                            // IndicatorIcon={false}
+                        // IndicatorIcon={false}
                         >
                             {recommendationList && recommendationList.filter(cardObject => cardObject.user !== username).slice(0, 25)
                                 .map((cardObject, index) => {
                                     return (
-                                        <SingleCard
+                                        <SingleCard className='carouselCards'
                                             cardObject={cardObject}
                                             key={index}
                                             id={cardObject.id}

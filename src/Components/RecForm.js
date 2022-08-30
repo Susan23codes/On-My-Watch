@@ -217,20 +217,20 @@ export default function RecForm(props) {
             <div class="container">
                 <div>{mediaChosen ?
                     <div></div>
-                    :
-                    <div>                <div className="input-field">
+                    : <div className="FieldParam">
+                        <div>                <div className="input-field">
 
-                        <label style={{ fontSize: 20 }}>First Tell Us What You Watched and then Choose the Appropriate Poster:</label>
-                        <br></br>
-                        <input
-                            className="input"
-                            type="text"
-                            onChange={handleChangeSearchParams}
-                            value={searchParams}
-                        /><div className="emptySpace"></div>
-                        <input type="button" value="Search" onClick={movieSearch}></input>
+                            <label style={{ fontSize: 20 }}>First Tell Us What You Watched and then Choose the Appropriate Poster:</label>
+                            <br></br>
+                            <input
+                                className="input"
+                                type="text"
+                                onChange={handleChangeSearchParams}
+                                value={searchParams}
+                            /><div className="emptySpace"></div>
+                            <input type="button" value="Search" onClick={movieSearch}></input>
 
-                    </div></div>
+                        </div></div></div>
                 }</div>
 
 

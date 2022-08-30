@@ -117,14 +117,15 @@ export default function LandingPage(props) {
 
     return (
         <>
-            <div className="landing-page-header" style={{ backgroundColor: "#293e8a", height: '150px', width: '100vw' }}>
+            <div className="landing-page-header" style={{ backgroundColor: "#382069", height: '150px', width: '100vw' }}>
                 <>
                     <div className="title">
-                        <h1 style={{ fontSize: '50px' }}>📺n My Watch</h1>
+                        <img className="logo" src="onMyWatchLogo.png" alt="logo" ></img>
+                        <h1 style={{ fontSize: '50px', color: 'white' }}>On My Watch</h1>
                     </div>
                     <div className='login-register'>
-                        <Button onClick={handleClickLoginOpen} color="inherit" sx={{ fontSize: 20 }}>Login </Button>
-                        <Button onClick={handleClickRegistrationOpen} color="inherit" sx={{ fontSize: 20 }}>Register </Button>
+                        <Button onClick={handleClickLoginOpen} color="inherit" sx={{ fontSize: 20, color: 'white' }}>Login </Button>
+                        <Button onClick={handleClickRegistrationOpen} color="inherit" sx={{ fontSize: 20, color: 'white' }}>Register </Button>
                     </div>
                 </>
             </div>
@@ -145,10 +146,10 @@ export default function LandingPage(props) {
                 <DialogContent>
                     <DialogContentText>
                         <div className='close-icon-login'>
-                    <CardActionArea style={{width:'30px', height:'30px'}}>
-                    <CloseIcon  style={{height:'30px', width:'30px'}} onClick={handleCloseLogin}/>
-                    </CardActionArea>
-                    </div>
+                            <CardActionArea style={{ width: '30px', height: '30px' }}>
+                                <CloseIcon style={{ height: '30px', width: '30px' }} onClick={handleCloseLogin} />
+                            </CardActionArea>
+                        </div>
                         <div className="entire-login-form">
                             <h2 className='login-form'>Please Log In!</h2>
                             {error && <div className='error'>{error}</div>}
@@ -176,14 +177,14 @@ export default function LandingPage(props) {
             <Dialog open={openRegister} onClose={handleCloseRegister}>
                 <DialogContent>
                     <DialogContentText>
-                    <div className='close-icon-login'>
-                    <CardActionArea style={{width:'30px', height:'30px'}}>
-                    <CloseIcon  style={{height:'30px', width:'30px'}} onClick={handleCloseRegister}/>
-                    </CardActionArea>
-                    </div>
+                        <div className='close-icon-login'>
+                            <CardActionArea style={{ width: '30px', height: '30px' }}>
+                                <CloseIcon style={{ height: '30px', width: '30px' }} onClick={handleCloseRegister} />
+                            </CardActionArea>
+                        </div>
                         {error && <div>{error}</div>}
                         <h2 style={{ textAlign: 'center' }}>Sign up and starting watching great TV!</h2>
-                        
+
                         <form id="registration-form" onSubmit={handleRegistrationSubmit}>
 
                             <div className="form-controls">

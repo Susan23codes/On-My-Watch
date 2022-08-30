@@ -49,7 +49,7 @@ export default function DetailView(props) {
     const { isLoggedIn, token, length, username } = props
 
     const [cardDetail, setCardDetail] = useState(null)
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(true);
     const [isOnWatchList, setIsOnWatchList] = useState(false)
     const [isOnWatchedList, setIsOnWatchedList] = useState(false)
     const [error, setError] = useState(null)
@@ -63,11 +63,11 @@ export default function DetailView(props) {
     const [open, setOpen] = useState(false)
     const [color, setColor] = useState('#e9eef0')
     const sad = '#a9def9'
-    const joy = '#ede7b1'
+    const joy = '#ffff99'
     const fear = '#e4c1f9'
     const disgust = '#ede7b1'
     const surprise = '#fbc4a3'
-    const anger = '#f694c1'
+    const anger = '#ff4137'
     /* for (let i = 0; i < cardObject.genre.length; i++) {
          console.log(cardObject.genre[i].key)
      }*/
@@ -668,7 +668,7 @@ export default function DetailView(props) {
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
                                     </Typography>
                                     <Typography
-                                        className="recommendation"
+                                        className="recommendation" gutterBottom={false}
                                         sx={{ width: 600 }}>
                                         <strong>My Recommendation: </strong> {cardDetail.reason}
                                     </Typography>
@@ -679,7 +679,7 @@ export default function DetailView(props) {
 
 
                             <CardActions className="see-comments">
-                                See comments
+                                Comments
                                 <ExpandMore
                                     expand={expanded}
                                     onClick={handleExpandClick}
