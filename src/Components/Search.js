@@ -84,7 +84,7 @@ export default function Search(props) {
             "label": "Crude"
         }
     ]
-    const genres = [{ "value": "action", "label": "Action" }]
+    const genres = [{ "value": "action", "label": "Action" }, { "value": "adventure", "label": "Adventure" }, { "value": "animation", "label": "Animation" }, { "value": "biography", "label": "Biography" }, { "value": "comedy", "label": "Comedy" }, { "value": "crime", "label": "Crime" }, { "value": "drama", "label": "Drama" }, { "value": "family", "label": "Family" }, { "value": "fantasy", "label": "Fantasy" }, { "value": "film-Noir", "label": "Film-Noir" }, { "value": "history", "label": "History" }, { "value": "horror", "label": "Horror" }, { "value": "music", "label": "Music" }, { "value": "musical", "label": "Musical" }, { "value": "mystery", "label": "Mystery" }, { "value": "romance", "label": "Romance" }, { "value": "sci-fi", "label": "Sci-Fi" }, { "value": "Sport", "label": "Sport" }, { "value": "thriller", "label": "Thriller" }, { "value": "war", "label": "War" }, { "value": "western", "label": "Western" }]
     const mediums = [{ "value": "Movie", "label": "Movie" }, { "value": "TVSeries", "label": "TV" }, { "value": "Both", "label": "Both" }]
 
 
