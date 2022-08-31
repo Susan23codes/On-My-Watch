@@ -108,7 +108,10 @@ export default function RecForm(props) {
             .then((res) => {
                 console.log(res.data.results);
                 setMediaObj(res.data.results);
-            });
+            }).catch((error) => {
+                setError(error.message);
+
+            });;
 
     }
 
@@ -124,7 +127,9 @@ export default function RecForm(props) {
             .then((res) => {
                 console.log(res.data);
                 setMediaObj(res.data);
-            });
+            }).catch((error) => {
+                setError(error.message);
+            });;
 
     }
 
