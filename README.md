@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# On My Watch Readme
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# CONTRIBUTORS:
 
-## Available Scripts
+This project was developed by backend developers Amanda McMullin and John Parrish and frontend developers Susan Brown and Connor O'Mara.
 
-In the project directory, you can run:
+# DESCRIPTION:
 
-### `npm start`
+On My Watch is an app designed for the user who is looking for new ideas or inspiration for what to watch next.  We've all been there, having finished watching a great movie or TV series and wondering, "What's next?"  This app allows users to browse recommendations by others, follow users to keep up with their latest recommendations, add shows they're interested in to a personal watch list, search, comment on shows, and make their own recommendations.  It also employs sentiment analysis to gauge the overall emotion of the recommendation and color-codes the card appropriately.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# INSTALLATION:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- To install this project, begin by cloning this repo in your terminal by clicking the green clone or download button at the top right of the page and copying the URL.
 
-### `npm test`
+- In your terminal, type `git clone URL`
+    - replace `URL` with the url you copied
+    - hit enter
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- This will copy all the files from the On My Watch repo onto your computer.
 
-### `npm run build`
+- In your terminal, cd into the directory you just created
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Next, type `npm install` to install all dependencies required for the project.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Finally, type `npm start` to run the app locally in the browser!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- To look at the code, open up the project in VS code.
 
-### `npm run eject`
+# PRODUCTION APPLICATION
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+You can reach our deployed application by accessing the link below: 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://transcendent-basbousa-7ac957.netlify.app/

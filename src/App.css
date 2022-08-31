@@ -15,14 +15,14 @@ html {
 
 .login-register2 {
   display: flex;
-  margin-right: 10px;
+  margin-right: 20px;
   gap: 15px;
 }
 
 .title {
   display: flex;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .title:hover {
@@ -98,6 +98,7 @@ html {
   color: black;
   padding: 30px 30px 0px 40px;
   align-items: flex-end;
+  margin-right: 20px;
 }
 
 .navbar-buttons-not-title {
@@ -141,8 +142,7 @@ html {
 
 .follow-image {
   justify-content: space-between;
-  filter: invert(17%) sepia(92%) saturate(6400%) hue-rotate(359deg) brightness(95%) contrast(118%);
-}
+  filter: invert(7%) sepia(48%) saturate(6556%) hue-rotate(259deg) brightness(106%) contrast(87%);}
 
 .card {
   padding-top: 30px;
@@ -232,14 +232,13 @@ html {
   display: flex;
   border: 1px solid black;
   width: 17vw;
-  margin: 120px 0 0 20px;
+  margin: 112px 0 0 20px;
   font-size: 20px;
-
   padding: 20px 20px 0 20px;
   background-color: #382069;
   color: white;
   border-radius: 4px;
-  height: 350px;
+  height: 392px;
   list-style-type: none;
 }
 
@@ -247,7 +246,7 @@ html {
   justify-content: center;
 }
 
-.homepage-sidebar-logged-out {
+/* .homepage-sidebar-logged-out {
   border: 1px solid black;
   width: 20vw;
   margin: 30px 0 0 10px;
@@ -258,7 +257,7 @@ html {
   border-radius: 10px;
   height: 600px;
   list-style-type: none;
-}
+} */
 
 
 .watchlist-cards {
@@ -362,7 +361,7 @@ html {
 
 
 .following-list-cards {
-  height: 600px;
+  max-height: 600px;
   overflow-y: scroll;
   overflow-x: visible;
   display: flex;
@@ -378,10 +377,9 @@ html {
   border: 1px solid #293e8a;
   border-radius: 5px;
   width: 20vw;
-  height: 25%;
+  height: 150px;
   padding: 0 0 10px 5px;
   margin-bottom: 10px;
-  padding-top: 20px;
   background-color: #e9eef0;
   align-items: flex-start;
 }
@@ -501,7 +499,7 @@ html {
 .close-icon-login {
   display: flex;
   justify-content: flex-end;
-  width: 600px
+  width: 600px;
 }
 
 /* .close-icon-and-following {
@@ -529,7 +527,7 @@ html {
 }
 
 .logo {
-  width: 10%;
+  width: 8%;
 }
 
 
@@ -538,10 +536,10 @@ html {
   display: flex;
 }
 
-.carousel {
+/* .carousel {
   padding-top: 12%;
 
-}
+} */
 
 .sidebarItem {
   padding-bottom: 30px;
@@ -570,7 +568,7 @@ html {
 }
 
 .other-user-poster {
-  margin-top: 30px;
+  margin-top: 20px;
 
   margin-right: 8px;
 }

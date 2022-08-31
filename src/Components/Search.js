@@ -6,7 +6,7 @@ import ComponentSearch from "./ComponentSearch";
 
 
 export default function Search(props) {
-    const [data, setData] = useState('')
+    const [data, setData] = useState(false)
     const [keyword, setKeyword] = useState('')
     const [medium, setMedium] = useState('Movie')
     const [searchParams, setSearchParams] = useState('')
@@ -124,6 +124,7 @@ export default function Search(props) {
                     Authorization: `Token ${props.token}`,
                 }
             );
+            console.log(a.data)
         setData(a.data)
     }
 
@@ -150,7 +151,12 @@ export default function Search(props) {
 
 
         <div>
-            {data !== '' && <h1>{data.map((data, index) =>
+            {data && data.length === 0 &&
+                <p style={{marginTop: '50px', fontSize:'25px'}}>Sorry, your search did not return any results! </p>
+            }
+            {data && 
+            <h1>{data.map((data, index) =>
+                
                 <SingleCard cardObject={data}
                     key={index}
                     id={data.id}

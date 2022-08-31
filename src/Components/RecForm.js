@@ -164,7 +164,6 @@ export default function RecForm(props) {
                     keywords: mediaObj.keywordList,
                     actors: mediaObj.actorList,
                     emotion: a.data,
-                    watched_by: [],
 
                 },
                 {
