@@ -11,9 +11,10 @@ export default function Search(props) {
     const [medium, setMedium] = useState('Movie')
     const [searchParams, setSearchParams] = useState('')
     const [choice, setChoice] = useState('')
-    const choices = [{ "value": "tags", "label": "Tags" }, { "value": "genre", "label": "Genre" }]
+    const choices = [{ "value": "tags", "label": "Tags" }, { "value": "genre", "label": "Genre" }, { "value": "users", "label": "Users" }]
     const [tag, setTag] = useState('')
     const [genre, setGenre] = useState('')
+    const [user, setUser] = useState('')
     const tags = [
         {
             "id": 1,
@@ -107,7 +108,22 @@ export default function Search(props) {
     const handleGenre = (value) => {
         setGenre(value)
     };
+    const handleUserSearch = async (event) => {
+        let a = await axios
+            .get(
+                `https://onmywatch.herokuapp.com/api/search/recommendations/?user=${user}`,
+                {},
+                {
+                    Authorization: `Token ${props.token}`,
+                }
+            );
+        setData(a.data)
+    }
+    const handleChangeUser = (event) => {
 
+        setUser(event.target.value)
+        console.log(user)
+    }
     const handleSearch = async (event) => {
         var string = ""
         if (tag !== undefined && tag !== "") {
@@ -131,12 +147,12 @@ export default function Search(props) {
 
 
 
-    return (<div className="searchBox"><div className="Search"><div> </div><br></br>Filter For Your Recommendation:<div></div><br></br>
+    return (<div>{choice !== "users" ? <div className="searchBox"><div className="Search"><div> </div><br></br>Filter For Your Recommendation:<div></div><br></br>
         <TextField select sx={{ 'width': '20%' }} label='search' defaultValue={"Movie"} value={medium} onChange={handleChangeMedium}>
             {mediums.map((option) => (<MenuItem key={option.value} value={option.value}>
                 {option.label}
             </MenuItem>))}
-        </TextField><TextField sx={{ 'width': '80%' }} label='Keyword' value={keyword} onChange={handleChangeSearchParams} />
+        </TextField><br></br><TextField sx={{ 'width': '80%' }} label='Keyword' value={keyword} onChange={handleChangeSearchParams} />
         <div className="emptySpace"></div>
         <label for="medium">Additional Options:</label>
         <div className='searchBox'>
@@ -170,7 +186,28 @@ export default function Search(props) {
 
         </div>
     </div>
-    </div >
+    </div> : <div className='box6'><div></div><div className='blankSpace'></div>
+
+
+
+        <div>What Is the Username?</div> <input type="text" onChange={handleChangeUser} placeholder="Search.."></input>
+        <input type="button" value="Search" onClick={handleUserSearch}></input>
+        <div>
+            {data !== '' && <h1>{data.map((data, index) =>
+                <SingleCard cardObject={data}
+                    key={index}
+                    id={data.id}
+                    isLoggedIn={props.isLoggedIn}
+                    token={props.token}
+                    username={data.user_info.username}
+                    navigate={props.navigate}
+                />
+            )} </h1>}
+
+
+        </div>
+
+    </div>}</div >
     )
     //call api to get list with props.searchType and props.params
 

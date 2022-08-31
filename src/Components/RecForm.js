@@ -22,6 +22,7 @@ export default function RecForm(props) {
     const [tags, setTags] = useState([])
     const [recommendation, setRecommendation] = useState([])
     const [error, setError] = useState('')
+    const [submitClicked, setSubmitClicked] = useState(false)
     const [emotion, setEmotion] = useState({
         "emotions_detected": [
             "anger"
@@ -107,7 +108,10 @@ export default function RecForm(props) {
             .then((res) => {
                 console.log(res.data.results);
                 setMediaObj(res.data.results);
-            });
+            }).catch((error) => {
+                setError(error.message);
+
+            });;
 
     }
 
@@ -123,7 +127,9 @@ export default function RecForm(props) {
             .then((res) => {
                 console.log(res.data);
                 setMediaObj(res.data);
-            });
+            }).catch((error) => {
+                setError(error.message);
+            });;
 
     }
 
@@ -133,6 +139,7 @@ export default function RecForm(props) {
 
 
     async function handleSubmit() {
+        setSubmitClicked(true)
         let a = await axios.request(options);
 
         console.log(a);
@@ -216,20 +223,20 @@ export default function RecForm(props) {
             <div class="container">
                 <div>{mediaChosen ?
                     <div></div>
-                    : <div className="FieldParam">
-                        <div>                <div className="input-field">
+                    :
+                    <div>                <div className="input-field">
 
-                            <label style={{ fontSize: 20 }}>First Tell Us What You Watched and then Choose the Appropriate Poster:</label>
-                            <br></br>
-                            <input
-                                className="input"
-                                type="text"
-                                onChange={handleChangeSearchParams}
-                                value={searchParams}
-                            /><div className="emptySpace"></div>
-                            <input type="button" value="Search" onClick={movieSearch}></input>
+                        <label style={{ fontSize: 20 }}>First Tell Us What You Watched and then Choose the Appropriate Poster:</label>
+                        <br></br>
+                        <input
+                            className="input"
+                            type="text"
+                            onChange={handleChangeSearchParams}
+                            value={searchParams}
+                        /><div className="emptySpace"></div>
+                        <input type="button" value="Search" onClick={movieSearch}></input>
 
-                        </div></div></div>
+                    </div></div>
                 }</div>
 
 
@@ -299,8 +306,15 @@ export default function RecForm(props) {
                             </div>
                             <br></br>
                             <div class="row submissionArea">
-                                <div >{submitComplete ? <div><div class="submissionMessage">Submission Complete!</div><img src="/singleloopcheck.gif" className="checkGif" alt="gifImage" height="120"  ></img></div> : <input type="button" value="Submit" onClick={handleSubmit}></input>
-                                }</div>
+
+                                <div >{submitComplete ?
+                                    <div><div class="submissionMessage">Submission Complete!</div>
+                                        <img src="/singleloopcheck.gif" className="checkGif" alt="gifImage" height="120"  ></img>
+                                    </div>
+                                    : <div> {!submitClicked ?
+                                        <input type="button" value="Submit" onClick={handleSubmit}></input> :
+                                        <div><img src="/loadingAnimation.gif" className="loading" alt="loading" height="120"  ></img></div>
+                                    }</div>}</div>
 
                             </div>
                         </form>

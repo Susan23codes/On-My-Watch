@@ -41,6 +41,7 @@ export default function SingleCard(props) {
     const [genreArray, setGenreArray] = useState([])
     const [isOnWatchedList, setIsOnWatchedList] = useState(false)
     const [color, setColor] = useState('#e9eef0')
+    const [emoji, setEmoji] = useState('meh.png')
     const sad = '#a9def9'
     const joy = '#ffff99'
     const fear = '#e4c1f9'
@@ -50,6 +51,7 @@ export default function SingleCard(props) {
     /* for (let i = 0; i < cardObject.genre.length; i++) {
          console.log(cardObject.genre[i].key)
      }*/
+
     function handleColor() {
         if (cardObject.emotion !== null) {
             if (cardObject.emotion.emotions_detected[0] !== null) {
@@ -57,12 +59,30 @@ export default function SingleCard(props) {
 
 
                 //      console.log(cardObject.emotion.emotions_detected[0])
-                if (cardObject.emotion.emotions_detected[0] === 'joy') { setColor(joy) }
-                if (cardObject.emotion.emotions_detected[0] === 'anger') { setColor(anger) }
-                if (cardObject.emotion.emotions_detected[0] === 'sadness') { setColor(sad) }
-                if (cardObject.emotion.emotions_detected[0] === 'disgust') { setColor(disgust) }
-                if (cardObject.emotion.emotions_detected[0] === 'surprise') { setColor(surprise) }
-                if (cardObject.emotion.emotions_detected[0] === 'fear') { setColor(fear) }
+                if (cardObject.emotion.emotions_detected[0] === 'joy') {
+                    setColor(joy)
+                    setEmoji('joy.png')
+                }
+                if (cardObject.emotion.emotions_detected[0] === 'anger') {
+                    setColor(anger)
+                    setEmoji('angry.png')
+                }
+                if (cardObject.emotion.emotions_detected[0] === 'sadness') {
+                    setColor(sad)
+                    setEmoji('sad.png')
+                }
+                if (cardObject.emotion.emotions_detected[0] === 'disgust') {
+                    setColor(disgust)
+                    setEmoji('disgust.png')
+                }
+                if (cardObject.emotion.emotions_detected[0] === 'surprise') {
+                    setColor(surprise)
+                    setEmoji('surprise.png')
+                }
+                if (cardObject.emotion.emotions_detected[0] === 'fear') {
+                    setColor(fear)
+                    setEmoji('scared.png')
+                }
             }
 
         }
@@ -183,6 +203,7 @@ export default function SingleCard(props) {
                             <CheckCircleIcon sx={{ color: "#382069" }} />
                         </IconButton>
                     </Tooltip>
+
                 </>
             )
         }
@@ -211,8 +232,10 @@ export default function SingleCard(props) {
                     <Avatar sx={{ bgcolor:'#382069', mr: 2, height: 60, width: 60 }} aria-label="recipe">
                         {cardObject.user.charAt(0).toUpperCase()}
                     </Avatar>
+
                 )
                 }
+
                 titleTypographyProps={{ variant: 'h5' }}
 
                 action={getWatchListIcon()}
@@ -228,15 +251,16 @@ export default function SingleCard(props) {
 
             />
             <div className='poster-and-text'>
-                <div className='poster'>
-                    <CardMedia
-                        component="img"
-                        height="230"
-                        sx={{ width: 200, pl: 5 }}
-                        image={cardObject.poster}
-                        alt="TV poster"
-                    />
-                </div>
+                <div className='boxbox'>
+                    <div className='poster'>
+                        <CardMedia
+                            component="img"
+                            height="230"
+                            sx={{ width: 200, pl: 5 }}
+                            image={cardObject.poster}
+                            alt="TV poster"
+                        />
+                    </div><img className="emoji" src={emoji} alt="sadface" width="20px" height="20px"></img></div>
                 <CardContent>
                     <Typography paragraph>
                         <strong>Medium:</strong> {cardObject.medium}
@@ -263,18 +287,25 @@ export default function SingleCard(props) {
 
 
 
-                    </Typography>
 
-                    <Typography paragraph>
-                        <strong>Tags: </strong>{cardObject.tag.join(', ')}
                     </Typography>
+                    <div className='boxbox'>
+                        <Typography paragraph>
+                            <strong>Tags: </strong>{cardObject.tag.join(', ')}
+                        </Typography>
+
+                    </div>
                 </CardContent>
             </div>
+
             {isLoggedIn &&
                 <CardActions>
                     <Button onClick={() => navigate(`/detail/${cardObject.id}`)} size="small">See More</Button>
                 </CardActions>
+
             }
+
+
         </Card>
     )
 }
