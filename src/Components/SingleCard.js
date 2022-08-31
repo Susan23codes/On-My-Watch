@@ -1,36 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment'
-import { Navigate, useParams, } from 'react-router-dom';
+import { useParams, } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
-import CheckIcon from '@mui/icons-material/Check';
-import { StarIcon } from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import MenuIcon from '@mui/icons-material/Menu';
-import { DarkMode } from '@mui/icons-material';
-import { autocompleteClasses, CardActionArea, Tooltip } from '@mui/material';
-import { flexbox, maxWidth } from '@mui/system';
+import { CardActionArea, Tooltip } from '@mui/material';
 
 
 
@@ -198,7 +184,7 @@ export default function SingleCard(props) {
                 <>
                     <Tooltip title="Add to Watchlist" arrow>
                         <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-                            <AddToQueueIcon sx={{ color: "red" }} />
+                            <AddToQueueIcon sx={{ color: "#382069" }} />
                         </IconButton>
                     </Tooltip>
 
@@ -209,12 +195,12 @@ export default function SingleCard(props) {
                 <>
                     <Tooltip title="Added to Watchlist!" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
-                            <BookmarkAddedIcon sx={{ color: "red" }} />
+                            <BookmarkAddedIcon sx={{ color: "#382069" }} />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="You've Watched This" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchedList()} aria-label="delete from watched">
-                            <CheckCircleIcon sx={{ color: "red" }} />
+                            <CheckCircleIcon sx={{ color: "#382069" }} />
                         </IconButton>
                     </Tooltip>
 
@@ -243,7 +229,7 @@ export default function SingleCard(props) {
                 avatar={cardObject.user_info.image ? (
                     <Avatar src={cardObject.user_info.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
                 ) : (
-                    <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="recipe">
+                    <Avatar sx={{ bgcolor:'#382069', mr: 2, height: 60, width: 60 }} aria-label="recipe">
                         {cardObject.user.charAt(0).toUpperCase()}
                     </Avatar>
 

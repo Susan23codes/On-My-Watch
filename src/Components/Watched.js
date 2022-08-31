@@ -17,7 +17,9 @@ export default function Watched(props) {
                 }
             })
             .then(res => {
+                console.log('*****')
                 console.log(res.data)
+                console.log('*****')
                 setAlreadyWatched(res.data.reverse())
             })
     }, [])
@@ -25,7 +27,7 @@ export default function Watched(props) {
 
     return (
         <>
-            <p style={{ marginLeft: '10px', textAlign: "left", fontSize: 30, fontStyle: 'italic', color: "#293e8a", }}>Shows I've "Scene"</p>
+            <p style={{ marginLeft: '20px', textAlign: "left", fontSize: 30, fontStyle: 'italic', color: "#293e8a", }}>Shows I've "Scene"</p>
 
             <div className='watched-background'>
                 {/* <h1 style={{ textAlign: "center", fontSize: 50, marginTop: 0 }}>I've already watched these fantastic shows:</h1> */}

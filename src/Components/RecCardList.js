@@ -58,13 +58,13 @@ export default function RecCardList(props) {
                         <div className='homepage-sidebar'>
 
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <GiFilmProjector style={{ marginTop: '20px' }} />
+                                <GiFilmProjector style={{ marginTop: '38px' }} />
                                 <GiFilmProjector style={{ marginTop: '42px' }} />
                                 <GiFilmProjector style={{ marginTop: '42px' }} />
                                 <GiFilmProjector style={{ marginTop: '60px' }} />
 
                             </div >
-                            <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '18px', }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '18px', marginTop:'18px' }}>
                                 <Link to={"/mywatchlist"} style={{ textDecoration: 'none', color: 'white', marginBottom: '35px', marginTop: '20px' }}> My Watchlist</Link>
                                 <Link to={"/following"} style={{ textDecoration: 'none', color: 'white', marginBottom: '35px' }}> Following</Link>
                                 <Link to={"/watched"} style={{ textDecoration: 'none', color: 'white', marginBottom: '35px' }}> What I've Watched</Link>
@@ -118,7 +118,7 @@ export default function RecCardList(props) {
                 <div className='homepage-cards-and-welcome'>
 
                     {isLoggedIn &&
-                        <p style={{ fontSize: 25 }}>Welcome, {username}!  Check out these latest recommendations...</p>
+                        <p style={{ fontSize: 25, textAlign:'center', fontStyle: 'italic', color: "#293e8a", }}>Welcome, {username}!  Check out the latest recommendations...</p>
                     }
 
 

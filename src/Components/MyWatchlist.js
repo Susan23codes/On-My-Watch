@@ -25,7 +25,7 @@ export default function MyWatchlist(props) {
 
     return (
         <>
-            <p style={{ marginLeft: '10px', textAlign: "left", fontSize: 30, fontStyle: 'italic', color: "#293e8a", }}>Don't Just Watch TV, Watch Good TV</p>
+            <p style={{ marginLeft: '20px', textAlign: "left", fontSize: 30, fontStyle: 'italic', color: "#293e8a", }}>Don't Just Watch TV, Watch Good TV</p>
             <div className='watchlist-cards'>
                 {!watchlist &&
                     <img src="/loadingAnimation.gif"

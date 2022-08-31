@@ -120,8 +120,8 @@ export default function LandingPage(props) {
             <div className="landing-page-header" style={{ backgroundColor: "#382069", height: '150px', width: '100vw' }}>
                 <>
                     <div className="title">
-                        <img className="logo" src="onMyWatchLogo.png" alt="logo" ></img>
-                        <h1 style={{ fontSize: '50px', color: 'white' }}>On My Watch</h1>
+                        <img className="logo" src="onMyWatchLogo.png" alt="logo" style={{width:'7%'}}></img>
+                        <h1 style={{ fontSize: '50px', color: 'white' }}>n My Watch</h1>
                     </div>
                     <div className='login-register'>
                         <Button onClick={handleClickLoginOpen} color="inherit" sx={{ fontSize: 20, color: 'white' }}>Login </Button>
@@ -134,99 +134,29 @@ export default function LandingPage(props) {
                 </div>
             </div>
             <div className="landing-page-text">
-            {/* <MovingText
-                        // type="unfold"
-                        type="slideInFrom"
-                        duration="1500ms"
-                        delay="2s"
-                        direction="normal"
-                        timing="ease-in"
-                        iteration="1"
-                        fillMode="none"> */}
                 <p style={{ fontSize: '60px' }}>Come find your next favorite show!</p>
-                {/* </MovingText> */}
                 <div >
-                    {/* <MovingText
-                        type="unfold"
-                        // type="fadeInFromRight"
-                        duration="1500ms"
-                        delay="2s"
-                        direction="normal"
-                        timing="ease-in"
-                        iteration="1"
-                        fillMode="none"> */}
                         Sign in or register to follow people and see their recommendations
-                    {/* </MovingText> */}
                 </div>
 
-                <div >
-                    {/* <MovingComponent
-                        type="unfold"
-                        // type="fadeInFromRight"
-                        duration="1500ms"
-                        delay="4s"
-                        direction="normal"
-                        timing="ease-in"
-                        iteration="1"
-                        fillMode="none"> */}
+                <div>
                         <p>Browse the latest recommendations for new ideas</p>
-                    {/* </MovingComponent> */}
                 </div>
 
                 <div>
-                    {/* <MovingComponent
-                        type="popIn"
-                        // type="fadeInFromRight"
-                        duration="1500ms"
-                        delay="6s"
-                        direction="normal"
-                        timing="ease-in"
-                        iteration="1"
-                        fillMode="none"> */}
                         <p >Color-coded cards with sentiment analysis</p>
-                    {/* </MovingComponent> */}
                 </div>
 
                 <div >
-                    {/* <MovingText
-                        type="popIn"
-                        // type="fadeInFromRight"
-                        duration="1500ms"
-                        delay="8s"
-                        direction="normal"
-                        timing="ease-in"
-                        iteration="1"
-                        fillMode="none"> */}
                         <p >Make your own recommendations</p>
-                    {/* </MovingText> */}
                 </div>
 
                 <div>
-                    {/* <MovingText
-                        type="popIn"
-                        // type="fadeInFromRight"
-                        duration="1500ms"
-                        delay="10s"
-                        direction="normal"
-                        timing="ease-in"
-                        iteration="1"
-                        fillMode="none"> */}
                         <p>Add shows to your watchlist</p>
-                    {/* </MovingText> */}
                 </div>
 
                 <div >
-                    {/* <MovingText
-                        type="popIn"
-                        // type="fadeInFromRight"
-                        duration="1500ms"
-                        delay="12s"
-                        direction="normal"
-                        timing="ease-in"
-                        iteration="1"
-                        fillMode="none"> */}
                         <span>Search for inspiration</span>
-                    {/* </MovingText> */}
                 </div>
             </div>
 

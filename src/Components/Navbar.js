@@ -34,7 +34,7 @@ export default function Navbar(props) {
 
 
     }
-    // *******
+
     return (
         <div className="landing-page-header" style={{ backgroundColor: "#382069", height: '150px', width: '100vw' }}>
             <>
@@ -43,7 +43,7 @@ export default function Navbar(props) {
                         navigate('/');
                         setLocation('home')
                     }} className="logo" src="onMyWatchLogo.png" alt="logo"  ></img>
-                    <Typography style={{ fontSize: '50px', color: 'white' }}>On My Watch</Typography>
+                    <Typography style={{ fontSize: '50px', color: 'white' }}>n My Watch</Typography>
                 </div>
                 <div className='login-register2'>
                     <Button onClick={() => {
