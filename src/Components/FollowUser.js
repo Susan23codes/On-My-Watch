@@ -1,11 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { GiFilmProjector } from 'react-icons/gi';
-import { Link } from 'react-router-dom'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import IconButton from '@mui/material/IconButton';
-import { Tooltip } from '@mui/material';
 import FollowingCard from './FollowingCard';
 
 
@@ -46,7 +40,7 @@ export default function FollowUser(props) {
         <>
 
 
-<p style={{ marginLeft: '10px', textAlign: "left", fontSize: 30, fontStyle: 'italic', color: "#293e8a", }}>My Supporting Cast</p>
+<p style={{ marginLeft: '20px', textAlign: "left", fontSize: 30, fontStyle: 'italic', color: "#293e8a", }}>My Supporting Cast</p>
             <div className='following-list'>
                 {followinglist && followinglist.map((followingObject, index) => {
                     return (

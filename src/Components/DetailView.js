@@ -17,7 +17,6 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
 import CloseIcon from '@mui/icons-material/Close';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
@@ -31,9 +30,7 @@ import Backdrop from '@mui/material/Backdrop';
 import MoreMovies from "./MoreMovies";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
 
 const ExpandMore = styled((props) => {
@@ -53,7 +50,7 @@ export default function DetailView(props) {
     const { isLoggedIn, token, length, username, SingleCard } = props
 
     const [cardDetail, setCardDetail] = useState(null)
-    const [expanded, setExpanded] = useState(true);
+    const [expanded, setExpanded] = useState(false);
     const [isOnWatchList, setIsOnWatchList] = useState(false)
     const [isOnWatchedList, setIsOnWatchedList] = useState(false)
     const [error, setError] = useState(null)
@@ -399,7 +396,7 @@ export default function DetailView(props) {
             return (
                 <Tooltip title="Delete Your Recommendation" arrow>
                     <IconButton onClick={() => handleDeleteRecommendationCard()} aria-label="delete">
-                        <DeleteIcon sx={{ color: "red" }} className="see-related" />
+                        <DeleteIcon sx={{ color: "#382069" }} className="see-related" />
                     </IconButton>
                 </Tooltip>
             )
@@ -420,17 +417,17 @@ export default function DetailView(props) {
 
                     <Tooltip title="Related Shows" arrow>
                         <IconButton onClick={handleRelatedMoviesOpen} aria-label="add">
-                            <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                            <TheatersIcon sx={{ color: "#382069" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Add Comment" arrow>
                         <IconButton onClick={handleOpenComment} aria-label="add">
-                            <CommentIcon sx={{ color: "red" }} className="see-related" />
+                            <CommentIcon sx={{ color: "#382069" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Add to Watchlist" arrow>
                         <IconButton onClick={() => handleAddToWatchList()} aria-label="add">
-                            <AddToQueueIcon sx={{ color: "red" }} className="addtoqueue" />
+                            <AddToQueueIcon sx={{ color: "#382069" }} className="addtoqueue" />
                         </IconButton>
                     </Tooltip>
                     {/* {handleShowComment()} */}
@@ -445,24 +442,24 @@ export default function DetailView(props) {
 
                     <Tooltip title="Add Comment" arrow>
                         <IconButton onClick={handleOpenComment} aria-label="add">
-                            <CommentIcon sx={{ color: "red" }} className="see-related" />
+                            <CommentIcon sx={{ color: "#382069" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Related Shows" arrow>
                         <IconButton onClick={handleRelatedMoviesOpen} aria-label="add">
-                            <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                            <TheatersIcon sx={{ color: "#382069" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
 
                     <Tooltip title="Added to Watchlist!" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchList()} aria-label="delete">
-                            <BookmarkAddedIcon sx={{ color: "red" }} />
+                            <BookmarkAddedIcon sx={{ color: "#382069" }} />
                         </IconButton>
                     </Tooltip>
                     {/* {handleShowComment()} */}
                     <Tooltip title="Mark as Watched" arrow>
                         <IconButton onClick={() => handleMovetoWatchedList()} aria-label="mark as watched">
-                            <CheckCircleOutlineIcon sx={{ color: "red" }} />
+                            <CheckCircleOutlineIcon sx={{ color: "#382069" }} />
                         </IconButton>
                     </Tooltip>
                 </>
@@ -476,19 +473,19 @@ export default function DetailView(props) {
 
                     <Tooltip title="Add Comment" arrow>
                         <IconButton onClick={handleOpenComment} aria-label="add">
-                            <CommentIcon sx={{ color: "red" }} className="see-related" />
+                            <CommentIcon sx={{ color: "#382069" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Related Shows" arrow>
                         <IconButton onClick={handleRelatedMoviesOpen} aria-label="add">
-                            <TheatersIcon sx={{ color: "red" }} className="see-related" />
+                            <TheatersIcon sx={{ color: "#382069" }} className="see-related" />
                         </IconButton>
                     </Tooltip>
 
                     {/* {handleShowComment()} */}
                     <Tooltip title="You've Watched This" arrow>
                         <IconButton onClick={() => handleDeleteFromWatchedList()} aria-label="delete from watched">
-                            <CheckCircleIcon sx={{ color: "red" }} />
+                            <CheckCircleIcon sx={{ color: "#382069" }} />
                         </IconButton>
                     </Tooltip>
                 </>
@@ -593,7 +590,7 @@ export default function DetailView(props) {
                                 avatar={cardDetail.user_info.image ? (
                                     <Avatar src={cardDetail.user_info.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
                                 ) : (
-                                    <Avatar sx={{ bgcolor: red[500], mr: 2, height: 60, width: 60 }} aria-label="avatar">
+                                    <Avatar sx={{ bgcolor: '#382069', mr: 2, height: 60, width: 60 }} aria-label="avatar">
                                         {cardDetail.user.charAt(0).toUpperCase()}
                                     </Avatar>
                                 )
@@ -649,7 +646,7 @@ export default function DetailView(props) {
                                                             <Avatar src={user.image} sx={{ width: '60px', height: '60px' }} aria-label="avatar" alt="avatar" />
                                                         ) : (
 
-                                                            <Avatar sx={{ bgcolor: red[500], mr: '1px', height: 60, width: 60 }} aria-label="recipe">
+                                                            <Avatar sx={{ bgcolor: '#382069', mr: '1px', height: 60, width: 60 }} aria-label="recipe">
                                                                 {user.username.charAt(0).toUpperCase()}
                                                             </Avatar>
                                                         )
