@@ -27,6 +27,13 @@ export default function Navbar(props) {
         }
 
     }
+    function refreshPageSearch() {
+        if (location === 'search') {
+            window.location.reload(false);
+        }
+
+
+    }
     // *******
     return (
         <div className="landing-page-header" style={{ backgroundColor: "#382069", height: '150px', width: '100vw' }}>
@@ -51,6 +58,7 @@ export default function Navbar(props) {
                     <Button onClick={() => {
                         navigate('/search');
                         setLocation('search');
+                        refreshPageSearch();
                     }} color="inherit" sx={{ fontSize: 20, }}> Search </Button>
                     <Button onClick={() => {
                         navigate('/');

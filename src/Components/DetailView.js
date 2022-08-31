@@ -68,7 +68,7 @@ export default function DetailView(props) {
     const [openMakeComment, setOpenMakeComment] = useState(false)
 
     const [color, setColor] = useState('#e9eef0')
-
+    const [emoji, setEmoji] = useState('joy.png')
     const sad = '#a9def9'
     const joy = '#ffff99'
     const fear = '#e4c1f9'
@@ -83,12 +83,30 @@ export default function DetailView(props) {
         if (card.emotion !== null) {
             if (card.emotion.emotions_detected[0] !== null) {
 
-                if (card.emotion.emotions_detected[0] === 'joy') { setColor(joy) }
-                if (card.emotion.emotions_detected[0] === 'anger') { setColor(anger) }
-                if (card.emotion.emotions_detected[0] === 'sadness') { setColor(sad) }
-                if (card.emotion.emotions_detected[0] === 'disgust') { setColor(disgust) }
-                if (card.emotion.emotions_detected[0] === 'surprise') { setColor(surprise) }
-                if (card.emotion.emotions_detected[0] === 'fear') { setColor(fear) }
+                if (card.emotion.emotions_detected[0] === 'joy') {
+                    setColor(joy)
+                    setEmoji('joy.png')
+                }
+                if (card.emotion.emotions_detected[0] === 'anger') {
+                    setColor(anger)
+                    setEmoji('angry.png')
+                }
+                if (card.emotion.emotions_detected[0] === 'sadness') {
+                    setColor(sad)
+                    setEmoji('sad.png')
+                }
+                if (card.emotion.emotions_detected[0] === 'disgust') {
+                    setColor(disgust)
+                    setEmoji('disgust.png')
+                }
+                if (card.emotion.emotions_detected[0] === 'surprise') {
+                    setColor(surprise)
+                    setEmoji('surprise.png')
+                }
+                if (card.emotion.emotions_detected[0] === 'fear') {
+                    setColor(fear)
+                    setEmoji('scared.png')
+                }
             }
 
         }
@@ -135,7 +153,7 @@ export default function DetailView(props) {
     }
 
 
-    function changeLocation(placeToGo){
+    function changeLocation(placeToGo) {
         navigate(placeToGo, { replace: true });
         window.location.reload();
     }
@@ -586,6 +604,7 @@ export default function DetailView(props) {
 
                         <Card className="card-detail" sx={{ bgcolor: color, width: '75vw', mr: 2, ml: 10, mt: 5, mb: 2, border: '2px solid gray', pt: 2, gridRowStart: 1 }}>
 
+
                             <CardHeader
                                 sx={{
                                     pt: 0,
@@ -692,6 +711,7 @@ export default function DetailView(props) {
                                     <Typography paragraph>
                                         <strong>Tags: </strong>{cardDetail.tag.join(', ')}
                                     </Typography>
+
                                     <Typography
                                         className="recommendation" gutterBottom={false}
                                         sx={{ width: 600 }}>
@@ -729,32 +749,32 @@ export default function DetailView(props) {
                     </div>
 
                     {/* {showAddComment && ( */}
-                        <>
-                            <Dialog open={openMakeComment} onClose={handleCloseComment} width='1000px'>
-                                <DialogContentText sx={{width:'1000px'}}>
+                    <>
+                        <Dialog open={openMakeComment} onClose={handleCloseComment} width='1000px'>
+                            <DialogContentText sx={{ width: '1000px' }}>
 
-                                    <h2 className='comment-form'>Want to join in the conversation?  Add a comment below.</h2>
-                                    <div className='comment-form'>
-                                        <form>
-                                            <textarea
-                                                value={comment}
-                                                className="write-comment"
-                                                placeholder='Write a comment'
-                                                rows={10}
-                                                cols={50}
-                                                onChange={(e) => setComment(e.target.value)}
-                                            >
+                                <h2 className='comment-form'>Want to join in the conversation?  Add a comment below.</h2>
+                                <div className='comment-form'>
+                                    <form>
+                                        <textarea
+                                            value={comment}
+                                            className="write-comment"
+                                            placeholder='Write a comment'
+                                            rows={10}
+                                            cols={50}
+                                            onChange={(e) => setComment(e.target.value)}
+                                        >
 
-                                            </textarea>
-                                        </form>
-                                    </div>
-                                </DialogContentText>
-                                <DialogActions>
-                                    <button type="button" onClick={handleAddComment} className="comment-button">Submit Comment</button>
-                                </DialogActions>
+                                        </textarea>
+                                    </form>
+                                </div>
+                            </DialogContentText>
+                            <DialogActions>
+                                <button type="button" onClick={handleAddComment} className="comment-button">Submit Comment</button>
+                            </DialogActions>
 
-                            </Dialog>
-                        </>
+                        </Dialog>
+                    </>
                     {/* )} */}
 
                 </>
@@ -783,6 +803,7 @@ export default function DetailView(props) {
                     </Box>
                     {/* </Fade> */}
                 </Modal>
+
             </>
 
             <div>
@@ -803,7 +824,7 @@ export default function DetailView(props) {
                             </CardActionArea>
                         </div>
                         {data !== '' && <h1 className="more-by-this-user">{data.map((data, index) =>
-                            <div className='following-smaller-card' style={{marginRight:'7px'}}>
+                            <div className='following-smaller-card' style={{ marginRight: '7px' }}>
                                 <>
                                     <div className='following-info'>
                                         <div className='other-user-poster'>
@@ -820,6 +841,7 @@ export default function DetailView(props) {
                         )} </h1>}
                     </Box>
                 </Modal>
+
             </div>
 
         </>

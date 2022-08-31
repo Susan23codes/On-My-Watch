@@ -8,6 +8,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
 import { CardActionArea } from '@mui/material';
+import { SafetyDivider } from '@mui/icons-material';
 
 
 const style = {
@@ -93,22 +94,22 @@ export default function RecCardList(props) {
                             </div>
                             <div className='emotion-names' style={{ backgroundColor: '#A9DEF9' }} >
                                 Sadness
-                            </div>
+                                <img className="emoji2" src='sad.png' alt="sadface" width="20px" height="20px"></img></div>
                             <div className='emotion-names' style={{ backgroundColor: '#FFFF99' }}>
                                 Joy
-                            </div>
+                                <img className="emoji2" src='joy.png' alt="face" width="20px" height="20px"></img></div>
                             <div className='emotion-names' style={{ backgroundColor: '#E4C1F9' }}>
                                 Fear
-                            </div>
+                                <img className="emoji2" src='scared.png' alt="face" width="20px" height="20px"></img></div>
                             <div className='emotion-names' style={{ backgroundColor: '#EDE7B1' }}>
                                 Disgust
-                            </div>
+                                <img className="emoji2" src='disgust.png' alt="face" width="20px" height="20px"></img></div>
                             <div className='emotion-names' style={{ backgroundColor: '#FBC4A3' }}>
                                 Surprise
-                            </div>
+                                <img className="emoji2" src='surprise.png' alt="face" width="20px" height="20px"></img></div>
                             <div className='emotion-names' style={{ backgroundColor: '#FF4137' }}>
                                 Anger
-                            </div>
+                                <img className="emoji2" src='angry.png' alt="sadface" width="20px" height="20px"></img></div>
                         </div>
                     </Box>
                 </Modal>
