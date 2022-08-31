@@ -265,15 +265,16 @@ export default function SingleCard(props) {
 
             />
             <div className='poster-and-text'>
-                <div className='poster'>
-                    <CardMedia
-                        component="img"
-                        height="230"
-                        sx={{ width: 200, pl: 5 }}
-                        image={cardObject.poster}
-                        alt="TV poster"
-                    />
-                </div>
+                <div className='boxbox'>
+                    <div className='poster'>
+                        <CardMedia
+                            component="img"
+                            height="230"
+                            sx={{ width: 200, pl: 5 }}
+                            image={cardObject.poster}
+                            alt="TV poster"
+                        />
+                    </div><img className="emoji" src={emoji} alt="sadface" width="20px" height="20px"></img></div>
                 <CardContent>
                     <Typography paragraph>
                         <strong>Medium:</strong> {cardObject.medium}
@@ -302,11 +303,12 @@ export default function SingleCard(props) {
 
 
                     </Typography>
+                    <div className='boxbox'>
+                        <Typography paragraph>
+                            <strong>Tags: </strong>{cardObject.tag.join(', ')}
+                        </Typography>
 
-                    <Typography paragraph>
-                        <strong>Tags: </strong>{cardObject.tag.join(', ')}
-                    </Typography>
-                    <img className="emoji" src={emoji} alt="sadface" width="20px" height="20px"></img>
+                    </div>
                 </CardContent>
             </div>
 

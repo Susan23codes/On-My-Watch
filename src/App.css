@@ -573,6 +573,12 @@ html {
   margin-right: 8px;
 }
 
+.emoji {
+  position: absolute;
+  margin-left: 93%;
+  margin-top: 44%;
+}
+
 .emoji2 {
   margin-right: 4px;
   float: right;
@@ -582,4 +588,8 @@ html {
   padding-top: 5%;
   padding-left: 20%;
   width: 80%;
+}
+
+.boxbox {
+  display: flex;
 }
