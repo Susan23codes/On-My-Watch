@@ -193,7 +193,7 @@ export default function Search(props) {
         <div>What Is the Username?</div> <input type="text" onChange={handleChangeUser} placeholder="Search.."></input>
         <input type="button" value="Search" onClick={handleUserSearch}></input>
         <div>
-            {data !== '' && <h1>{data.map((data, index) =>
+            {data && <h1>{data.map((data, index) =>
                 <SingleCard cardObject={data}
                     key={index}
                     id={data.id}
